@@ -1,7 +1,5 @@
 /**
  * UI object for generating recurring UI's
- *
- * @dependencies - Animation
  */	
 TiGantry.UI = {
 	/**

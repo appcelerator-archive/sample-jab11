@@ -30,9 +30,9 @@ TiGantry.init = (function(version, codename, appname, appdir, controldir, layout
 	
 	// Intro log files (inspired by Fred Spencer...of course)	
 	TiGantry.log({ msg: '*** TiGantry Framework Initialized ***', info: true });
-	TiGantry.log({ msg: '*** AUTHOR: Rick Blalock & Dawson Toth', info: true });
-	TiGantry.log({ msg: '*** APP Name: ' + appname, info: true });
-	TiGantry.log({ msg: '*** Version: ' + version + ' ' + codename, info: true });	
+	TiGantry.log({ msg: '*** AUTHOR: Rick Blalock & Dawson Toth ***', info: true });
+	TiGantry.log({ msg: '*** APP Name: ' + appname + ' ***', info: true });
+	TiGantry.log({ msg: '*** Version: ' + version + ' ' + codename + ' ***', info: true });	
 });
 
 // Include core framework libraries

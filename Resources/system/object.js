@@ -15,7 +15,6 @@ TiGantry.Create = (function(type, name, callback) {
 		});
 		return null; 
 	} else {
-		// Create the new object
 		TiGantry.App[type][name] = callback;
 		
 		TiGantry.log({

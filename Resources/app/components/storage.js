@@ -6,12 +6,12 @@ TiGantry.Create('Components', 'Storage', (function() {
 	
 	// Database listing
 	var dbs = {
-		tweetrdone: conn.use('tweetrdone')
+		tweetrdone: conn.use('jab11')
 	};
 	
 	// Collection listing
 	var colls = {
-		tasks: dbs.tweetrdone.collection('tasks')
+		users: dbs.tweetrdone.collection('users')
 	};
 	
 	// Revealing module pattern.  Return only what's needed
