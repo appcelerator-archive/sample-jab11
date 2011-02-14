@@ -1,7 +1,7 @@
 /**
  * General app styles in one place
  */
-TiGantry.Styles = {	
+TiAir.Styles = {	
 	// App Windows / Tabs
 	mainWindow: {
 		backgroundColor: '#777'

@@ -2,7 +2,7 @@
  * XHR Object
  * @param {Object} opts - Options for the XHR request
  */
-TiGantry.XHR = (function(opts) {
+TiAir.XHR = (function(opts) {
 	// Setup the xhr object
 	var xhr = Ti.Network.createHTTPClient();
 
@@ -24,7 +24,7 @@ TiGantry.XHR = (function(opts) {
 		if(opts.onerror) {
 			opts.onerror(e);				
 		} else {
-			TiGantry.log({
+			TiAir.log({
 				error: true,
 				msg: e
 			});
@@ -38,7 +38,7 @@ TiGantry.XHR = (function(opts) {
 		try 
 		{
 			if(this.responseText == null) {
-				TiGantry.log({
+				TiAir.log({
 					debug: true,
 					msg: this
 				});
@@ -60,7 +60,7 @@ TiGantry.XHR = (function(opts) {
 			if(opts.onerror) {
 				opts.onerror(e);				
 			} else {
-				TiGantry.log({
+				TiAir.log({
 					error: true,
 					msg: e
 				});

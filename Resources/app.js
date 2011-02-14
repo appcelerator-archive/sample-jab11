@@ -4,7 +4,7 @@
 	Ti.include('system/core.js');
 	
 	// Set app preferences
-	TiGantry.init(
+	TiAir.init(
 		'0.1',			// App version
 		'Zergling',		// App version name
 		'jab11',		// Name of app
@@ -14,7 +14,7 @@
 	);
 	
 	// Set the theme
-	TiGantry.setTheme('default');
+	TiAir.setTheme('default');
 	
 	// Include app files - Plugins first, then components, helpers, and anything else
 	Ti.include(
@@ -25,28 +25,28 @@
 	); 
 	
 	// Object that stores all the app windows
-	TiGantry.App.Windows = {
-		main: Ti.UI.createWindow(TiGantry.Styles.mainWindow)
+	TiAir.App.Windows = {
+		main: Ti.UI.createWindow(TiAir.Styles.mainWindow)
 	};
 	
 	// Set the main window data title
-	TiGantry.App.Windows.main.title = 'Joomla and Beyond';
+	TiAir.App.Windows.main.title = 'Joomla and Beyond';
 	
 	// ----- Build the tabs ----- //
-	TiGantry.App.Tabs = Ti.UI.createTabGroup();
+	TiAir.App.Tabs = Ti.UI.createTabGroup();
 	
 	var window_tab = Ti.UI.createTab({  
 	    title: 'Joomla and Beyond',
-	    window: TiGantry.App.Windows.main
+	    window: TiAir.App.Windows.main
 	});
 	
 	// Load the default controller
-	var list = TiGantry.Controller('Dash');
+	var list = TiAir.Controller('Dash');
 	list.execute('init', true);
 	
 	// Add the tabs to the window
-	TiGantry.App.Tabs.addTab(window_tab);
-	TiGantry.App.Tabs.open();
+	TiAir.App.Tabs.addTab(window_tab);
+	TiAir.App.Tabs.open();
 
 })();
 
@@ -54,6 +54,6 @@
 //(function() {
 //	Ti.include('system/test.js');
 //	Ti.include('system/coretests.js');
-//	TiGantry.CoreTests();	
+//	TiAir.CoreTests();	
 //})();
 // *** //

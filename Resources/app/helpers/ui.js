@@ -1,7 +1,7 @@
 /**
  * UI object for generating recurring UI's
  */	
-TiGantry.UI = {
+TiAir.UI = {
 	/**
 	 * Main table creation wrapper with optional animation
 	 *
@@ -14,7 +14,7 @@ TiGantry.UI = {
 		tableview.setData(data);
 
 		if(anim == true) {
-			//TiGantry.Animation.elemSlideIn(tableview, { top: 40 });
+			//TiAir.Animation.elemSlideIn(tableview, { top: 40 });
 		}
 
 		return tableview;

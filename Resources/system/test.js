@@ -1,17 +1,17 @@
 /**
  * Core Testing Helper
  */
-TiGantry.Test = (function(funcName, testFunc) {
-	var message = '** TIGANTRY TEST - ';
+TiAir.Test = (function(funcName, testFunc) {
+	var message = '** TiAir TEST - ';
 	var result = testFunc();
 	
 	if(result == true) {
-		TiGantry.log({
+		TiAir.log({
 			info: true,
 			msg: message + funcName + ': PASSED - **' 
 		});		
 	} else {
-		TiGantry.log({
+		TiAir.log({
 			error: true,
 			msg: message + funcName + ': FAILED - **'
 		});

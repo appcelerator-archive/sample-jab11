@@ -1,9 +1,9 @@
 /**
  * Simple tests for the core framework
  */
-TiGantry.CoreTests = function() {
+TiAir.CoreTests = function() {
 	
-	TiGantry.init(
+	TiAir.init(
 		'0.1',			
 		'test',		
 		'testapp',	
@@ -13,10 +13,10 @@ TiGantry.CoreTests = function() {
 	);
 
 	var controllerName = 'testcontroller';
-	var testcontroller = TiGantry.Controller(controllerName);
+	var testcontroller = TiAir.Controller(controllerName);
 	
 	// Controller can be loaded
-	TiGantry.Test('Load Controller', function() {
+	TiAir.Test('Load Controller', function() {
 		if(typeof testcontroller == 'object') {
 			return true;
 		} else {
@@ -25,7 +25,7 @@ TiGantry.CoreTests = function() {
 	});
 	
 	// Controller can return something from method
-	TiGantry.Test('Load Method', function() {
+	TiAir.Test('Load Method', function() {
 		if(testcontroller.load('init')) {
 			return true;
 		} else {
@@ -34,10 +34,10 @@ TiGantry.CoreTests = function() {
 	});
 	
 	// Create an object member of the framework
-	TiGantry.Test('Create New TiGantry Object', function() {
-		var testNewObject = TiGantry.Create('Controller', 'NewObjectTest', null);
+	TiAir.Test('Create New TiAir Object', function() {
+		var testNewObject = TiAir.Create('Controller', 'NewObjectTest', null);
 		
-		if(typeof TiGantry.App.Controller.NewObjectTest == 'object') {
+		if(typeof TiAir.App.Controller.NewObjectTest == 'object') {
 			return true;
 		} else {
 			return false;
@@ -46,17 +46,17 @@ TiGantry.CoreTests = function() {
 	
 	// GET XHR Request
 	(function() {
-		TiGantry.XHR({
+		TiAir.XHR({
 			timeout: 5000,
 			type: 'get',
 			url: 'http://google.com',
 			callback: function(data) {
-				TiGantry.Test('GET XHR Request', function() {
+				TiAir.Test('GET XHR Request', function() {
 					return true;
 				});	
 			},
 			onerror: function(e) {
-				TiGantry.Test('GET XHR Request', function() {
+				TiAir.Test('GET XHR Request', function() {
 					return false;
 				});	
 			}

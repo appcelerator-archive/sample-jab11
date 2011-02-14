@@ -1,7 +1,7 @@
 /**
  * TiStorage Component
  */	
-TiGantry.Create('Components', 'Storage', (function() {
+TiAir.Create('Components', 'Storage', (function() {
 	var conn = new TiStorage();
 	
 	// Database listing

@@ -1,7 +1,7 @@
 /**
  * Animation helper
  */
-TiGantry.Animation = {
+TiAir.Animation = {
 	/**
 	 * Element Slide In
 	 *

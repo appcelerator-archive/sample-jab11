@@ -1,9 +1,9 @@
 /**
  * List Layout
  */
-TiGantry.Create('Layout', 'dash', function() {
+TiAir.Create('Layout', 'dash', function() {
 	// Assign a styles pointer for what's used here
-	var Styles = TiGantry.Styles.dash;
+	var Styles = TiAir.Styles.dash;
 	
 	/**
 	 * Creates a standard row, formatted for this layout

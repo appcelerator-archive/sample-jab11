@@ -1,11 +1,11 @@
 /**
  * List controller
  */
-TiGantry.Create('Controller', 'Dash', function() {
+TiAir.Create('Controller', 'Dash', function() {
 	var Controller = this;
-	this.window = TiGantry.App.Windows.main;
+	this.window = TiAir.App.Windows.main;
 
-	this.Layout = TiGantry.Layout('dash');
+	this.Layout = TiAir.Layout('dash');
 
 	this.init = (function(isHome) {
 		var win = this.window;
@@ -15,13 +15,13 @@ TiGantry.Create('Controller', 'Dash', function() {
 		win.addEventListener('focus', function() {
 			var data = Controller.setData();
 	
-			var table = TiGantry.UI.createTable(data, TiGantry.Styles.dash.table);
+			var table = TiAir.UI.createTable(data, TiAir.Styles.dash.table);
 			
 			win.add(table);			
 		});
 		
 		if(isHome == null) {
-			TiGantry.App.Tabs.activeTab.open(win, { animated:true });
+			TiAir.App.Tabs.activeTab.open(win, { animated:true });
 		}
 	});
 	
@@ -44,7 +44,7 @@ TiGantry.Create('Controller', 'Dash', function() {
 	this.actionButton = (function() {
 		var addButton = Ti.UI.createButton({systemButton: Ti.UI.iPhone.SystemButton.ADD});
 		this.window.rightNavButton = addButton;
-		TiGantry.App.Events.addItem(addButton);
+		TiAir.App.Events.addItem(addButton);
 	});
 	
 });

@@ -2,15 +2,15 @@
  * The parent controller
  * @param {string} controller - The controller that is to be loaded
  */
-TiGantry.Controller = (function(controller) {
+TiAir.Controller = (function(controller) {
 	
 	this.controller = null;
 	
 	// Include the controller file
-	Ti.include(TiGantry.TIGANTRY_APPDIR + '/' + TiGantry.TIGANTRY_CONTROLDIR + '/' + controller + '.js');
+	Ti.include(TiAir.TiAir_APPDIR + '/' + TiAir.TiAir_CONTROLDIR + '/' + controller + '.js');
 
 	// Instantiate the desired controller
-	this.controller = new TiGantry.App.Controller[controller]();
+	this.controller = new TiAir.App.Controller[controller]();
 	
 	// Execute a specific method in the controller
 	this.execute = function(methodName, args) {
