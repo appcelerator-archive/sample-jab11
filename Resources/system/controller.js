@@ -10,6 +10,9 @@ TiAir.Controller = (function(controller) {
 	Ti.include(TiAir.TiAir_APPDIR + '/' + TiAir.TiAir_CONTROLDIR + '/' + controller + '.js');
 
 	// Instantiate the desired controller
+	// TODO should we automatically assume a controller should be instantiated?  What if
+	// it's a static object?  Should we expect users to place static objects elsewhere? Or
+	// Called differently?
 	this.controller = new TiAir.App.Controller[controller]();
 	
 	// Execute a specific method in the controller

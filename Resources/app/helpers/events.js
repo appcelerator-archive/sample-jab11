@@ -2,6 +2,9 @@
  * Events helper / wrapper
  */
 
+// TODO - Maybe events should be separated from 'helpers' and placed elsewhere.  If we decide
+// to make a central event architechture in the framework and for the app?
+
 /**
  * Add item event
  */

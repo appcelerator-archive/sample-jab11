@@ -6,7 +6,6 @@
  */
 TiAir.Create = (function(type, name, callback) {
 	// If the object exists, don't recreate it
-	// TODO Need a warning message to let the dev know he's trying to recreate something?
 	// TODO Test this...does this even work right?
 	if(TiAir.App[type][name] != null) { 
 		TiAir.log({

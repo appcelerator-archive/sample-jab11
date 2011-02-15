@@ -13,6 +13,8 @@ var TiAir = {};
  * @param {string} layoutdir
  */
 TiAir.init = (function(version, codename, appname, appdir, controldir, layoutdir) {
+	// TODO this is ugly.  Probably should just allow an object to be passed so
+	// we don't have to maintain all these args.
 	TiAir.TiAir_VERSION 		= version;		// The app version
 	TiAir.TiAir_CODENAME 		= codename;		// The app codename
 	TiAir.TiAir_APPNAME 		= appname;		// The app name
@@ -21,11 +23,13 @@ TiAir.init = (function(version, codename, appname, appdir, controldir, layoutdir
 	TiAir.TiAir_LAYOUTDIR		= layoutdir;	// The layout dir
 	
 	// Setup Default App Namespaces
+	// TODO is this even needed now that we have TiAir.Create ?
 	TiAir.App = {
 		Controller	: {},
 		Layout		: {},
 		Components	: {},
-		Events		: {}		
+		Events		: {},
+		UI			: {}		
 	};
 	
 	// Intro log files (inspired by Fred Spencer...of course)	
@@ -48,6 +52,7 @@ Ti.include(
  * Sets the app theme by including the styles file from the themes dir
  * @param {string} theme - Name of the theme directory
  */
+// TODO Should this be placed in the core layout.js file (i.e. TiAir.Layout)?
 TiAir.setTheme = (function(theme) {
 	Ti.include(TiAir.TiAir_APPDIR + '/themes/' + theme + '/styles.js');	
 });

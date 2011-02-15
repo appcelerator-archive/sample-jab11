@@ -1,7 +1,7 @@
 /**
  * UI object for generating recurring UI's
  */	
-TiAir.UI = {
+TiAir.App.UI = {
 	/**
 	 * Main table creation wrapper with optional animation
 	 *

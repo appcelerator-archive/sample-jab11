@@ -1,6 +1,7 @@
 /**
  * List controller
  */
+// TODO quick and dirty implementation
 TiAir.Create('Controller', 'Dash', function() {
 	var Controller = this;
 	this.window = TiAir.App.Windows.main;
@@ -15,7 +16,7 @@ TiAir.Create('Controller', 'Dash', function() {
 		win.addEventListener('focus', function() {
 			var data = Controller.setData();
 	
-			var table = TiAir.UI.createTable(data, TiAir.Styles.dash.table);
+			var table = TiAir.App.UI.createTable(data, TiAir.Styles.dash.table);
 			
 			win.add(table);			
 		});
