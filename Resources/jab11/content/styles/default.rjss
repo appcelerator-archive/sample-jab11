@@ -1,0 +1,60 @@
+#DefaultWindow {
+    backgroundImage: 'jab11/content/images/default/bg.png'
+}
+#DefaultGrid {
+    top: 197,
+    left: 7,
+    right: 7
+}
+
+.DaysUntil {
+    top: 9,
+    height: 25,
+    width: 160,
+    left: 0,
+    right: 0
+}
+.DaysUntilLabel {
+    left: 50,
+    font: { fontWeight: 'bold', fontSize: 16 },
+    shadowColor: "#fdd49e",
+	shadowOffset: {x:0, y:1},
+}
+.DaysUntilNumber {
+    right: 115,
+    width: 'auto',
+    font: { fontWeight: 'bold', fontSize: 20 },
+    shadowColor: "#fdd49e",
+	shadowOffset: {x:0, y:1},
+}
+.icon {
+    width: 102,
+    height: 85
+}
+#AboutIcon {
+    backgroundImage: 'jab11/content/images/default/about.png'
+}
+#MapsIcon {
+    backgroundImage: 'jab11/content/images/default/maps.png'
+}
+#LatestNewsIcon {
+    backgroundImage: 'jab11/content/images/default/news.png'
+}
+#SpeakersIcon {
+    backgroundImage: 'jab11/content/images/default/speakers.png'
+}
+#ProgramIcon {
+    backgroundImage: 'jab11/content/images/default/program.png'
+}
+#SocialIcon {
+    backgroundImage: 'jab11/content/images/default/social.png'
+}
+#JOSCARSIcon {
+    backgroundImage: 'jab11/content/images/default/joscars.png'
+}
+#SettingsIcon {
+    backgroundImage: 'jab11/content/images/default/settings.png'
+}
+#TravelIcon {
+    backgroundImage: 'jab11/content/images/default/travel.png'
+}
