@@ -1,12 +1,10 @@
 #DefaultWindow {
     backgroundImage: 'jab11/content/images/default/bg.png'
 }
-#DefaultGrid {
-    top: 197,
-    left: 7,
-    right: 7
-}
 
+/*
+    Style 'Days Until' at the top
+*/
 .DaysUntil {
     top: 9,
     height: 25,
@@ -15,7 +13,7 @@
     right: 0
 }
 .DaysUntilLabel {
-    left: 50,
+    left: 50, height: 'auto', bottom: 3,
     font: { fontWeight: 'bold', fontSize: 16 },
     shadowColor: "#fdd49e",
 	shadowOffset: {x:0, y:1},
@@ -27,7 +25,16 @@
     shadowColor: "#fdd49e",
 	shadowOffset: {x:0, y:1},
 }
-.icon {
+
+/*
+    Style the icons grid
+*/
+#DefaultGrid {
+    top: 197,
+    left: 7,
+    right: 7
+}
+.Icon {
     width: 102,
     height: 85
 }

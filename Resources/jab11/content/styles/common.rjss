@@ -1,0 +1,43 @@
+Window {
+    backgroundImage: 'jab11/content/images/bg.png'
+}
+
+WebView {
+    backgroundColor: 'transparent'
+}
+
+.TornEdge {
+    image: 'jab11/content/images/tornedge.png',
+    width: 320,
+    height: 6
+}
+
+.DetailsTornEdge {
+    top: 63
+}
+.DetailsContainer {
+    top: 0, right: 0, bottom: 0, left: 0
+}
+.DetailsTitleContainer {
+    top: 0, right: 0, left: 0,
+    height: 63,
+    backgroundColor: '#fff',
+    layout: 'vertical'
+}
+.DetailsTitle {
+    top: 12,
+    height: 'auto',
+    font: { fontWeight: 'bold', fontSize: 19 },
+    color: '#b94646',
+    textAlign: 'center'
+}
+.DetailsSubtitle {
+    top: 1,
+    height: 'auto',
+    font: { fontSize: 14 },
+    color: '#4674b9',
+    textAlign: 'center'
+}
+.DetailsBody {
+    top: 63
+}

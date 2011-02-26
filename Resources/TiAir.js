@@ -197,7 +197,7 @@ var TiAir = {};
             }
         }
         var view = TiAir.getView(controllerID, viewID);
-        return typeof view === 'function' ? view(model) : view;
+        return typeof view === 'function' ? view(model || {}) : view;
     };
     /**
      * Returns a view, mixing in any model data. Only operates from inside a controller,
