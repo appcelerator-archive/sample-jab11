@@ -6,6 +6,23 @@ WebView {
     backgroundColor: 'transparent'
 }
 
+.HomeButton {
+    backgroundImage: 'jab11/content/images/bars/9dots.png',
+    width: 41,
+    height: 30
+}
+.TitleBar {
+    backgroundImage: 'jab11/content/images/bars/top.png',
+    top: 0, right: 0, left: 0, height: 44
+}
+.TitleBarTitle {
+    color: '#fff',
+    font: { fontWeight: 'bold', fontSize: 20 },
+    textAlign: 'center',
+    shadowColor: "#000",
+	shadowOffset: {x:0, y:-1}
+}
+
 .TornEdge {
     image: 'jab11/content/images/tornedge.png',
     width: 320,

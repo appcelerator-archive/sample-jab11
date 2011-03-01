@@ -16,12 +16,13 @@ var used = [
  */
 includeRJSS(
         'jab11/content/styles/common.rjss',
-        'jab11/content/styles/default.rjss');
+        'jab11/content/styles/default.rjss',
+        'jab11/content/styles/about.rjss');
 /*
  * Call the init function. This will intelligently load our application, and call the default controller's action.
  */
 TiAir.init({
     applicationDirectory: 'jab11',
     theme: 'default',
-    defaultURL: { controller: 'default', action: 'list' }
+    defaultURL: { controller: 'default', action: 'list', window: 'container' }
 });
