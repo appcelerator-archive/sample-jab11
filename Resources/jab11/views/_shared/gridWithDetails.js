@@ -5,17 +5,16 @@ view = function(model) {
     model.layout = model.layout || 'horizontal';
     var grid = new View(model);
 
-    function curryClickHandler(data) {
-        return function() {
-            TiAir.openURL(data.targetURL);
-        };
-    }
+    $(grid).click(function(evt) {
+        if (evt.source.targetURL) {
+            TiAir.openURL(evt.source.targetURL, evt);
+        }
+    });
 
     for (var i = 0, l = model.data.length; i < l; i++) {
         var view = model.data[i].view;
         if (model.data[i].targetURL) {
             view.targetURL = model.data[i].targetURL;
-            view.addEventListener('click', curryClickHandler(model.data[i]));
         }
         grid.add(view);
     }

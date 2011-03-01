@@ -4,11 +4,9 @@
 Ti.include('redux.js');
 Ti.include('TiAir.js');
 
-Ti.UI.backgroundImage = 'jab11/content/images/bg.png';
-
 var used = [
     Ti.UI.createView, Ti.UI.createLabel, Ti.UI.createImageView, Ti.UI.createButton,
-    Ti.UI.createWindow, Ti.UI.createWebView
+    Ti.UI.createWindow, Ti.UI.createWebView, Ti.UI.createAnimation
 ];
 
 /*

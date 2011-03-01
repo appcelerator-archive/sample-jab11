@@ -19,7 +19,8 @@ var TiAir = {};
     TiAir.options = {
         applicationDirectory: 'app',
         pluginsDirectory: null,
-        defaultURL: { controller: 'default', action: 'default' }
+        defaultURL: { controller: 'default', action: 'default' },
+        navigator: 'default'
     };
 
     /**
@@ -32,6 +33,8 @@ var TiAir = {};
         this.initModels();
         this.initControllers();
         this.initViews();
+
+        this.initNavigators();
 
         if (this.options.defaultURL) {
             this.openURL(this.options.defaultURL);
@@ -73,6 +76,43 @@ var TiAir = {};
             return models[id];
         }
         throw 'TiAir :: Error :: No model with the id ' + id + ' exists.';
+    };
+
+    /*
+     The following functions manage our navigators.
+     */
+    var navigators = {};
+    TiAir.initNavigators = function() {
+        this.iterateDirectory('navigators', function(result) {
+            var navigator = null;
+            eval(result.file.read().toString());
+            if (navigator) {
+                TiAir.createNavigator({
+                    id: result.name.split('.').shift(),
+                    value: navigator
+                });
+            }
+        });
+        var navigator = this.getNavigator(this.options.navigator);
+        if (navigator == null) {
+            throw 'TiAir :: Error :: No navigator found with id ' + this.options.navigator + ' in application directory / navigators.';
+        }
+        navigator.init(this);
+    };
+    TiAir.createNavigator = function(args) {
+        if (args == null) {
+            throw 'TiAir :: Error :: No navigator passed to TiAir.createNavigator.';
+        }
+        if (!args.id) {
+            throw 'TiAir :: Error :: No id set on navigator passed to TiAir.createNavigator.';
+        }
+        navigators[args.id] = args.value;
+    };
+    TiAir.getNavigator = function(id) {
+        if (navigators[id]) {
+            return navigators[id];
+        }
+        throw 'TiAir :: Error :: No navigator with the id ' + id + ' exists.';
     };
 
     /*
@@ -149,7 +189,7 @@ var TiAir = {};
         return retVal;
     };
 
-    TiAir.openURL = function(url) {
+    TiAir.openURL = function(url, evt) {
         var controller = this.getController(url.controller);
         controllerID = url.controller;
         actionID = url.action;
@@ -162,14 +202,23 @@ var TiAir = {};
         // was something returned from the action?
         if (result != null) {
             // is it a window?
-            var type = result.toString();
-            if (type.split('Window').length > 1) {
-                result.open();
+            var navigator = this.getNavigator(this.options.navigator);
+            if (navigator == null) {
+                throw 'TiAir :: Error :: No navigator found with id ' + this.options.navigator + ' in application directory / navigators.';
             }
+            var args = Array().slice.call(arguments);
+            args.splice(1, 0, result);
+            navigator.open.apply(navigator, args);
         }
-
         controllerID = null;
         actionID = null;
+    };
+    TiAir.close = function(view) {
+        var navigator = this.getNavigator(this.options.navigator);
+        if (navigator == null) {
+            throw 'TiAir :: Error :: No navigator found with id ' + this.options.navigator + ' in application directory / navigators.';
+        }
+        navigator.close(view);
     };
 
     /**

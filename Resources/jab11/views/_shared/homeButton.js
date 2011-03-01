@@ -1,7 +1,7 @@
-view = function(win) {
+view = function(parentView) {
     var button = new Button({ className: 'HomeButton' });
     $(button).click(function() {
-        win.close();
+        TiAir.close(parentView);
     });
     return button;
 };

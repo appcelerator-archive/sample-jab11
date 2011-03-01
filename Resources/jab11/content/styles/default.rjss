@@ -1,4 +1,4 @@
-#DefaultWindow {
+#DefaultView {
     backgroundImage: 'jab11/content/images/default/bg.png'
 }
 

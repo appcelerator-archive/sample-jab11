@@ -8,11 +8,11 @@ view = function(model) {
         model.icons[i].view = AirView('button', model.icons[i]);
     }
     // now create the main view; in this case, a window!
-    var win = new Window({ id: 'DefaultWindow' });
-    win.add(AirView('daysUntil', model.conferenceDate));
-    win.add(AirView('gridWithDetails', {
+    var view = new View({ id: 'DefaultView' });
+    view.add(AirView('daysUntil', model.conferenceDate));
+    view.add(AirView('gridWithDetails', {
         data: model.icons,
         id: 'DefaultGrid'
     }));
-    return win;
+    return view;
 };
