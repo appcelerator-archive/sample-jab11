@@ -189,36 +189,37 @@ var TiAir = {};
         return retVal;
     };
 
+    var openCache = {};
     TiAir.openURL = function(url, evt) {
         var controller = this.getController(url.controller);
-        controllerID = url.controller;
-        actionID = url.action;
+        var hash = url.controller + '/' + url.action;
+        var args = Array().slice.call(arguments);
+        var navigator = this.getNavigator(this.options.navigator);
 
-        if (controller.actions[actionID] == null) {
-            throw 'TiAir :: Error :: No action found with id ' + actionID + ' in ' + controllerID;
-        }
-
-        var result = controller.actions[actionID]();
-        // was something returned from the action?
-        if (result != null) {
-            // is it a window?
-            var navigator = this.getNavigator(this.options.navigator);
-            if (navigator == null) {
-                throw 'TiAir :: Error :: No navigator found with id ' + this.options.navigator + ' in application directory / navigators.';
-            }
-            var args = Array().slice.call(arguments);
-            args.splice(1, 0, result);
+        if (openCache[hash]) {
+            args.splice(1, 0, openCache[hash]);
             navigator.open.apply(navigator, args);
         }
-        controllerID = null;
-        actionID = null;
+        else {
+            controllerID = url.controller;
+            actionID = url.action;
+            if (controller.actions[actionID] == null) {
+                throw 'TiAir :: Error :: No action found with id ' + actionID + ' in ' + controllerID;
+            }
+            var result = controller.actions[actionID]();
+            args.splice(1, 0, result);
+            openCache[hash] = result;
+            // was something returned from the action?
+            if (result != null) {
+                // is it a window?
+                navigator.open.apply(navigator, args);
+            }
+            controllerID = null;
+            actionID = null;
+        }
     };
     TiAir.close = function(view) {
-        var navigator = this.getNavigator(this.options.navigator);
-        if (navigator == null) {
-            throw 'TiAir :: Error :: No navigator found with id ' + this.options.navigator + ' in application directory / navigators.';
-        }
-        navigator.close(view);
+        this.getNavigator(this.options.navigator).close(view);
     };
 
     /**

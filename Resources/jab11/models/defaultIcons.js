@@ -64,7 +64,7 @@ model = {
                 controller: 'settings', action: 'list',
                 navigatorOptions: { animate: 'pop' }
             }
-        },
+        }
 
     ]
 };

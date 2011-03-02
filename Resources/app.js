@@ -1,12 +1,15 @@
 /*
- * Include the two libraries we will use -- redux and TiAir. These two libraries are NOT dependent on each other.
+ * Include the libraries we will use. These libraries are NOT dependent on each other.
  */
+Ti.include('TiStorage.js');
 Ti.include('redux.js');
 Ti.include('TiAir.js');
 
+Ti.UI.backgroundImage = 'jab11/content/images/loading.withoutbar.png';
 var used = [
     Ti.UI.createView, Ti.UI.createLabel, Ti.UI.createImageView, Ti.UI.createButton,
-    Ti.UI.createWindow, Ti.UI.createWebView, Ti.UI.createAnimation
+    Ti.UI.createWindow, Ti.UI.createWebView, Ti.UI.createAnimation, Ti.Map.createView,
+    Ti.UI.create2DMatrix, Ti.UI.createScrollView
 ];
 
 /*
@@ -22,5 +25,5 @@ includeRJSS(
 TiAir.init({
     applicationDirectory: 'jab11',
     theme: 'default',
-    defaultURL: { controller: 'default', action: 'list', window: 'container' }
+    defaultURL: { controller: 'default', action: 'list' }
 });

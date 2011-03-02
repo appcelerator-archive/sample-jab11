@@ -6,7 +6,8 @@ navigator = {
     __popIn: new Animation({ className: 'PopIn' }),
     __store: {},
     init: function(TiAir) {
-        this.__mainWindow.open({ animate: this.__fadeIn });
+        this.__mainWindow.opacity = 0;
+        this.__mainWindow.open(this.__fadeIn);
     },
     open: function(url, target, evt) {
         var animation = this.__fadeIn;
@@ -15,8 +16,13 @@ navigator = {
             switch (url.navigatorOptions.animate) {
                 case 'pop':
                     animation = this.__popOut;
-                    target.poppedTransform = target.transform = Ti.UI.create2DMatrix().translate(evt.globalPoint.x - target.width / 2, evt.globalPoint.y - target.height / 2).scale(0.1, 0.1);
+                    target.poppedTransform = target.transform = Ti.UI
+                            .create2DMatrix()
+                            .translate(evt.globalPoint.x - target.width / 2, evt.globalPoint.y - target.height / 2)
+                            .scale(0.1, 0.1);
                     break;
+                case 'modal':
+                    throw 'Not Yet Implemented';
             }
         }
         this.__mainWindow.add(target);

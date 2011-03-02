@@ -1,7 +1,7 @@
 controller = {
     actions: {
         list: function() {
-            return AirView();
+            return AirView(AirModel('newsList'));
         },
         details: function(id) {
             return AirView();

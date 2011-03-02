@@ -1,3 +1,6 @@
+/*
+    Generic Elements and Reusable Classes
+*/
 Window {
     backgroundImage: 'jab11/content/images/bg.png'
 }
@@ -5,7 +8,15 @@ Window {
 WebView {
     backgroundColor: 'transparent'
 }
+.TornEdge {
+    image: 'jab11/content/images/tornedge.png',
+    width: 320,
+    height: 6
+}
 
+/*
+    Title Bar View
+*/
 .HomeButton {
     backgroundImage: 'jab11/content/images/bars/9dots.png',
     width: 41,
@@ -23,12 +34,9 @@ WebView {
 	shadowOffset: {x:0, y:-1}
 }
 
-.TornEdge {
-    image: 'jab11/content/images/tornedge.png',
-    width: 320,
-    height: 6
-}
-
+/*
+    Details View
+*/
 .DetailsTornEdge {
     top: 63
 }
@@ -57,6 +65,42 @@ WebView {
 }
 .DetailsBody {
     top: 63
+}
+
+/*
+    List View
+*/
+.ListContainer {
+    layout: 'vertical',
+    contentHeight: 'auto'
+}
+.Row {
+    backgroundColor: '#fff',
+    height: 60
+}
+.RowTopBorder {
+    backgroundColor: '#b4b7bb',
+    top: -2,
+    height: 2,
+    left: 0,
+    right: 0
+}
+.RowTitle {
+    top: 14, right: 30, left: 10,
+    height: 14,
+    font: { fontWeight: 'bold', fontSize: 14 },
+    color: '#4674b9'
+}
+.RowSubtitle {
+    top: 32, right: 30, left: 10,
+    height: 13,
+    font: { fontSize: 13 },
+    color: '#b94646'
+}
+.RowDetailsArrow {
+    right: 10,
+    width: 10, height: 14,
+    image: 'jab11/content/images/arrowright.png'
 }
 
 /*
