@@ -3,7 +3,7 @@ controller = {
         form: function() {
             return AirView();
         },
-        submit: function(model) {
+        submit: function(data) {
             return AirView();
         }
     }

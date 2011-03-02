@@ -1,0 +1,42 @@
+#JOSCARsBannerImage {
+    image: 'jab11/content/images/joscars/joscars.png',
+    width: 105, height: 141
+}
+#JOSCARsScroll {
+    contentHeight: 'auto',
+    layout: 'vertical',
+    top: 43, left: 10, right: 10
+}
+#JOSCARsSubtitle {
+    text: 'Nominate your favourites from the Joomla!Sphere:',
+    textAlign: 'center',
+    color: '#555',
+    font: { fontSize: 13 },
+    height: 26
+}
+#JOSCARsCommunity {
+    top: 5,
+    text: 'Web Site Community',
+    textAlign: 'left',
+    color: '#4674b9',
+    font: { fontSize: 18, fontWeight: 'bold' },
+    height: 'auto'
+}
+#JOSCARsNonProfit {
+    top: 10,
+    text: 'Web Site Non-Profit',
+    textAlign: 'left',
+    color: '#4674b9',
+    font: { fontSize: 18, fontWeight: 'bold' },
+    height: 'auto'
+}
+.JOSCARsText {
+    backgroundImage: 'jab11/content/images/joscars/text.png',
+    top: 3, paddingLeft: 10,
+    width: 293, height: 36
+}
+#JOSCARsSubmit {
+    top: 15, bottom: 15,
+    width: 278, height: 45,
+    backgroundImage: 'jab11/content/images/joscars/submitMyNominations.png'
+}

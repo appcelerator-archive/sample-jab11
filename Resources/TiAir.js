@@ -221,8 +221,6 @@ var TiAir = {};
             }
             // call the view
             toOpen = openCache[hash] = controller.actions[actionID].apply(controller.actions, actionArgs);
-            controllerID = null;
-            actionID = null;
         }
 
         if (toOpen != null) {
@@ -235,7 +233,7 @@ var TiAir = {};
     };
 
     /**
-     * Returns a view, mixing in any model data. Only operates from inside a controller, and will throw an error if called otherwise.
+     * Returns a view, mixing in any model data.
      * @param {...number} var_args An optional string in the form "viewName" or "controller/viewName", followed by an optional model.
      */
     context.AirView = function() {
@@ -268,7 +266,7 @@ var TiAir = {};
         return typeof view === 'function' ? view(model || {}) : view;
     };
     /**
-     * Returns a view, mixing in any model data. Only operates from inside a controller, and will throw an error if called otherwise.
+     * Returns a view, mixing in any model data.
      * @param id The id of the model to retrieve
      */
     context.AirModel = function(id) {
@@ -277,7 +275,7 @@ var TiAir = {};
     };
 
     /**
-     * Returns the response from an action. Only operates from inside a controller, and will throw an error if called otherwise.
+     * Returns the response from an action.
      * @param url The url of the action to call
      * @param {...number} var_args Any arguments that should be passed to the action.
      */
