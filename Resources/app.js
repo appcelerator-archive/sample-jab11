@@ -1,9 +1,7 @@
 /*
  * Include the libraries we will use. These libraries are NOT dependent on each other.
  */
-Ti.include('TiStorage.js');
-Ti.include('redux.js');
-Ti.include('TiAir.js');
+Ti.include('utility.js', 'redux.js', 'TiStorage.js', 'TiAir.js');
 
 Ti.UI.backgroundImage = 'jab11/content/images/loading.withoutbar.png';
 var used = [

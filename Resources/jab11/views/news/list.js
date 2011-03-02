@@ -15,10 +15,10 @@ view = function(model) {
     }
     var table = AirView('table', {
         rows: rows,
-        getRows: function(callback) {
+        update: function(callback) {
             // TODO: load from internet
             setTimeout(function() {
-                callback(rows);
+                callback({ rows: rows });
             }, 3000);
         }
     });
