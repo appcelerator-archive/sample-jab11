@@ -13,7 +13,7 @@ view = function(model) {
             targetURL: { controller: 'news', action: 'details', index: i }
         }));
     }
-    var list = AirView('listWithDetails', {
+    var table = AirView('table', {
         rows: rows,
         getRows: function(callback) {
             // TODO: load from internet
@@ -22,7 +22,7 @@ view = function(model) {
             }, 3000);
         }
     });
-    list.top = 45;
-    win.add(list);
+    table.top = 45;
+    win.add(table);
     return win;
 };

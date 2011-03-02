@@ -1,7 +1,6 @@
 view = function(model) {
 
-    var row = new View({ className: 'Row' });
-    row.add(new View({ className: 'RowTopBorder' }));
+    var row = new TableViewRow({ className: 'Row' });
 
     // title
     if (typeof model.title === 'string') {

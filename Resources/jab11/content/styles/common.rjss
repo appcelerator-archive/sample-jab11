@@ -68,22 +68,15 @@ WebView {
 }
 
 /*
-    List View
+    Table
 */
-.ListContainer {
-    layout: 'vertical',
-    contentHeight: 'auto'
+.Table {
+    backgroundColor: 'transparent'
 }
 .Row {
     backgroundColor: '#fff',
+    selectedBackgroundColor: '#ddd',
     height: 60
-}
-.RowTopBorder {
-    backgroundColor: '#b4b7bb',
-    top: -2,
-    height: 2,
-    left: 0,
-    right: 0
 }
 .RowTitle {
     top: 14, right: 30, left: 10,
