@@ -1,3 +1,4 @@
+var turnOnTiStorageLogging = true;
 /**
  * TiStorage
  *
@@ -109,8 +110,9 @@ function TiStorage() {
 		var storage = Ti.App.Properties.setString(this.globalStore, JSON.stringify(StorageDb));
 
 		this.storage = JSON.parse(Ti.App.Properties.getString(this.globalStore));
-
-		Ti.API.info('TiStorage - Ti Prop Created: ' + this.storage);
+        if (turnOnTiStorageLogging) {
+		    Ti.API.info('TiStorage - Ti Prop Created: ' + this.storage);
+        }
 	}
 
 	/**
@@ -125,9 +127,9 @@ function TiStorage() {
 			this.storage[db] = {};
 			Ti.App.Properties.setString(this.globalStore, JSON.stringify(this.storage));
 		}
-
-		Ti.API.info('TiStorage - Database Selected: ' + db);
-
+        if (turnOnTiStorageLogging) {
+            Ti.API.info('TiStorage - Database Selected: ' + db);
+        }
 		// Create a new instance of the TiStorage factory
 		return new TiStorageFactory(this.globalStore, this.storage, db);
 	};
@@ -159,8 +161,9 @@ function TiStorage() {
 			}
 
 			this.coll = collection;
-
-			Ti.API.info('TiStorage - Collection Selected: ' + this.coll);
+            if (turnOnTiStorageLogging) {
+			    Ti.API.info('TiStorage - Collection Selected: ' + this.coll);
+            }
 
 			return new TiStorage.core(this.globalStore, this.storage, this.database, this.coll);
 		};
@@ -199,8 +202,10 @@ function TiStorage() {
 			this.storage[this.database][this.collection].push(obj);
 			Ti.App.Properties.setString(this.globalStore, JSON.stringify(this.storage));
 
-			Ti.API.info('TiStorage - Record Created: ' + obj.id);
-
+            if (turnOnTiStorageLogging) {
+			    Ti.API.info('TiStorage - Record Created: ' + obj.id);
+            }
+            
 			return this;
 		};
 
@@ -255,12 +260,16 @@ function TiStorage() {
 
 			} else {
 				// Throw a warning if the developer is doing something stupid
-				Ti.API.warn('Invalid arguement: Update only receives an object or an integer');
+                if (turnOnTiStorageLogging) {
+				    Ti.API.warn('Invalid arguement: Update only receives an object or an integer');
+                }
 			}
 
 			Ti.App.Properties.setString(this.globalStore, JSON.stringify(this.storage));
 
-			Ti.API.info('TiStorage - Updated Record');
+            if (turnOnTiStorageLogging) {
+			    Ti.API.info('TiStorage - Updated Record');
+            }
 
 			return this;
 		};
@@ -287,7 +296,9 @@ function TiStorage() {
 			// Save the collection minus the removed row above
 			Ti.App.Properties.setString(this.globalStore, JSON.stringify(this.storage));
 
-			Ti.API.info('TiStorage - Removed record: ' + row.id);
+            if (turnOnTiStorageLogging) {
+			    Ti.API.info('TiStorage - Removed record: ' + row.id);
+            }
 
 			return this;
 		};
@@ -404,7 +415,9 @@ function TiStorage() {
 											// @TODO - implement a way to return ANY, non-specific matching records
 											record.push(collection[i]);
 										} else {
-											Ti.API.info('TiStorage - Record Selected: ' + collection[i].id);
+                                            if (turnOnTiStorageLogging) {
+											    Ti.API.info('TiStorage - Record Selected: ' + collection[i].id);
+                                            }
 
 											return collection[i];
 											//this.findSpecific(obj, collection[i])
@@ -418,7 +431,9 @@ function TiStorage() {
 
 				// Return of array of matching records
 				if(qty === undefined) {
-					Ti.API.info('TiStorage - Records Selected: ' + record);
+					if (turnOnTiStorageLogging) {
+                        Ti.API.info('TiStorage - Records Selected: ' + record);
+                    }
 					return this.findSpecific(obj, record);
 
 					// @TODO - implement a way to return ANY, non-specific matching records
