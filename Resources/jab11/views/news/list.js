@@ -5,8 +5,8 @@ view = function(model) {
         title: 'Latest News'
     }));
     var rows = [];
-    for (var i = 0, l = model.query.results.item.length; i < l; i++) {
-        var item = model.query.results.item[i];
+    for (var i = 0, l = model.length; i < l; i++) {
+        var item = model[i];
         rows.push(AirView('row', {
             title: item.title,
             subtitle: item.pubDate,

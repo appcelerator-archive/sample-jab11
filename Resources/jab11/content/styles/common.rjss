@@ -54,14 +54,14 @@ WebView {
     layout: 'vertical'
 }
 .DetailsTitle {
-    top: 12,
-    height: 'auto',
+    top: 12, left: 10, right: 10,
+    height: 19,
     font: { fontWeight: 'bold', fontSize: 19 },
     color: '#b94646',
     textAlign: 'center'
 }
 .DetailsSubtitle {
-    top: 1,
+    top: 1, left: 10, right: 10,
     height: 'auto',
     font: { fontSize: 14 },
     color: '#4674b9',

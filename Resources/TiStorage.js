@@ -96,7 +96,7 @@
 	users.clear();
 
  */
-var TiStorage = function() {
+function TiStorage() {
 	// A default name the Ti Properties API will use (most likely will never need to change)
 	this.globalStore = 'StorageDb';
 	// Global Ti property exposed
@@ -430,4 +430,6 @@ var TiStorage = function() {
 
 
 	}; // End of TiStorage.Core
-}; // End of TiStorage
+
+    return this;
+} // End of TiStorage
