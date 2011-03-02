@@ -235,8 +235,7 @@ var TiAir = {};
     };
 
     /**
-     * Returns a view, mixing in any model data. Only operates from inside a controller,
-     * and will throw an error if called otherwise.
+     * Returns a view, mixing in any model data. Only operates from inside a controller, and will throw an error if called otherwise.
      * @param {...number} var_args An optional string in the form "viewName" or "controller/viewName", followed by an optional model.
      */
     context.AirView = function() {
@@ -269,13 +268,37 @@ var TiAir = {};
         return typeof view === 'function' ? view(model || {}) : view;
     };
     /**
-     * Returns a view, mixing in any model data. Only operates from inside a controller,
-     * and will throw an error if called otherwise.
+     * Returns a view, mixing in any model data. Only operates from inside a controller, and will throw an error if called otherwise.
      * @param id The id of the model to retrieve
      */
     context.AirModel = function(id) {
         var model = TiAir.getModel(id);
         return typeof model === 'function' ? model() : model;
+    };
+
+    /**
+     * Returns the response from an action. Only operates from inside a controller, and will throw an error if called otherwise.
+     * @param url The url of the action to call
+     * @param {...number} var_args Any arguments that should be passed to the action.
+     */
+    context.AirAction = function(url) {
+        var controller = TiAir.getController(url.controller);
+        actionID = url.action;
+        if (controller.actions[actionID] == null) {
+            throw 'TiAir :: Error :: No action found with id ' + actionID + ' in ' + controllerID;
+        }
+        var currentActionID = actionID;
+        // dynamically map arguments in the URL to the arguments in the action
+        var actionArgs = [], expectedArgs = controller.actions[actionID].toString().split('(')[1].split(')')[0].split(',');
+        if (expectedArgs.length > 0 && expectedArgs[0] != '') {
+            for (var i = 0, l = expectedArgs.length; i < l; i++) {
+                actionArgs.push(url[expectedArgs[i]]);
+            }
+        }
+        // call the action
+        var retVal = controller.actions[actionID].apply(controller.actions, actionArgs);
+        actionID = currentActionID;
+        return retVal;
     };
 
     /*

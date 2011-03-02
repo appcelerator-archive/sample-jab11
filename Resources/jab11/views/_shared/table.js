@@ -5,14 +5,16 @@ view = function(model) {
     var handleDataCallback;
 
     function handleData(model) {
-        var data = [];
-        for (var i = 0, l = model.rows.length; i < l; i++) {
-            data.push(model.rows[i]);
+        if (model && model.rows) {
+            var data = [];
+            for (var i = 0, l = model.rows.length; i < l; i++) {
+                data.push(model.rows[i]);
+            }
+            if (i > 1) {
+                data[i - 1].add(new ImageView({ className: 'TornEdge', bottom: -5 }));
+            }
+            table.setData(data);
         }
-        if (i > 1) {
-            data[i - 1].add(new ImageView({ className: 'TornEdge', bottom: -5 }));
-        }
-        table.setData(data);
         if (handleDataCallback) {
             handleDataCallback();
         }
