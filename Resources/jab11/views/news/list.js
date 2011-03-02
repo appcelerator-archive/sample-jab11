@@ -10,7 +10,7 @@ view = function(model) {
         rows.push(AirView('row', {
             title: item.title,
             subtitle: item.pubDate,
-            targetURL: { controller: 'news', action: 'details', index: i }
+            targetURL: { controller: 'news', action: 'details', id: i }
         }));
     }
     var table = AirView('table', {

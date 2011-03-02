@@ -1,3 +1,3 @@
-view = function() {
+view = function(model) {
     return AirView('notImplemented');
 };

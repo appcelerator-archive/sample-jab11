@@ -192,30 +192,42 @@ var TiAir = {};
     var openCache = {};
     TiAir.openURL = function(url, evt) {
         var controller = this.getController(url.controller);
-        var hash = url.controller + '/' + url.action;
+        var hash;
+        for (var n in url) {
+            if (url.hasOwnProperty(n)) {
+                hash += n + ':' + url[n] + '/';
+            }
+        }
         var args = Array().slice.call(arguments);
         var navigator = this.getNavigator(this.options.navigator);
 
+        var toOpen;
         if (openCache[hash]) {
-            args.splice(1, 0, openCache[hash]);
-            navigator.open.apply(navigator, args);
+            toOpen = openCache[hash];
         }
         else {
+            // determine which view needs to be loaded
             controllerID = url.controller;
             actionID = url.action;
             if (controller.actions[actionID] == null) {
                 throw 'TiAir :: Error :: No action found with id ' + actionID + ' in ' + controllerID;
             }
-            var result = controller.actions[actionID]();
-            args.splice(1, 0, result);
-            openCache[hash] = result;
-            // was something returned from the action?
-            if (result != null) {
-                // is it a window?
-                navigator.open.apply(navigator, args);
+            // dynamically map arguments in the URL to the arguments in the action
+            var actionArgs = [], expectedArgs = controller.actions[actionID].toString().split('(')[1].split(')')[0].split(',');
+            if (expectedArgs.length > 0 && expectedArgs[0] != '') {
+                for (var i = 0, l = expectedArgs.length; i < l; i++) {
+                    actionArgs.push(url[expectedArgs[i]]);
+                }
             }
+            // call the view
+            toOpen = openCache[hash] = controller.actions[actionID].apply(controller.actions, actionArgs);
             controllerID = null;
             actionID = null;
+        }
+
+        if (toOpen != null) {
+            args.splice(1, 0, toOpen);
+            navigator.open.apply(navigator, args);
         }
     };
     TiAir.close = function(view) {

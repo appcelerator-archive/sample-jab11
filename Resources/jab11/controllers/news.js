@@ -4,7 +4,7 @@ controller = {
             return AirView(AirModel('newsList'));
         },
         details: function(id) {
-            return AirView();
+            return AirView(id);
         }
     }
 };
