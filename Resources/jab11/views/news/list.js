@@ -1,5 +1,5 @@
 view = function(model) {
-    var win = new Window({ id: 'NewsWindow' });
+    var win = new View({ id: 'NewsWindow', className: 'Window' });
     win.add(AirView('titleBar', {
         left: AirView('homeButton', win),
         title: 'Latest News'
@@ -10,7 +10,7 @@ view = function(model) {
         rows.push(AirView('row', {
             title: item.title,
             subtitle: item.pubDate,
-            targetURL: { controller: 'news', action: 'details', id: i }
+            targetURL: { controller: 'news', action: 'details', id: i, navigatorOptions: { animate: 'tabSlide' } }
         }));
     }
     var table = AirView('table', {

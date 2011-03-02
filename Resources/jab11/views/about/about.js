@@ -1,5 +1,5 @@
 view = function(model) {
-    var win = new Window({ id: 'AboutWindow' });
+    var win = new View({ id: 'AboutWindow', className: 'Window' });
     var sponsorsButton = new Button({ id: 'SponsorsButton' });
     $(sponsorsButton).click(function() {
         TiAir.openURL({ action: 'sponsors', controller: 'about' });

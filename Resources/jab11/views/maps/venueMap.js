@@ -1,5 +1,5 @@
 view = function(model) {
-    var win = new Window({ id: 'VenueMapWindow' });
+    var win = new View({ id: 'VenueMapWindow', className: 'Window' });
     win.add(AirView('titleBar', {
         left: AirView('homeButton', win),
         title: 'Venue Map'

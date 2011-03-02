@@ -1,10 +1,9 @@
 /*
     Generic Elements and Reusable Classes
 */
-Window {
+.Window {
     backgroundImage: 'jab11/content/images/bg.png'
 }
-
 WebView {
     backgroundColor: 'transparent'
 }
@@ -20,6 +19,11 @@ WebView {
 .HomeButton {
     backgroundImage: 'jab11/content/images/bars/9dots.png',
     width: 41,
+    height: 30
+}
+.BackButton {
+    backgroundImage: 'jab11/content/images/bars/back.png',
+    width: 54,
     height: 30
 }
 .TitleBar {
@@ -110,12 +114,18 @@ Animation {
     opacity: 0
 }
 .PopOut {
-    top: 0, left: 0,
     transform: Ti.UI.create2DMatrix(),
     opacity: 1
 }
 .PopIn {
-    top: 0, left: 0,
     transform: Ti.UI.create2DMatrix().scale(0.1, 0.1),
+    opacity: 0
+}
+.SlideIn {
+    transform: Ti.UI.create2DMatrix(),
+    opacity: 1
+}
+.SlideOut {
+    transform: Ti.UI.create2DMatrix().translate(320, 0),
     opacity: 0
 }

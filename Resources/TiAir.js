@@ -237,7 +237,7 @@ var TiAir = {};
     /**
      * Returns a view, mixing in any model data. Only operates from inside a controller,
      * and will throw an error if called otherwise.
-     * @param {...number} var_args
+     * @param {...number} var_args An optional string in the form "viewName" or "controller/viewName", followed by an optional model.
      */
     context.AirView = function() {
         if (!controllerID || !actionID) {
@@ -250,7 +250,14 @@ var TiAir = {};
         }
         else {
             if (typeof arguments[0] === 'string') {
-                viewID = arguments[0];
+                var url = arguments[0].split('/');
+                if (url.length == 1) {
+                    viewID = url[0];
+                }
+                else {
+                    controllerID = url[0];
+                    viewID = url[1];
+                }
                 model = arguments.length > 1 && arguments[1];
             }
             else {
