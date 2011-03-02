@@ -22,21 +22,14 @@ view = function(model) {
         update: function(callback) {
             AirAction({
                 controller: 'news',
-                action: 'updateNews',
+                action: 'update',
                 callback: function(response) {
                     if (response.error) {
                         callback();
                         alert(response.error);
                     }
                     else {
-                        var news = TiStorage().use('jab11').collection('News');
-                        news.clear();
-                        var items = response.query.results.item;
-                        for (var i = 0, l = items.length; i < l; i++) {
-                            items[i].id = i;
-                            news.create(items[i]);
-                        }
-                        callback(news.find());
+                        callback(response);
                     }
                 }
             });

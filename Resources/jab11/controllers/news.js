@@ -1,15 +1,13 @@
 controller = {
     actions: {
         list: function() {
-            return AirView(this.getNews());
+            return AirView(this.get());
         },
         details: function(id) {
-            return AirView(this.getNews(id)[0]);
+            return AirView(this.get(id)[0]);
         },
-        getNews: function(id) {
-
+        get: function(id) {
             var news = TiStorage().use('jab11').collection('News');
-
             // if we don't have anything in our database, load in the default data.
             if (news.find().length == 0) {
                 var defaultNews = AirModel('defaultNewsList').query.results.item;
@@ -18,17 +16,23 @@ controller = {
                     news.create(defaultNews[i]);
                 }
             }
-
             return news.find(id == undefined ? undefined : { id: id })
         },
-        updateNews: function(callback) {
+        update: function(callback) {
             var xhr = new HTTPClient();
 
             xhr.onload = function() {
                 try {
                     var response = JSON.parse(this.responseData);
                     if (response) {
-                        callback(response);
+                        var news = TiStorage().use('jab11').collection('News');
+                        news.clear();
+                        var items = response.query.results.item;
+                        for (var i = 0, l = items.length; i < l; i++) {
+                            items[i].id = i;
+                            news.create(items[i]);
+                        }
+                        callback(news.find());
                     } else {
                         callback({ error: 'The server is temporarily unavailable; please check your internet connection, and try again.' });
                     }
