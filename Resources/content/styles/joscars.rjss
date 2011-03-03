@@ -1,5 +1,5 @@
 #JOSCARsBannerImage {
-    image: 'jab11/content/images/joscars/joscars.png',
+    image: 'content/images/joscars/joscars.png',
     width: 105, height: 141
 }
 #JOSCARsScroll {
@@ -31,12 +31,12 @@
     height: 'auto'
 }
 .JOSCARsText {
-    backgroundImage: 'jab11/content/images/joscars/text.png',
+    backgroundImage: 'content/images/joscars/text.png',
     top: 3, paddingLeft: 10,
     width: 293, height: 36
 }
 #JOSCARsSubmit {
     top: 15, bottom: 15,
     width: 278, height: 45,
-    backgroundImage: 'jab11/content/images/joscars/submitMyNominations.png'
+    backgroundImage: 'content/images/joscars/submitMyNominations.png'
 }

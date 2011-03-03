@@ -2,13 +2,13 @@
     Generic Elements and Reusable Classes
 */
 .Window {
-    backgroundImage: 'jab11/content/images/bg.png'
+    backgroundImage: 'content/images/bg.png'
 }
 WebView {
     backgroundColor: 'transparent'
 }
 .TornEdge {
-    image: 'jab11/content/images/tornedge.png',
+    image: 'content/images/tornedge.png',
     width: 320,
     height: 6
 }
@@ -17,17 +17,17 @@ WebView {
     Title Bar View
 */
 .HomeButton {
-    backgroundImage: 'jab11/content/images/bars/9dots.png',
+    backgroundImage: 'content/images/bars/9dots.png',
     width: 41,
     height: 30
 }
 .BackButton {
-    backgroundImage: 'jab11/content/images/bars/back.png',
+    backgroundImage: 'content/images/bars/back.png',
     width: 54,
     height: 30
 }
 .TitleBar {
-    backgroundImage: 'jab11/content/images/bars/top.png',
+    backgroundImage: 'content/images/bars/top.png',
     top: 0, right: 0, left: 0, height: 44
 }
 .TitleBarTitle {
@@ -97,7 +97,7 @@ WebView {
 .RowDetailsArrow {
     right: 10,
     width: 10, height: 14,
-    image: 'jab11/content/images/arrowright.png'
+    image: 'content/images/arrowright.png'
 }
 
 /*
@@ -110,7 +110,7 @@ WebView {
 .PullToRefreshArrow {
     top: -30, left: 20,
     width: 10, height: 14,
-    image: 'jab11/content/images/arrowright.png'
+    image: 'content/images/arrowright.png'
 }
 .PullToRefreshText {
     left: 55, bottom: 30,

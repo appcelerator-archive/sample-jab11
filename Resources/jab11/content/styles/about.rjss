@@ -1,5 +1,0 @@
-#SponsorsButton {
-    backgroundImage: 'jab11/content/images/bars/sponsors.png',
-    width: 72,
-    height: 30
-}

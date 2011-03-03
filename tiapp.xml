@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ti:app xmlns:ti="http://ti.appcelerator.org">
-<id>com.jab.jab11</id>
-<name>jab11</name>
-<version>1.0</version>
-<publisher>appcelerator.com</publisher>
-<url>http://jandbeyond.org/</url>
-<description>No description provided</description>
-<copyright>2011 by Appcelerator, Inc.</copyright>
-<icon>appicon.png</icon>
+    <id>com.dawson.jab11</id>
+    <name>jab11</name>
+    <version>1.0</version>
+    <publisher>dawson</publisher>
+    <url>www.appcelerator.com</url>
+    <description>No description provided</description>
+    <copyright>2011 by dawson</copyright>
+    <icon>appicon.png</icon>
     <persistent-wifi>false</persistent-wifi>
     <prerendered-icon>true</prerendered-icon>
     <statusbar-style>default</statusbar-style>
@@ -15,7 +15,7 @@
     <fullscreen>false</fullscreen>
     <navbar-hidden>false</navbar-hidden>
     <analytics>true</analytics>
-    <guid>c7f4c598-aaac-40c5-aebc-1461cc4e13f6</guid>
+    <guid>b164f3a8-ea64-43f4-aed0-7346b900356b</guid>
     <iphone>
         <orientations device="iphone">
             <orientation>Ti.UI.PORTRAIT</orientation>

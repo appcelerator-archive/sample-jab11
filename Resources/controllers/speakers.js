@@ -19,7 +19,7 @@ controller = {
             return AirView();
         },
         get: function(id) {
-            var items = TiStorage().use('jab11').collection('Speakers');
+            var items = TiStorage().use('jab').collection('Speakers');
             // if we don't have anything in our database, load in the default data.
             if (items.find().length == 0) {
                 var defaultItems = AirModel('defaultSpeakers').query.results.item;
@@ -37,7 +37,7 @@ controller = {
                 try {
                     var response = JSON.parse(this.responseData);
                     if (response) {
-                        var items = TiStorage().use('jab11').collection('Speakers');
+                        var items = TiStorage().use('jab').collection('Speakers');
                         items.clear();
                         var items = response.query.results.item;
                         for (var i = 0, l = items.length; i < l; i++) {

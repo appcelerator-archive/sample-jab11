@@ -17,11 +17,21 @@ var TiAir = {};
      * Define our default options. These will take affect if the user does not pass anything to the init function.
      */
     TiAir.options = {
-        applicationDirectory: 'app',
-        pluginsDirectory: null,
         defaultURL: { controller: 'default', action: 'default' },
-        navigator: 'default'
+        navigator: 'default',
+        controllers: [],
+        models: [],
+        views: {}
     };
+
+    /**
+     * The following are private variables, and should not be altered.
+     */
+    var models = {};
+    var views = {};
+    var controllers = {}, controllerID, actionID;
+    var navigator;
+    var openCache = {};
 
     /**
      * Initializes TiAir, intelligently loading our application.
@@ -29,29 +39,26 @@ var TiAir = {};
      */
     TiAir.init = function(options) {
         this.options = this.merge(options, this.options);
-        this.initPlugins();
-        this.initModels();
-        this.initControllers();
-        this.initViews();
 
-        this.initNavigators();
+        this.initModels();
+        this.initViews();
+        this.initControllers();
+
+        this.initNavigator();
 
         if (this.options.defaultURL) {
             this.openURL(this.options.defaultURL);
         }
     };
 
-    TiAir.initPlugins = function() {
-        if (TiAir.options.pluginsDirectory) {
-            // TODO: init plugins
-        }
-    };
-    /*
-     The following functions manage our models.
+    /**
+     * Initializes the models passed in to TiAir.init.
      */
-    var models = {};
     TiAir.initModels = function() {
-        TiAir.iterateDirectory('models', function(result) {
+        if (!this.options.models || !this.options.models.length) {
+            throw 'TiAir :: Error :: No models passed in to TiAir.init.';
+        }
+        TiAir.iterateFiles(this.options.models, function(result) {
             var model = null;
             eval(result.file.read().toString());
             if (model) {
@@ -60,8 +67,16 @@ var TiAir = {};
                     value: model
                 });
             }
-        });
+            else {
+                Ti.API.warn('TiAir :: Warning :: Model ' + file.nativePath.split('.') + '');
+            }
+        }, 'models');
     };
+
+    /**
+     * Creates a model.
+     * @param args
+     */
     TiAir.createModel = function(args) {
         if (args == null) {
             throw 'TiAir :: Error :: No model passed to TiAir.createModel.';
@@ -71,6 +86,11 @@ var TiAir = {};
         }
         models[args.id] = args.value;
     };
+
+    /**
+     * Retrieves a model by its id.
+     * @param id
+     */
     TiAir.getModel = function(id) {
         if (models[id]) {
             return models[id];
@@ -78,27 +98,28 @@ var TiAir = {};
         throw 'TiAir :: Error :: No model with the id ' + id + ' exists.';
     };
 
-    /*
-     The following functions manage our navigators.
+    /**
+     * Initializes the navigator passed in to TiAir.init.
      */
-    var navigators = {};
-    TiAir.initNavigators = function() {
-        this.iterateDirectory('navigators', function(result) {
-            var navigator = null;
-            eval(result.file.read().toString());
-            if (navigator) {
-                TiAir.createNavigator({
-                    id: result.name.split('.').shift(),
-                    value: navigator
-                });
-            }
-        });
-        var navigator = this.getNavigator(this.options.navigator);
-        if (navigator == null) {
-            throw 'TiAir :: Error :: No navigator found with id ' + this.options.navigator + ' in application directory / navigators.';
+    TiAir.initNavigator = function() {
+        var navigator = null;
+        eval(Ti.Filesystem.getFile('navigators/' + this.options.navigator).read().toString());
+        if (navigator) {
+            TiAir.createNavigator({
+                id: this.options.navigator.split('.').shift(),
+                value: navigator
+            });
+        }
+        else {
+            throw 'TiAir :: Error :: No navigator found with id ' + this.options.navigator + ' in navigators directory.';
         }
         navigator.init(this);
     };
+
+    /**
+     * Creates a navigator.
+     * @param args
+     */
     TiAir.createNavigator = function(args) {
         if (args == null) {
             throw 'TiAir :: Error :: No navigator passed to TiAir.createNavigator.';
@@ -106,21 +127,24 @@ var TiAir = {};
         if (!args.id) {
             throw 'TiAir :: Error :: No id set on navigator passed to TiAir.createNavigator.';
         }
-        navigators[args.id] = args.value;
-    };
-    TiAir.getNavigator = function(id) {
-        if (navigators[id]) {
-            return navigators[id];
-        }
-        throw 'TiAir :: Error :: No navigator with the id ' + id + ' exists.';
+        navigator = args.value;
     };
 
-    /*
-     The following functions manage our controllers.
+    /**
+     * Gets a particular navigator.
      */
-    var controllers = {}, controllerID, actionID;
+    TiAir.getNavigator = function() {
+        return navigator;
+    };
+
+    /**
+     * Initializes the controllers passed in to TiAir.init.
+     */
     TiAir.initControllers = function() {
-        TiAir.iterateDirectory('controllers', function(result) {
+        if (!this.options.controllers || !this.options.controllers.length) {
+            throw 'TiAir :: Error :: No controllers passed in to TiAir.init.';
+        }
+        TiAir.iterateFiles(this.options.controllers, function(result) {
             var controller = null;
             eval(result.file.read().toString());
             if (controller) {
@@ -129,8 +153,13 @@ var TiAir = {};
                     value: controller
                 });
             }
-        });
+        }, 'controllers');
     };
+
+    /**
+     * Creates a controller so that it can later be used.
+     * @param args
+     */
     TiAir.createController = function(args) {
         if (args == null) {
             throw 'TiAir :: Error :: No controller passed to TiAir.createController.';
@@ -140,6 +169,11 @@ var TiAir = {};
         }
         controllers[args.id] = args.value;
     };
+
+    /**
+     * Retrieves a controller based on its id.
+     * @param id
+     */
     TiAir.getController = function(id) {
         if (controllers[id]) {
             return controllers[id];
@@ -147,25 +181,33 @@ var TiAir = {};
         throw 'TiAir :: Error :: No controller with the id ' + id + ' exists.';
     };
 
-    /*
-     The following functions manage our views.
+    /**
+     * Initializes the views passed in to the TiAir.init function.
      */
-    var views = {};
     TiAir.initViews = function() {
-        TiAir.iterateDirectory('views', function(result) {
-            TiAir.iterateDirectory('views/' + result.name, function (subResult) {
-                var view = null;
-                eval(subResult.file.read().toString());
-                if (view) {
-                    TiAir.createView({
-                        controllerID: result.name,
-                        id: subResult.name.split('.').shift(),
-                        value: view
-                    });
-                }
-            });
-        });
+        if (!this.options.views) {
+            throw 'TiAir :: Error :: No views passed in to TiAir.init.';
+        }
+        TiAir.iterateFiles(this.options.views, function(result) {
+            var view = null;
+            if (!result.file.exists()) {
+                throw 'TiAir :: Error :: View passed in to TiAir.init does not exist: ' + result.name.split('.').shift() + ' in ' + result.base.split('/').pop();
+            }
+            eval(result.file.read().toString());
+            if (view) {
+                TiAir.createView({
+                    controllerID: result.base.split('/').pop(),
+                    id: result.name.split('.').shift(),
+                    value: view
+                });
+            }
+        }, 'views');
     };
+
+    /**
+     * Creates a view so that it can be later retrieved and displayed.
+     * @param args
+     */
     TiAir.createView = function(args) {
         if (args == null) {
             throw 'TiAir :: Error :: No view passed to TiAir.createView.';
@@ -181,6 +223,12 @@ var TiAir = {};
         }
         views[args.controllerID][args.id] = args.value;
     };
+
+    /**
+     * Retrieves a view based on the controller and view ids.
+     * @param controllerID
+     * @param viewID
+     */
     TiAir.getView = function(controllerID, viewID) {
         var retVal = (views[controllerID] && views[controllerID][viewID]) || (views._shared && views._shared[viewID]);
         if (retVal == null) {
@@ -189,8 +237,12 @@ var TiAir = {};
         return retVal;
     };
 
-    var openCache = {};
-    TiAir.openURL = function(url, evt) {
+    /**
+     * Opens a particular URL, mapping any arguments onto a particular controller's action, then calling the navigator.
+     * Note that views are cached, so subsequent calls to open an identical URL will load up much quicker.
+     * @param url
+     */
+    TiAir.openURL = function(url) {
         var controller = this.getController(url.controller);
         var hash;
         for (var n in url) {
@@ -199,7 +251,7 @@ var TiAir = {};
             }
         }
         var args = Array().slice.call(arguments);
-        var navigator = this.getNavigator(this.options.navigator);
+        var navigator = this.getNavigator();
 
         var toOpen;
         if (openCache[hash]) {
@@ -228,12 +280,17 @@ var TiAir = {};
             navigator.open.apply(navigator, args);
         }
     };
+
+    /**
+     * Closes the particular view, passing the request on to the navigator.
+     * @param view The view that should be closed.
+     */
     TiAir.close = function(view) {
-        this.getNavigator(this.options.navigator).close(view);
+        this.getNavigator().close(view);
     };
 
     /**
-     * Returns a view, mixing in any model data.
+     * Returns a view, mixing in any model data.ll throw an error if called otherwise.
      * @param {...number} var_args An optional string in the form "viewName" or "controller/viewName", followed by an optional model.
      */
     context.AirView = function() {
@@ -265,6 +322,7 @@ var TiAir = {};
         var view = TiAir.getView(controllerID, viewID);
         return typeof view === 'function' ? view(model || {}) : view;
     };
+
     /**
      * Returns a view, mixing in any model data.
      * @param id The id of the model to retrieve
@@ -299,10 +357,6 @@ var TiAir = {};
         return retVal;
     };
 
-    /*
-     * The following are utility functions that accomplish common programming tasks.
-     */
-
     /**
      * Merges the properties of the two objects. Taken from redux.
      * @param {Object} original
@@ -327,21 +381,27 @@ var TiAir = {};
         return original;
     };
 
-    TiAir.iterateDirectory = function iterateDirectory(path, callback) {
-        var dir = Ti.Filesystem.getFile(this.options.applicationDirectory, path);
-        if (!dir.exists()) {
-            throw 'TiAir.iterateDirectory :: ' + path + ' directory not found in ' + this.options.applicationDirectory;
-        }
-        var dirs = dir.getDirectoryListing();
-        for (var i = 0, l = dirs.length; i < l; i++) {
-            // ignore hidden files
-            if (dirs[i].substr(0, 1) !== '.') {
-                var file = Ti.Filesystem.getFile(dir.nativePath, dirs[i]);
+    /**
+     * Iterates through the files represented in the passed in enumerable.
+     * @param arr An array, object, or object of arrays to iterate over.
+     * @param callback A function that will be called once for each value in the enumerable.
+     */
+    TiAir.iterateFiles = function iterateFiles(arr, callback, base) {
+        if (arr.length) {
+            // arrays contain file names; pass our results to the callback
+            for (var i = 0, l = arr.length; i < l; i++) {
                 callback({
-                    name: dirs[i],
-                    path: file.nativePath,
-                    file: file
+                    file: (base && Ti.Filesystem.getFile(base, arr[i])) || Ti.Filesystem.getFile(arr[i]),
+                    name: arr[i],
+                    base: base
                 });
+            }
+        }
+        else {
+            // but objects contain child properties with arrays of child file names (the properties are folders)
+            for (var p in arr) {
+                // recurse on it, setting it as the base
+                iterateFiles(arr[p], callback, base + '/' + p);
             }
         }
     };

@@ -1,5 +1,5 @@
 #DefaultView {
-    backgroundImage: 'jab11/content/images/default/bg.png'
+    backgroundImage: 'content/images/default/bg.png'
 }
 
 /*
@@ -39,29 +39,29 @@
     height: 85
 }
 #AboutIcon {
-    backgroundImage: 'jab11/content/images/default/about.png'
+    backgroundImage: 'content/images/default/about.png'
 }
 #MapsIcon {
-    backgroundImage: 'jab11/content/images/default/maps.png'
+    backgroundImage: 'content/images/default/maps.png'
 }
 #LatestNewsIcon {
-    backgroundImage: 'jab11/content/images/default/news.png'
+    backgroundImage: 'content/images/default/news.png'
 }
 #SpeakersIcon {
-    backgroundImage: 'jab11/content/images/default/speakers.png'
+    backgroundImage: 'content/images/default/speakers.png'
 }
 #ProgramIcon {
-    backgroundImage: 'jab11/content/images/default/program.png'
+    backgroundImage: 'content/images/default/program.png'
 }
 #SocialIcon {
-    backgroundImage: 'jab11/content/images/default/social.png'
+    backgroundImage: 'content/images/default/social.png'
 }
 #JOSCARSIcon {
-    backgroundImage: 'jab11/content/images/default/joscars.png'
+    backgroundImage: 'content/images/default/joscars.png'
 }
 #SettingsIcon {
-    backgroundImage: 'jab11/content/images/default/settings.png'
+    backgroundImage: 'content/images/default/settings.png'
 }
 #TravelIcon {
-    backgroundImage: 'jab11/content/images/default/travel.png'
+    backgroundImage: 'content/images/default/travel.png'
 }

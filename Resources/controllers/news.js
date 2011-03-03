@@ -7,7 +7,7 @@ controller = {
             return AirView(this.get(id)[0]);
         },
         get: function(id) {
-            var news = TiStorage().use('jab11').collection('News');
+            var news = TiStorage().use('jab').collection('News');
             // if we don't have anything in our database, load in the default data.
             if (news.find().length == 0) {
                 var defaultNews = AirModel('defaultNewsList').query.results.item;
@@ -25,7 +25,7 @@ controller = {
                 try {
                     var response = JSON.parse(this.responseData);
                     if (response) {
-                        var news = TiStorage().use('jab11').collection('News');
+                        var news = TiStorage().use('jab').collection('News');
                         news.clear();
                         var items = response.query.results.item;
                         for (var i = 0, l = items.length; i < l; i++) {
