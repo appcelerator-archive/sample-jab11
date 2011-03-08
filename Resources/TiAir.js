@@ -59,6 +59,9 @@ var TiAir = {};
             throw 'TiAir :: Error :: No models passed in to TiAir.init.';
         }
         TiAir.iterateFiles(this.options.models, function(result) {
+            if (!result.file.exists()) {
+                throw 'TiAir :: Error :: Model passed in to TiAir.init does not exist: ' + result.file.nativePath;
+            }
             var model = null;
             eval(result.file.read().toString());
             if (model) {
@@ -145,6 +148,9 @@ var TiAir = {};
             throw 'TiAir :: Error :: No controllers passed in to TiAir.init.';
         }
         TiAir.iterateFiles(this.options.controllers, function(result) {
+            if (!result.file.exists()) {
+                throw 'TiAir :: Error :: Controller passed in to TiAir.init does not exist: ' + result.file.nativePath;
+            }
             var controller = null;
             eval(result.file.read().toString());
             if (controller) {
@@ -189,10 +195,10 @@ var TiAir = {};
             throw 'TiAir :: Error :: No views passed in to TiAir.init.';
         }
         TiAir.iterateFiles(this.options.views, function(result) {
-            var view = null;
             if (!result.file.exists()) {
-                throw 'TiAir :: Error :: View passed in to TiAir.init does not exist: ' + result.name.split('.').shift() + ' in ' + result.base.split('/').pop();
+                throw 'TiAir :: Error :: View passed in to TiAir.init does not exist: ' + result.file.nativePath;
             }
+            var view = null;
             eval(result.file.read().toString());
             if (view) {
                 TiAir.createView({
@@ -230,9 +236,9 @@ var TiAir = {};
      * @param viewID
      */
     TiAir.getView = function(controllerID, viewID) {
-        var retVal = (views[controllerID] && views[controllerID][viewID]) || (views._shared && views._shared[viewID]);
+        var retVal = (views[controllerID] && views[controllerID][viewID]) || (views.shared && views.shared[viewID]);
         if (retVal == null) {
-            throw 'TiAir :: Error :: No view found with id ' + viewID + '; searched in ' + controllerID + ' and _shared.';
+            throw 'TiAir :: Error :: No view found with id ' + viewID + '; searched in ' + controllerID + ' and shared.';
         }
         return retVal;
     };
@@ -391,7 +397,8 @@ var TiAir = {};
             // arrays contain file names; pass our results to the callback
             for (var i = 0, l = arr.length; i < l; i++) {
                 callback({
-                    file: (base && Ti.Filesystem.getFile(base, arr[i])) || Ti.Filesystem.getFile(arr[i]),
+                    file: (base && Ti.Filesystem.getFile(Ti.Filesystem.resourcesDirectory, base, arr[i]))
+                            || Ti.Filesystem.getFile(Ti.Filesystem.resourcesDirectory, arr[i]),
                     name: arr[i],
                     base: base
                 });

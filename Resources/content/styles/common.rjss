@@ -1,3 +1,7 @@
+Window {
+    backgroundImage: 'content/images/loading.withoutbar.png'
+}
+
 /*
     Generic Elements and Reusable Classes
 */
