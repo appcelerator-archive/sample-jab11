@@ -205,7 +205,7 @@ function TiStorage() {
             if (turnOnTiStorageLogging) {
 			    Ti.API.info('TiStorage - Record Created: ' + obj.id);
             }
-            
+
 			return this;
 		};
 
@@ -374,7 +374,7 @@ function TiStorage() {
 		 * @param (object) obj The object to filter by
 		 */
 		this.findOne = function(obj) {
-			return this.find(obj, 'true');
+			return this.find(obj, 1);
 		};
 
 		/**
@@ -387,6 +387,10 @@ function TiStorage() {
 			var collection = this.storage[this.database][this.collection];
 
 			if(obj === undefined) {
+                if (qty == 1)
+                {
+                    return collection[0];
+                }
 				return collection; // return the whole collection object
 			} else {
 				// Cache the record array

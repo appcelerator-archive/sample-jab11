@@ -41,7 +41,7 @@ TiAir.init({
 
     // models contain data
     models: [
-        'about.js', 'defaultIcons.js', 'defaultNewsList.js', 'joscars.js', 'venueMap.js'
+        'about.js', 'defaultIcons.js', 'defaultNewsList.js', 'defaultTravel.js', 'joscars.js', 'venueMap.js'
     ],
 
     // navigators control the transitions between views in your app
@@ -50,8 +50,8 @@ TiAir.init({
     // views show something to the user; a single view can contain other views, and usually receives a model
     views: {
         shared: [
-            'backButton.js', 'details.js', 'detailsCSS.js', 'gridWithDetails.js', 'homeButton.js', 'notImplemented.js', 'pullToRefresh.js',
-            'row.js', 'segmentedDisplay.js', 'table.js', 'titleBar.js'
+            'backButton.js', 'details.js', 'detailsCSS.js', 'gridWithDetails.js', 'homeButton.js', 'notImplemented.js',
+            'pullToRefresh.js', 'refreshButton.js', 'row.js', 'segmentedDisplay.js', 'table.js', 'titleBar.js'
         ],
         about: [
             'about.js', 'sponsors.js'

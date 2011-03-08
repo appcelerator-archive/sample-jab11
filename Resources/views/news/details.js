@@ -4,7 +4,7 @@ view = function(model) {
         left: AirView('backButton', win),
         title: 'Latest News'
     }));
-    var details = AirView('_shared/details', {
+    var details = AirView('shared/details', {
         title: model.title,
         subtitle: model.pubDate,
         bodyHTML: model.description

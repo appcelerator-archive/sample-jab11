@@ -17,7 +17,7 @@ controller = {
                     news.create(defaultNews[i]);
                 }
             }
-            return news.find(id == undefined ? undefined : { id: id })
+            return news.find(id == undefined ? undefined : { id: id });
         },
         update: function(callback) {
 

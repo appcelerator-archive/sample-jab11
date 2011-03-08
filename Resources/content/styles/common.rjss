@@ -30,6 +30,11 @@ WebView {
     width: 54,
     height: 30
 }
+.RefreshButton {
+    backgroundImage: 'content/images/bars/refresh.png',
+    width: 41,
+    height: 30
+}
 .TitleBar {
     backgroundImage: 'content/images/bars/top.png',
     top: 0, right: 0, left: 0, height: 44

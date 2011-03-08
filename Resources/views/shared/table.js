@@ -4,7 +4,7 @@ view = function(model) {
 
     var handleDataCallback;
 
-    function handleData(model) {
+    table.updateRows = function(model) {
         if (model && model.rows) {
             var data = [];
             for (var i = 0, l = model.rows.length; i < l; i++) {
@@ -18,9 +18,9 @@ view = function(model) {
         if (handleDataCallback) {
             handleDataCallback();
         }
-    }
+    };
 
-    handleData(model);
+    table.updateRows(model);
 
     $(table).click(function(evt) {
         if (evt.row && evt.row.targetURL) {
@@ -28,13 +28,18 @@ view = function(model) {
         }
     });
 
+    table.update = function (callback) {
+        handleDataCallback = callback;
+        model.update(table.updateRows);
+    };
+
     // pull to refresh?
     if (model.update) {
         AirView('pullToRefresh', {
             table: table,
             update: function (callback) {
                 handleDataCallback = callback;
-                model.update(handleData);
+                model.update(table.updateRows);
             }
         });
     }

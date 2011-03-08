@@ -1,13 +1,21 @@
 controller = {
     actions: {
         list: function() {
-            return AirView();
+            var collection = TiStorage().use('jab').collection('Travel');
+            // if we don't have anything in our database, load in the default data.
+            collection.clear();
+            if (collection.find().length == 0) {
+                var item = AirModel('defaultTravel').query.results.item;
+                item.description = item.description.replace(/K2Feed/gi, 'item');
+                collection.create(item);
+            }
+            return AirView(collection.findOne());
         },
         update: function(callback) {
 
             var n = new Date();
             var timestamp = '' + n.getUTCFullYear() + toTwoDigits(n.getUTCMonth() + 1) + toTwoDigits(n.getUTCDate()) + toTwoDigits(n.getUTCHours());
-            var query = 'SELECT title, description FROM feed WHERE url="http://jandbeyond.org/information.feed?export=json?t=' + timestamp + '" and guid="http://jandbeyond.org/information/Travelling.html"';
+            var query = 'SELECT * FROM feed WHERE url="http://jandbeyond.org/information.feed?export=json?t=' + timestamp + '" and guid="http://jandbeyond.org/information/Travelling.html"';
 
             Ti.Yahoo.yql(query, function(response) {
                 if (!response.success) {
@@ -15,17 +23,14 @@ controller = {
                 }
                 else {
                     var data = response.data;
-                    var news = TiStorage().use('jab').collection('News');
-                    news.clear();
-                    var items = data.item;
-                    for (var i = 0, l = items.length; i < l; i++) {
-                        items[i].id = i;
-                        news.create(items[i]);
-                    }
-                    callback(news.find());
+                    var collection = TiStorage().use('jab').collection('Travel');
+                    collection.clear();
+                    var item = data.item[0];
+                    item.description = item.description.replace(/K2Feed/gi, 'item');
+                    collection.create(item);
+                    callback(collection.findOne());
                 }
             });
-
         }
     }
 };
