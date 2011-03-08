@@ -1,4 +1,4 @@
-view = function() {
+view = function(model) {
     var win = new View({ id: 'JOSCARsView', className: 'Window' });
     win.add(AirView('titleBar', {
         left: AirView('homeButton', win),
@@ -9,25 +9,34 @@ view = function() {
     scroll.add(new ImageView({ id: 'JOSCARsBannerImage' }));
     scroll.add(new Label({ id: 'JOSCARsSubtitle' }));
 
-    scroll.add(new Label({ id: 'JOSCARsCommunity' }));
-    var community = new TextField({ className: 'JOSCARsText' });
-    scroll.add(community);
+    var textFields = [];
 
-    scroll.add(new Label({ id: 'JOSCARsNonProfit' }));
-    var nonprofit = new TextField({ className: 'JOSCARsText' });
-    scroll.add(nonprofit);
+    for (var i = 0, l = model.length; i < l; i++) {
+        scroll.add(new Label({ text: model[i].title, className: 'JOSCARsCategory' }));
+        var community = new TextField({ className: 'JOSCARsText' });
+        scroll.add(community);
+        textFields.push(community);
+    }
 
     var submit = new Button({ id: 'JOSCARsSubmit' });
     scroll.add(submit);
 
     $(submit).click(function() {
-        var commValue = community.value.trim();
-        var npValue = nonprofit.value.trim();
-        if (!commValue.length && !npValue.length) {
-            alert('Please nominate at least one site.');
+        var atLeastOneFilledOut = false;
+
+        for (var j = 0, k = textFields.length; j < k; j++) {
+            if (textFields[j].value.trim().length) {
+                atLeastOneFilledOut = true;
+                break;
+            }
+        }
+
+        if (atLeastOneFilledOut) {
+            // TODO: hit web service
+            return AirView('notImplemented');
         }
         else {
-            return AirView('notImplemented');
+            alert('Please nominate at least one site.');
         }
     });
 

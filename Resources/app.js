@@ -41,7 +41,7 @@ TiAir.init({
 
     // models contain data
     models: [
-        'about.js', 'defaultIcons.js', 'defaultNewsList.js', 'venueMap.js'
+        'about.js', 'defaultIcons.js', 'defaultNewsList.js', 'joscars.js', 'venueMap.js'
     ],
 
     // navigators control the transitions between views in your app
