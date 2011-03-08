@@ -11,3 +11,7 @@ function formatDate(d) {
     }
     return retVal;
 }
+
+function toTwoDigits(num) {
+    return num < 10 ? '0' + String(num) : num;
+}
