@@ -1,0 +1,11 @@
+body {
+    background: transparent;
+    margin: 10px;
+}
+div.itemIntroText {
+    padding-top: 0 !important;
+}
+div.itemIntroText p {
+    margin-top: 0;
+    padding-top: 0;
+}

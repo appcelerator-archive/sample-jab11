@@ -1,0 +1,928 @@
+/*
+// "J and Beyond 2011" template for Joomla! 1.5.x by Nuevvo Webware Ltd. - Version 1.0
+// Copyright (c) 2010 Nuevvo Webware Ltd. - http://nuevvo.com
+// Released under a commercial license
+// ***Last update: November 18th, 210***
+*/
+
+/*
+Legend:
+font-family:"Yanone Kaffeesatz","Trebuchet MS",Trebuchet,Arial,Verdana,Sans-serif;
+font-family:"IM Fell DW Pica SC","Trebuchet MS",Trebuchet,Arial,Verdana,Sans-serif;
+font-family:Georgia, "Times New Roman", Times, serif;
+font-family:"Trebuchet MS",Trebuchet,Arial,Verdana,Sans-serif;
+font-family:Arial, Helvetica, sans-serif;
+font-family:Tahoma, Geneva, sans-serif;
+
+Colors:
+red - 9e0b0f
+blue - 4674b9
+orange - fc7d01
+darker orange - c67b05
+*/
+
+/* Load Google fonts */
+@import url(http://fonts.googleapis.com/css?family=Yanone+Kaffeesatz&subset=latin);
+@import url(http://fonts.googleapis.com/css?family=IM+Fell+DW+Pica+SC&subset=latin);
+
+/* ========================================================================== */
+/* ========================================================================== */
+/* ============================= GLOBAL STYLING ============================= */
+/* ========================================================================== */
+/* ========================================================================== */
+
+/*
+* {margin:0;padding:0;} - reset all margins and paddings
+*/
+body {font-family:"Trebuchet MS",Trebuchet,Arial,Verdana,Sans-serif;font-size:13px;color:#212121;padding:0;margin:0;text-align:left;background:#f7ad39;}
+
+/* Links */
+a {color:#4674b9;text-decoration:none;}
+a:link {}
+a:visited {}
+a:hover {color:#fc7d01;text-decoration:none;}
+a:active,a:focus {outline:0;}
+
+h3 a {/*color:#9e0b0f;*/ color:#c40000;}
+h3 a:hover {color:#fc7d01;}
+
+/* Headings */
+h1 {}
+h2 {}
+h3 {/*color:#9e0b0f;*/ color:#c40000;}
+h4 {}
+h5 {}
+h6 {}
+.itemIntroText h2,
+.itemFullText h2,
+.catItemIntroText h2 {color:#d95b43; font:normal 24px/26px "Yanone Kaffeesatz","Trebuchet MS",Trebuchet,Arial,Verdana,Sans-serif;}
+
+/* Listings */
+ul {margin:8px 16px;padding:0 8px;list-style:square;}
+ul li {margin:1px 4px;padding:0;}
+ol {margin:8px 16px;padding:0 8px;}
+ol li {margin:1px 4px;padding:0;}
+.itemIntroText ul,.itemFullText ul, .catItemIntroText ul {padding:0; margin:8px 10px;}
+.itemIntroText ul li,
+.itemFullText ul li,
+.catItemIntroText ul li {list-style:none; background:url(../images/jab11/liBullet_10x11.png) no-repeat 0 4px; padding:0 18px;}
+
+
+/* Forms */
+form {padding:0;margin:0;}
+select,option {font-weight:normal;text-decoration:none;}
+input {vertical-align:middle;}
+textarea {}
+label {}
+
+/* Horizontal lines */
+hr {line-height:0;height:0;border:none;border-bottom:1px solid #ccc;padding:0;margin:8px 0;}
+
+/* Images */
+img {border:none;}
+
+/* Form elements */
+.inputbox {}
+.inputbox:focus {}
+.button {cursor:pointer;}
+
+/* Horizontal lines */
+hr.separator {}
+
+/* Other */
+fieldset {padding:0;margin:0;border:0;}
+legend {display:block;width:100%;color:#9e0b0f;padding:24px 0 8px 0;margin:0 0 8px 0;border-bottom:1px dotted #ccc;font-size:18px;font-family:Georgia, "Times New Roman", Times, serif;}
+
+pre {display:block;clear:both;font-family:monospace;font-size:12px;padding:8px;margin:8px 0;border-top:4px solid #ccc;border-bottom:4px solid #ccc;background:#fffff0;
+    width: 500px;                          /* specify width  */
+    white-space: pre-wrap;                 /* CSS3 browsers  */
+    white-space: -moz-pre-wrap !important; /* 1999+ Mozilla  */
+    white-space: -pre-wrap;                /* Opera 4 thru 6 */
+    white-space: -o-pre-wrap;              /* Opera 7 and up */
+} /* used for displaying code blocks in content */
+
+/* Global clear */
+.clr {clear:both;height:0;line-height:0;display:block;float:none;padding:0;margin:0;border:0;}
+
+
+
+/* ========================================================================== */
+/* ========================================================================== */
+/* ========== COMMON SITE ELEMENTS (titles, menu, tooltips etc.) ============ */
+/* ========================================================================== */
+/* ========================================================================== */
+
+/* SEF About Us */
+h1#helloGoogle {display:none;}
+
+/* Generic titles */
+div.componentheading {background:url(../images/jab11/componentheadingBg.png) no-repeat 50% 0;text-transform:uppercase;text-align:center;font:normal 30px/110% 'IM Fell DW Pica SC',"Trebuchet MS",Trebuchet,Arial,Verdana,Sans-serif;color:#4674b9;padding:110px 0 10px;margin:15px 0 0;}
+
+/* Form Buttons */
+#rdbsform button {clear:both;display:block;float:left;padding:0 0 0 8px;margin:0 0 0 -10px;border:0;cursor:pointer;font-size:14px;background:url(../images/formButtonLargeOnOff.png) no-repeat 100% 1px;overflow:visible;}
+button span {display:block;padding:0 8px 0 0;margin:0;background:url(../images/formButtonLargeOnOff.png) no-repeat 0 0;}
+button span span {display:block;white-space:nowrap;padding:0 0 0 24px;margin:0 20px;line-height:30px;height:30px;background:url(../images/tick.png) no-repeat 0 50%;font-weight:bold;text-align:center;}
+button span.next span {display:block;white-space:nowrap;padding:0 0 0 24px;margin:0 20px;line-height:30px;height:30px;background:url(../images/next.png) no-repeat 0 50%;font-weight:bold;text-align:center;}
+button span.forward span {display:block;white-space:nowrap;padding:0 0 0 24px;margin:0 20px;line-height:30px;height:30px;background:url(../images/forward.png) no-repeat 0 50%;font-weight:bold;text-align:center;}
+button span.back2 span {display:block;white-space:nowrap;padding:0 0 0 24px;margin:0 20px;line-height:30px;height:30px;background:url(../images/back2.png) no-repeat 0 50%;font-weight:bold;text-align:center;}
+
+button:hover {background-position:100% -31px;}
+button:hover span {background-position:0 100%;}
+button:hover span span {background-position:0 50%;}
+
+body.itemid8 button {margin:0 0 0 -12px;}
+
+/* Identify element */
+.identify {border:1px solid red;}
+
+/* For Banners */
+.banner span {display:none;}
+
+
+
+/* ========================================================================== */
+/* ========================================================================== */
+/* ============================ CONTENT LAYOUT ============================== */
+/* ========================================================================== */
+/* ========================================================================== */
+
+.container {width:990px;margin:0 auto;padding:0;}
+
+/* Top Section */
+body.frontpage #sectionTop {background:url(../images/jab11/upper_section_1920x979_q75_5.jpg) repeat-x 50% 0;height:979px;}
+#sectionTopContainer {background:url(../images/jab11/upper_section_inner_1920x621_q75_5.jpg) repeat-x 50% 0;}
+/*#sectionTop {background:url(../images/jab11/upper_section_inner_1920x821_q75_4.jpg) repeat-x 50% 0;height:821px;}*/
+    #sectionTop {height:392px;}
+    #sectionTop .container {position:relative;}
+
+        a#mainSponsor, a#mainSponsor:hover {background:url(../images/jab11/redComponentLogoBig.png) no-repeat 0 0; display:block;width:153px;height:57px;margin:0;padding:0;position:absolute;top:68px;left:23px;}
+        body.frontpage a#mainSponsor, body.frontpage a#mainSponsor:hover {top:88px;left:37px;}
+        a#mainSponsor span, a.mainSponsorInnerRight span {display:none;}
+        a.mainSponsorInnerRight {display:block; background:url(../images/jab11/mainSponsorRight190x112.png) no-repeat 50% 0; height:112px; width:210px; margin:0 auto 24px;}
+
+        a#siteLogo,
+        a#siteLogo:hover {display:block;width:306px;height:216px;margin:0;padding:0;position:absolute;top:30px;left:342px;}
+        a#siteLogo span {display:none;}
+
+        div#socialize {position:absolute;width:110px;height:100px;top:70px;right:46px;}
+            div#socialize a {display:block;height:50px;margin:0;padding:0;}
+            div#socialize a#socTw {float:left;width:49%;}
+            div#socialize a#socFb {float:right;width:49%;}
+            div#socialize a#socRSS {clear:both;width:50%;margin:0 auto;}
+            div#socialize a span {display:none;}
+
+        body.frontpage div#goldSponsors {position:absolute;width:140px;height:280px;top:534px;left:32px;}
+            body.frontpage div#goldSponsors a {display:block;}
+            body.frontpage div#goldSponsors a#gsJoomlart,
+            body.frontpage div#goldSponsors a#gsCb,
+            body.frontpage div#goldSponsors a#gsMs,
+            body.frontpage div#goldSponsors a#gsMc {margin:0 0 16px 0;}
+
+        /*div#goldSponsors {position:absolute;width:400px;height:130px;top:520px;left:32px;}
+            div#goldSponsors a {display:block;margin-bottom:16px;float:left;width:140px;}
+            div#goldSponsors a#gsJoomlart {margin-top:12px;}
+            div#goldSponsors a#gsCb {margin-left:120px;}
+            div#goldSponsors a#gsMs {margin-top:2px;}
+            div#goldSponsors a#gsMc {margin-left:120px;margin-top:2px;}*/
+
+        div#goldSponsorsInner {background:url(../images/jab11/goldSponsors_212x471.png) no-repeat 50% 0; width:142px; height:341px; margin:0 auto 24px; padding:130px 35px 0;}
+            div#goldSponsorsInner a {display:block; margin:0 0 10px 0;}
+            div#goldSponsorsInner a#gsJoomlart {}
+            div#goldSponsorsInner a#gsCb {}
+            div#goldSponsorsInner a#gsMs {}
+            div#goldSponsorsInner a#gsMc {}
+
+        /* --- Start Menu --- */
+        #siteMenuWrapper {width:840px;margin:0 auto;padding:0;position:absolute;top:334px;left:75px;}
+        body.frontpage #siteMenuWrapper {top:358px;}
+            #siteMenu {padding:0;margin:0;}
+                #siteMenu ul {margin:0;padding:0 50px;list-style:none;white-space:nowrap;}
+                #siteMenu ul li {float:left;margin:0 24px 0 0;padding:0;}
+                #siteMenu ul li.item8 {margin:0;}
+                #siteMenu ul li.item469 {margin:0;}
+
+                #siteMenu li.active {}
+                #siteMenu span.separator {cursor:pointer;}
+                #siteMenu span.separator,
+                    #siteMenu a {display:block;color:#303030;font-family:"Yanone Kaffeesatz","Trebuchet MS",Trebuchet,Arial,Verdana,Sans-serif;font-size:30px;line-height:normal;text-transform:uppercase;}
+
+                    #siteMenu li.active a,
+                    #siteMenu li.active li.active a,
+                    #siteMenu li.active li.active li.active a,
+                    #siteMenu a:hover {color:#B52D22;}
+
+                    #siteMenu li.active li a,
+                    #siteMenu li.active li li a {color:#303030;}
+                    #siteMenu li.active li a:hover,
+                    #siteMenu li.active li li a:hover {color:#fc7d01;}
+
+                /* second-level lists */
+                #siteMenu ul li ul {position:absolute;background:#fff;z-index:99999;padding:8px;margin:-1px 0 0 -12px;border:2px solid #A6916D;}
+                #siteMenu ul li ul li,
+                #siteMenu ul li ul li:hover,
+                #siteMenu ul li ul li.sfhover {float:left;clear:both;margin:0;padding:0;}
+                #siteMenu ul li ul li a,
+                #siteMenu ul li ul li a:hover {width:240px;font-size:24px;line-height:normal;padding:4px;text-transform:none;}
+                #siteMenu ul li ul li a:hover {color:#B52D22;}
+                #siteMenu li li.active,
+                #siteMenu li li li.active {background:none;}
+
+                /* third-and-above-level lists */
+                #siteMenu li ul ul {margin:-47px 0 0 240px;}
+                /* show second level lists */
+                #siteMenu li ul,
+                #siteMenu li:hover ul ul,
+                #siteMenu li:hover ul ul ul,
+                #siteMenu li.sfhover ul ul,
+                #siteMenu li.sfhover ul ul ul {left:-9999px;}
+                /* lists nested under hovered list items */
+                #siteMenu li:hover ul,
+                #siteMenu li li:hover ul,
+                #siteMenu li li li:hover ul,
+                #siteMenu li.sfhover ul,
+                #siteMenu li li.sfhover ul,
+                #siteMenu li li li.sfhover ul {left:auto;}
+                /* make menus not sticky in ie7 */
+                #siteMenu li:hover,
+                #siteMenu li.sfhover {position:static;}
+        /* --- End Menu --- */
+
+        #posSlideshow {position:absolute;top:450px;left:229px;} /* 202+44 */
+
+        #headerBanners {position:absolute;top:430px;left:558px;width:430px;height:150px;}
+        .headerBannerInnerLeft, .headerBannerInnerRight{position:absolute;top:205px;width:170px;height:106px;}
+        .headerBannerInnerLeft {left:14px;}
+        .headerBannerInnerRight {right:18px;}
+            #headerBanners a#bannerTickets {float:right;margin-left:30px;}
+            #headerBanners a#bannerRegister {}
+            #headerBanners a {display:block;width:200px;height:150px;}
+            .headerBannerInnerLeft a, .headerBannerInnerRight a {display:block;width:170px;height:106px;}
+            #headerBanners a span, .headerBannerInnerLeft a span, .headerBannerInnerRight a span {display:none;}
+
+        body.frontpage #headerBanners {position:absolute;top:430px;left:788px;width:200px;height:300px;}
+            body.frontpage #headerBanners a {display:block;float:right;margin:0;}
+
+
+/* Content */
+#sectionContent {background:url(../images/jab11/content_bg_repeat.png) repeat-y;width:1002px;margin:0 auto;padding-bottom:24px;}
+#sectionTopContainer #sectionContent {background:url(../images/jab11/content_bg_repeat_inner.png) repeat-y;}
+    #sectionContent .container {width:982px; padding:24px 4px; background:#fff;}
+    #sectionContent .contentInnerCont {background:url(../images/jab11/contentInnerSeparatorRight_5x38.png) repeat-y 75% 0;}
+    body.frontpage #sectionContent .contentInnerCont {background:url(../images/jab11/contentSeparator_488x38.png) repeat-y 49% 0;}
+
+    #leftCol {width:248px;float:left;}
+
+        a#bannerProposedSessions {display:block;width:210px;height:61px;margin:0 auto 24px;padding:0;background:url(../images/jab11/bannerProposedSessions_210x61.png) no-repeat;}
+        a#bannerGrabTheBanners {display:block;width:210px;height:109px;margin:0 auto 24px;padding:0;background:url(../images/jab11/bannerGrabTheBanners_210x109.png) no-repeat;}
+
+    #mainCol {width:696px;float:left;background:url(../images/jab11/blog_bottom_460x120.png) no-repeat 50% 100%;margin:0 2px;border-bottom:2px solid #A6916D;padding:0 16px 100px;margin:0;}
+    body.frontpage #mainCol {width:480px;padding:0 0 100px 0;margin:0;}
+
+    #rightCol {width:249px;float:right;}
+
+        /* Twitter Block */
+        div#twitterBuzz {margin:0 auto;background:url(../images/jab11/loadingIcon_twitter.gif) no-repeat 50% 50%;width:220px;}
+        div#twitterBuzz h3 {background:url(../images/jab11/title_twitter_218x64.png) no-repeat 50% 50%;width:218px;height:64px;margin:0 auto;padding:0 0 8px 0;}
+        div#twitterBuzz h3 span {display:none;}
+        div#twitterBuzz div.twtr-hd,
+        div#twitterBuzz div.twtr-ft {display:none;}
+        div#twitterBuzz div.twtr-bd {}
+            div.twtr-avatar {border:2px solid #A6916D;margin:4px 0 0 4px;}
+            div.twtr-img img {width:48px;height:48px;}
+            div.twtr-widget .twtr-tweet-wrap {padding:6px 0;}
+            div.twtr-widget .twtr-tweet {border:none;padding:12px 0 20px;background:url(../images/jab11/separator.png) no-repeat 50% 100%;}
+            div.twtr-tweet-wrap div.twtr-tweet-text {margin-left:70px !important;margin-right:4px;}
+        a#buttonUpdatesOnTwitter {display:block;background:url(../images/jab11/button_twitter_220x14.png) no-repeat 0 50%;width:220px;height:14px;margin:0 auto;padding:8px 0;border-top:2px solid #A6916D;border-bottom:2px solid #A6916D;}
+        a#buttonUpdatesOnTwitter span {display:none;}
+
+/* Search */
+.searchView form#searchForm {background:#F7ECC9; border:1px solid #DED7C6; margin:30px 0; padding:8px;}
+.searchView form#searchForm table.contentpaneopen {margin:0 0 10px 0; padding:0 0 10px 0; border-bottom:1px solid #A89367; width:100%;}
+.searchView label#searchword {float:left; margin:0 5px 0 0; padding:5px 0 0;}
+.searchView input#search_searchword {float:left; border:1px solid #CDB380; background:#fff; margin:0 5px 8px 0; padding:4px 10px; color:#737373; font-family:"Trebuchet MS",Trebuchet,Arial,Verdana,Sans-serif; font-size:14px; font-style:italic;}
+.searchView button {float:left; border:0; background:url(../images/jab11/searchBg.png) no-repeat -156px -9px; width:47px; height:28px; border:2px solid #4c8dc2;}
+.searchView select {border:1px solid #CDB380; background:#fff; font-family:"Trebuchet MS",Trebuchet,Arial,Verdana,Sans-serif; font-size:14px; font-style:italic; color:#737373;}
+.searchView select#ordering {}
+.searchView table.contentpaneopen input {margin:0 3px;}
+.searchView .itemContainer {float:none;}
+.searchView span.highlight {color:#C40000;}
+
+/* Silver Sponsors */
+#silverSponsors {background:url(../images/jab11/title_silverSponsors_122x30.png) no-repeat 50% 8px;margin:16px 10px 0 10px;padding:52px 0 4px 0;border-top:2px solid #A6916D;text-align:center;}
+    #silverSponsors a {padding:0 16px;}
+    #silverSponsors a img {width:140px;height:auto;vertical-align:middle;}
+
+/* Footer */
+#sectionBottom {width:1000px;height:163px;padding:0;margin:-29px auto 0;background:url(../images/jab11/footer_1000x166.png) no-repeat;}
+        #credits {float:right;width:404px;height:62px;margin:90px 14px 0 0;padding:0;}
+        #credits a {display:block;float:right;height:62px;}
+        #credits a#creditsNuevvo {width:182px;}
+        #credits a#creditsThink {width:52px;margin-right:36px;}
+        #credits a#creditsRdbs {width:118px;margin-right:12px;}
+        #credits a span {display:none;}
+
+        #copyrights {color:#3d3f41;font-size:11px;padding-top:90px;}
+            #copyrights a {}
+            #copyrights a:hover {}
+
+        #footerMenu {color:#3d3f41;margin:12px 0 0 0;padding:0;}
+            div#footerMenu ul.menu {margin:0;padding:0;list-style:none;}
+            div#footerMenu ul.menu li {display:inline;padding:0 4px 0 0;margin:0 4px 0 0;border-right:1px solid #999;}
+            div#footerMenu ul.menu li.item14 {border:none;padding:0;margin:0;}
+
+            div#footerMenu ul.menu li a {color:#3d3f41;font-size:11px;text-transform:uppercase;}
+            div#footerMenu ul.menu li a:hover {color:#fc7d01;}
+            div#footerMenu ul.menu li.active a {font-weight:bold;}
+
+
+
+/* ========================================================================== */
+/* ========================================================================== */
+/* =============================== COMPONENTS =============================== */
+/* ========================================================================== */
+/* ========================================================================== */
+
+/* K2 */
+/* --- Zebra rows --- */
+.even,
+.odd {background-color:none;border:none;padding:0;}
+
+/* Categories */
+div.itemListCategoriesBlock {margin:0 0 20px 0;}
+div.itemListCategoryContainer {background:url(../images/jab11/separator.png) no-repeat 50% 100%;padding:0 0 10px 0;}
+div.itemListCategory {position:relative;text-align:center; background:url(../images/jab11/componentheadingBg.png) no-repeat 50% 0; border:0; margin:15px 0 0; padding:110px 0 10px;}
+    div.itemListCategory h2 {text-transform:uppercase;font:normal 30px/110% 'IM Fell DW Pica SC',"Trebuchet MS",Trebuchet,Arial,Verdana,Sans-serif;color:#4674b9;padding:0 0 5px;margin:0;}
+    div.itemListCategory span.catCounter {color:#C40000;display:block;font:52px/110% "Yanone Kaffeesatz","Trebuchet MS",Trebuchet,Arial,Verdana,Sans-serif;left:297px;overflow:hidden;position:absolute;text-align:center;top:20px;width:100px;}
+    div.itemListCategory p {margin:0;color:#32363e;font:18px/110% "Yanone Kaffeesatz","Trebuchet MS",Trebuchet,Arial,Verdana,Sans-serif;}
+
+    /* Subcategories */
+    div.itemListSubCategories {margin:20px 0 0 0;}
+    div.subCategoryContainer {width:328px !important;margin:0 40px 40px 0;}
+    div.subCategoryContainerLast {margin:0 0 40px 0;}
+    div.subCategory {background:none; border:0; border-bottom:1px solid #a89367; margin:0; padding:0;}
+    div.subCategory h2 {background:url("../images/jab11/separator.png") no-repeat 50% 100%;text-align:center;font:28px/110% "Yanone Kaffeesatz","Trebuchet MS",Trebuchet,Arial,Verdana,Sans-serif; margin:0; padding:0 0 24px 0;}
+    div.subCategory h2 a {color:#c40000;}
+
+
+div.itemListLeading2Cols {background:url(../images/jab11/itemListLeading2ColsBg.png) repeat-y 50% 0;}
+div.itemContainerNewWidth {width:328px !important; margin:0 40px 0 0;}
+div.itemContainerLast {margin:0;}
+div.itemContainer {border-bottom:1px solid #a89367; margin-bottom:40px;}
+
+    div.catItemView {padding:0;margin:0 auto;}
+    /* Sponsors List */
+    div.sponsorsCat39 {background:url(../images/mainSponsor_89x98.png) no-repeat 10px 0; padding:32px 0 0 0;}
+    div.sponsorsCat40 {background:url(../images/goldSponsor_89x98.png) no-repeat 10px 0; padding:32px 0 0 0;}
+    div.sponsorsCat41 {background:url(../images/silverSponsor_89x98.png) no-repeat 10px 0; padding:32px 0 0 0;}
+    div.sponsorsCat42 {background:url(../images/bronzeSponsor_89x98.png) no-repeat 10px 0; padding:32px 0 0 0;}
+
+    div.catItemHeader {text-align:center;font-family:"Yanone Kaffeesatz","Trebuchet MS",Trebuchet,Arial,Verdana,Sans-serif;font-weight:normal;line-height:110%;background:url(../images/jab11/separator.png) no-repeat 50% 100%;padding:0 0 24px 0;margin-bottom:14px;}
+    div.catItemHeader h3.catItemTitle {font-size:28px;color:#CD4746;font-family:"Yanone Kaffeesatz","Trebuchet MS",Trebuchet,Arial,Verdana,Sans-serif;font-weight:normal;line-height:110%;padding:0 0 8px 0;margin:0;}
+    div.catItemHeader h3.catItemTitle span {}
+    div.catItemHeader h3.catItemTitle span sup {font-size:12px;color:#CF1919;text-decoration:none;} /* superscript */
+    div.catItemHeader span.catItemDateCreated {color:inherit;font-size:16px;}
+    div.catItemHeader span.catItemAuthor {display:inline;padding:0 0 0 4px;margin:0 0 0 2px;font-size:16px;line-height:18px;border-left:1px solid #A6916D;}
+    div.catItemHeader span.catItemAuthor a {}
+    div.catItemHeader span.catItemAuthor a:hover {}
+
+div.catItemBody div.catItemIntroText h3,
+div.catItemBody div.catItemFullText h3 {color:#4674b9;font-size:16px;}
+
+div.catItemBody {padding:0;margin:0 0 10px 0;}
+    div.catItemImageBlock {padding:0;margin:0 0 8px 0;}
+    div.catItemIntroText {font-size:inherit;font-weight:normal;line-height:150%;padding:0;}
+    div.catItemIntroText img {}
+    div.catItemIntroText a.k2ReadMore {color:#c40000; font-size:17px; font-family:"Yanone Kaffeesatz","Trebuchet MS",Trebuchet,Arial,Verdana,Sans-serif;}
+    div.catItemIntroText a.k2ReadMore:hover {}
+    div.catItemLinks {margin:0;}
+    div.catItemCategory {border-bottom:0;padding:2px 0;line-height:16px;font-size:12px;}
+    div.catItemCategory a {font-weight:bold;}
+    div.catItemCategory span {padding:0;}
+    div.catItemTagsBlock {border-bottom:0; padding:0; line-height:16px;font-size:12px;}
+    div.catItemCommentsLink { border-right:0; display:inline; padding:0; line-height:16px;font-size:12px; margin:0 8px 0 0; }
+
+/* Item */
+div.itemView {border-bottom:none;}
+
+div.itemHeader {text-align:center;font-family:"Yanone Kaffeesatz","Trebuchet MS",Trebuchet,Arial,Verdana,Sans-serif;font-weight:normal;line-height:110%;background:url(../images/jab11/separator.png) no-repeat 50% 100%; padding:0 0 20px 0;}
+    div.itemHeader h2.itemTitle {font:normal 40px/110% "Yanone Kaffeesatz","Trebuchet MS",Trebuchet,Arial,Verdana,Sans-serif; color:#CD4746;padding:40px 0 4px 0;margin:0;}
+    div.itemHeader span.itemDateCreated {color:inherit;font-size:16px;}
+    div.itemHeader span.itemAuthor {display:inline;padding:0 0 0 4px;margin:0 0 0 2px;font-size:16px;line-height:18px;border-left:1px solid #A6916D;}
+
+div.itemBody div.itemIntroText h3,
+div.itemBody div.itemFullText h3 {color:#4674b9;font-size:18px;}
+div.itemBody div.itemIntroText {color:#444;font-size:18px;font-weight:normal;line-height:120%;padding:4px 0 12px 0;}
+
+    /* Table styling */
+    .itemFullText table {border-collapse:collapse;border:1px solid #ccc;}
+    .itemFullText table tr th,
+    .itemFullText table tr td {border:1px solid #ccc;padding:4px 8px;}
+    .itemFullText table tr th {background:#DEEEFD;}
+
+div.itemToolbar {background:none;border:0;border-bottom:1px solid #a89367;margin:0;padding:0 0 2px 0;}
+    div.itemToolbar ul > li:first-child { border:medium none; }
+    div.itemToolbar ul li {color:#737373;background:none;border-left:1px solid #a89367;display:inline;font-size:12px;line-height:25px;list-style:none outside none;margin:0;padding:0 5px;text-align:center;}
+    div.itemToolbar ul li a {color:#737373;}
+    div.itemToolbar ul li a.itemVideoLink {background:url(../images/jab11/itemVideoAnchor.png) no-repeat 0 2px; padding:0 8px;}
+    div.itemToolbar ul li a.itemImageGalleryLink {background:url(../images/jab11/itemGalleryAnchor.png) no-repeat 0 2px; padding:0 10px;}
+    div.itemToolbar ul li a.itemVideoLink span,
+    div.itemToolbar ul li a.itemImageGalleryLink span {display:none;}
+    div.itemToolbar ul li a.itemCommentsLink {background:url(../images/jab11/itemCommentsAnchor.png) no-repeat 0 2px; padding:0 0 0 20px;}
+
+div.itemRatingBlock {padding:0; float:left; font-size:12px; line-height:25px;}
+    div.itemRatingBlock span,
+    .itemRatingLog  { color:#737373;}
+    div.itemRatingBlock ul li {border:0;}
+
+div.itemLinks {font-size:12px; margin:0;}
+div.itemCategory {float:left; border:0; padding:0;}
+div.itemCategory span {color:#2b2a2a; padding:0; font-weight:normal;}
+
+span.itemDateModified {display:block; float:right; border:0; padding:0; margin:0; color:#737373; font-style:italic;}
+div.itemCategoryDateModified,
+div.itemHitsTwitterFacebook,
+div.itemTagsBlock {border-bottom:1px solid #a89367; line-height:20px;}
+div.itemHitsTwitterFacebook {padding:3px 0;}
+div.itemHitsTwitterFacebook span {float:left; display:block;}
+span.itemHits {border-right:1px solid #a89367; padding:0 5px 0 0; margin:0 5px 0 0;}
+div.itemTagsBlock {padding:2px 0;}
+
+div.itemNavigation {background:url(../images/jab11/separator.png) no-repeat 50% 100%; border:0; margin:0 0 24px; padding:3px 0 8px;}
+    div.itemNavigation a,
+    div.itemNavigation span {display:block;}
+    div.itemNavigation a {font:normal 15px/110% "Yanone Kaffeesatz","Trebuchet MS",Trebuchet,Arial,Verdana,Sans-serif;}
+    div.itemNavigation a.itemPrevious {float:left; width:280px; padding:0; margin:0 10px 0 0;}
+    div.itemNavigation a.itemNext {float:right; width:270px;padding:0; margin:0 0 0 10px; text-align:right;}
+    div.itemNavigation span.itemNavigationTitle {float:left; font-size:12px; color:#737373; text-transform:lowercase;}
+
+div.itemAuthorBlock { background:#f7ecc9; border:1px solid #ded7c6; clear:both; margin:0 0 30px; padding:8px; }
+    div.userImgBlock {float:left; margin:0 15px 5px 0;display:block; width:73px; height:73px; padding:12px; background:url(../images/jab11/user_frame_97x97.png) no-repeat 0 0;}
+    div.userImgBlock span {display:block; width:73px; height:73px; overflow:hidden; background-position:50% 25%; background-repeat:no-repeat;}
+    div.itemAuthorDetails h3 {font:normal 20px/110% "Yanone Kaffeesatz","Trebuchet MS",Trebuchet,Arial,Verdana,Sans-serif; color:#4674b9; margin:0 0 10px 0;}
+    div.itemAuthorDetails h3 a {color:#4674b9;}
+    div.itemAuthorDetails p {margin:5px 0; padding:0; color:#32363e; font-style:italic; font-size:12px;}
+    div.itemAuthorBlock .userAdditionalInfo{font-size:12px; border-top:1px solid #a89367; margin:8px 0 0; padding:4px 0;}
+    div.itemAuthorBlock .userAdditionalInfo span {color:#7e6e4d; padding:0 20px 0 0; display:inline;}
+
+div.itemAuthorLatest,
+div.itemRelated {margin:0 0 30px; padding:0 0 10px 0; background:url(../images/jab11/separator.png) no-repeat 50% 100%;}
+    div.itemAuthorLatest h3,
+    div.itemRelated h3 {font:normal 25px/110% "Yanone Kaffeesatz","Trebuchet MS",Trebuchet,Arial,Verdana,Sans-serif; color:#4674b9; padding:0 0 3px 0; margin:0 0 10px 0; border-bottom:1px solid #a89367;}
+    div.itemAuthorLatest ul,
+    div.itemRelated ul {margin:15px 0 0 0; padding:0;}
+    div.itemAuthorLatest ul li,
+    div.itemRelated ul li {list-style:none; background:url(../images/jab11/liBulletGold_10x12.png) no-repeat 0 4px; padding:0 18px 5px 18px; margin:0 0 5px 0;}
+    div.itemAuthorLatest ul li a,
+    div.itemRelated ul li a  {color:#c40000;font:normal 18px/110% "Yanone Kaffeesatz","Trebuchet MS",Trebuchet,Arial,Verdana,Sans-serif;}
+
+/* Multimedia Tabs */
+div.multimediaContainer {margin:30px 0 0 0;}
+div.multimediaContainer h3 {color:#1f73a0; font-size:22px; line-height:26px; margin:0 0 12px 0; border-bottom:3px solid #cde6fa;}
+div.multimediaContainer dt span {}
+div.multimediaContainer dt {color:#fff; text-transform:uppercase; text-align:center; font:normal 20px/110% "Yanone Kaffeesatz","Trebuchet MS",Trebuchet,Arial,Verdana,Sans-serif;}
+div.multimediaContainer dt {display:block; float:left; background-image:url(../images/jab11/tabTitlesBg.png); background-repeat:no-repeat; height:23px; margin:0 5px 0 0; padding:4px 0;}
+
+dt#videoTab.open {background-position:-127px 0; width:80px;}
+dt#videoTab.closed {background-position:-127px -32px; width:80px;}
+dt#galleryTab.open {background-position:0 0; width:126px;}
+dt#galleryTab.closed {background-position:0 -32px; width:126px;}
+
+div.multimediaContainer dd {margin:0; background:#719dd7; border:2px solid #4674b9; padding:8px;}
+div.multimediaContainer .current { padding:0; clear:both; border-top:5px solid #033e8c;}
+
+    /* Item Video */
+    .itemVideoBlockContainer {margin:0 0 10px 0;}
+    .itemVideoBlock {margin:0 0 10px 0 !important; background:none !important; padding:15px !important;}
+    .itemVideo,
+    .itemVideoEmbedded {width:640px; height:510px;}
+     span.avPlayerContainer span.avPlayerSubContainer {padding:0; margin:0 auto; background:none;}
+     span.avPlayerContainer span.avPlayerSubContainerClean {margin:0;}
+     span.avPlayerContainer span.avPlayerSubContainer a { color:#fff; }
+
+        span.itemVideoCaption,
+        span.itemVideoCredits {display:block;}
+        span.itemVideoCaption {font-weight:bold; color:#2194d1; font-size:16px; line-height:30px;}
+        span.itemVideoCredits {font-size:12px; font-style:italic;}
+        span.itemVideoCredits span {font-weight:bold;}
+
+    /* Image Gallery */
+    .itemImageGallery {}
+    .itemImageGallery ul.sig-container {margin:0 auto !important; padding:0 !important;}
+    .itemImageGallery li.sig-block { background:none !important; float:left; margin:5px; padding:0; border:2px solid #4674b9;}
+    .itemImageGallery li.sig-block span.sig-link-wrapper { background:none !important; display:block; float:left; margin:0; padding:2px; }
+    .itemImageGallery li.sig-block span.sig-link-innerwrapper { border:1px solid #4674b9; display:block; float:left; margin:0; padding:0; }
+
+/* Item Comments */
+div.itemComments { background:none; border:0; padding:0;}
+
+    div.itemComments h3.itemCommentsCounter {margin:0 0 10px 0; font-size:25px; font-weight:normal; font-family:"Yanone Kaffeesatz","Trebuchet MS",Trebuchet,Arial,Verdana,Sans-serif;}
+    div.itemComments h3.itemCommentsCounter span.commentCounter {display:block; float:left; text-align:center; width:36px; padding:0 5px 0 0; height:53px; overflow:hidden; line-height:42px; color:#fff; background:url(../images/jab11/itemCommentsCounter.png) no-repeat 0 0;}
+    div.itemComments h3.itemCommentsCounter span.commentCounterTitle {color:#4674b9; border-bottom:1px solid #a89367; display:block; float:left; width:655px; padding:5px 0 2px 0;}
+
+    div.itemComments .itemCommentsLogin {margin:0 0 10px 0; font-size:25px; font-weight:normal; font-family:"Yanone Kaffeesatz","Trebuchet MS",Trebuchet,Arial,Verdana,Sans-serif;color:#4674b9; border-bottom:1px solid #a89367; display:block; padding:5px 0 2px 0;}
+    div.itemComments ul.itemCommentsList {}
+    div.itemComments ul.itemCommentsList li {border:0; background:url(../images/jab11/separator.png) no-repeat 50% 100%; padding:8px 0 10px 0;}
+    div.itemComments ul.itemCommentsList li img {float:left; border:2px solid #a89367; width:35px; height:auto; background:none; padding:0; margin:0 10px 0 0;}
+    div.itemComments ul.itemCommentsList li .itemCommentsDateAuthor {float:left; margin:0 30px 0 0;}
+    div.itemComments ul.itemCommentsList li .itemCommentsDateAuthor span {display:block;}
+    div.itemComments ul.itemCommentsList li span.commentAuthorName { font-size:18px; font-weight:normal; color:#d95b43; font-family:"Yanone Kaffeesatz","Trebuchet MS",Trebuchet,Arial,Verdana,Sans-serif;}
+    div.itemComments ul.itemCommentsList li span.commentDate { color:#737373; border-right:0; font-size:12px; font-style:italic; font-weight:normal; margin:0; padding:0; }
+    div.itemComments ul.itemCommentsList li span.commentText {color:#2b2a2a; font-size:14px; font-style:italic; }
+    div.itemComments ul.itemCommentsList li span.commentLink {margin:5px 0 0 0;}
+    div.itemComments ul.itemCommentsList li span.commentLink a,
+    div.itemComments ul.itemCommentsList li span.commentLink a:hover { color:#4674b9; font-size:15px; font-weight:normal; text-decoration:none; font-family:"Yanone Kaffeesatz","Trebuchet MS",Trebuchet,Arial,Verdana,Sans-serif;}
+
+    div.itemCommentsForm {margin:50px 0 20px 0;}
+    div.itemCommentsForm h3 {margin:0 0 10px 0; font-size:25px; font-weight:normal; font-family:"Yanone Kaffeesatz","Trebuchet MS",Trebuchet,Arial,Verdana,Sans-serif;color:#4674b9; border-bottom:1px solid #a89367; display:block; padding:5px 0 2px 0;}
+    div.itemCommentsForm p.itemCommentsFormNotes {color:#2b2a2a; font-size:12px; padding:5px 0; border:0; margin:0;}
+    div.itemCommentsForm form {padding:10px 0;}
+    div.itemCommentsForm .commentsLeftCont {float:left; width:372px; margin:0;}
+    div.itemCommentsForm .commentsRightCont {float:right; width:302px; margin:0;}
+    div.itemCommentsForm form label {display:none !important;}
+    div.itemCommentsForm form .inputbox {font-size:12px; font-style:italic; color:#737373; background:#f7ecc9; border:1px solid #ecd078; font-family:"Trebuchet MS",Trebuchet,Arial,Verdana,Sans-serif;}
+    div.itemCommentsForm form input.inputbox {margin:0 0 15px 0; padding:6px 10px; width:280px;}
+    div.itemCommentsForm form textarea.inputbox {margin:0 0 15px 0; padding:6px 10px; width:350px; height:112px;}
+    div.itemCommentsForm form input#submitCommentButton {float:left; border:0; background:url(../images/jab11/itemSubmitComment.png) no-repeat 0 0; width:220px; height:38px;}
+    div.itemCommentsForm form span#formLog {float:right; color:#2b2a2a;}
+
+    /* Recapthca */
+    #recaptcha {margin:0 0 15px 0;}
+    label.formRecaptcha {margin:0 0 5px 0; display:block;}
+    #recaptcha_table {border:1px solid #979494 !important;}
+    #recaptcha_table, #recaptcha_area tr, #recaptcha_area td, #recaptcha_area th {background-color:#d8d8d8 !important; width:302px;}
+    .recaptchatable .recaptcha_image_cell center {width:302px;}
+    .recaptchatable #recaptcha_image {width:300px !important; background:#d8d8d8; border:1px solid #b2afaf !important;}
+    .recaptcha_input_area {width:302px;}
+    #recaptcha_response_field {border:1px solid #979494 !important; width:280px !important; background:#d8d8d8 !important; color:#333; padding:5px 10px; font-family:Georgia; font-size:12px !important; line-height:18px;}
+
+.itemBackToTop {margin:30px 0 0 0;}
+
+/* User List */
+div.userList {}
+div.userList ul.attendeeIndex {text-align:center; background:url(../images/jab11/separator.png) no-repeat 50% 0;margin:0 0 30px 0; padding:8px 0 3px; border-bottom:1px solid #a89367;}
+div.userList ul li {margin:0; padding:0; list-style:none; display:inline;}
+div.userList ul li a {padding:0 8px 0 5px;border-right:1px solid #a89367; font:normal 24px/110% "Yanone Kaffeesatz","Trebuchet MS",Trebuchet,Arial,Verdana,Sans-serif;}
+div.userList ul li.lastItem a {border-right:0;}
+
+div.userList a.attendeeBlock {float:left; display:block; width:144px; min-height:168px; text-align:center; margin:0 15px 15px;}
+div.userList a.attendeeBlock span.attendeeImgBlock {margin:0 0 5px 0;display:block; width:80px; height:80px; padding:17px; background:url(../images/jab11/attendee_frame_144x114.png) no-repeat 0 0;}
+div.userList a.attendeeBlock span.attendeeImgBlock span {display:block; width:80px; height:80px; overflow:hidden; background-position:50% 0; background-repeat:no-repeat;}
+div.userList a.attendeeBlock span.attendeeBlockName {display:block; width:114px; text-align:center; font:normal 18px/110% "Yanone Kaffeesatz","Trebuchet MS",Trebuchet,Arial,Verdana,Sans-serif;}
+
+/* User Item List */
+div.userBlock { background:#f7ecc9; border:1px solid #ded7c6; clear:both; margin:0 0 30px; padding:8px; }
+div.userImgBlock {float:left; margin:0 15px 5px 0;display:block; width:73px; height:73px; padding:12px; background:url(../images/jab11/user_frame_97x97.png) no-repeat 0 0;}
+div.userImgBlock span {display:block; width:73px; height:73px; overflow:hidden; background-position:50% 25%; background-repeat:no-repeat;}
+div.userItemHeader h2 {font:normal 20px/110% "Yanone Kaffeesatz","Trebuchet MS",Trebuchet,Arial,Verdana,Sans-serif; color:#4674b9; margin:0 0 10px 0;}
+div.userItemHeader p {margin:5px 0; padding:0; color:#32363e; font-style:italic; font-size:12px;}
+div.userBlock p.userAdditionalInfo {font-size:12px; border-top:1px solid #a89367; margin:8px 0 0; padding:4px 0;}
+div.userBlock p.userAdditionalInfo span {color:#7e6e4d; padding:0 20px 0 0; display:inline;}
+
+/* com_rdbs_form */
+#rdbsform {padding:0 0 32px 0;margin-bottom:24px;border-bottom:1px dotted #ccc;}
+
+#rdbsform .inputbox {display:block;}
+#rdbsform .inputbox:hover {background:#fffff0;}
+#rdbsform .inputbox:focus {}
+
+#rdbsform ul {}
+#rdbsform ul li {padding:4px 0;}
+
+#rdbsform textarea {width:100%;margin:2px 50px 16px 0;border:1px solid #ccc;}
+
+#rdbsform label.lib,
+#rdbsform div.field {line-height:20px;}
+
+#rdbsform .formelm .field .inputbox {width:97%;display:block;}
+
+#rdbsform button.paypal {clear:both;display:block;float:left;padding:0 0 0 8px;margin:0 0 0 -10px;border:0;cursor:pointer;background:url(../images/btn_xpressCheckout.gif) no-repeat 100% 1px;overflow:visible;width:142px;height:45px}
+
+div.formelm {padding:0;display:block;margin-bottom:10px;}
+.box {width:98%;background-color:#ddd;padding:10px;}
+.title {font-weight:bold;}
+
+.field {width:60%;overflow:hidden;padding:0;float:left;}
+
+.formelm label {float:left;width:30%;padding:0 16px 0 0;}
+.formelm label.lcb {float:left;width:70%;}
+
+.fail {}
+.fail label {background:url(../images/achtung.gif) no-repeat 0 50%;padding:0 0 0 16px;}
+
+.formelm input {float:left;width:70%;}
+.formelm select {}
+.formelm select option {}
+
+.formelm .b10 {width:10%;}
+.formelm .b20 {width:20%;}
+.formelm .cb {float:left;width:15px;height:15px;margin-right:10px;}
+.formelm .rb {float:left;width:15px;padding:0;position:relative;top:0;}
+.formelm .time {float:left;width:10%;}
+
+div.ainfo {padding:10px;}
+.ainfo dl.ainfo {}
+.ainfo dl.ainfo dt {background:none;}
+.ainfo dl.ainfo dd {background:#eee;}
+.charge {clear:left;}
+div.NN {display:none;}
+
+.lsb {float:left;}
+.lrb {margin:0 0 0 10px;float:none!important;border:0 solid!important;padding:0 5px!important;margin:0!important;}
+.rb {margin:0;display:inline;float:none!important;}
+.radio {margin:10px 0 0!important;line-height:1.5em;font-weight:normal;border:0 solid!important;display:block;}
+img.calendar {padding:0 0 0 10px;background:#fff;}
+.lib:hover,
+.lcb:hover,
+.ltb:hover,
+.lta:hover {color:#000;}
+
+ul.rdbsform_error {}
+ul.rdbsform_error li {}
+
+#rdbsform form label.time {width:6.2em;}
+#rdbsform form label.time span.small {font-size:1em;}
+
+#rdbsform .container {background:#F7FAFE;margin:24px 50px 8px 0;padding:8px;border-top:1px dotted #ccc;border-bottom:1px dotted #ccc;display: block;width: auto}
+#rdbsform .container .kategorie {font-size:18px;font-family:Georgia, "Times New Roman", Times, serif;}
+#rdbsform .container .kategorie div {font-size:12px;font-family:"Trebuchet MS",Trebuchet,Arial,Verdana,Sans-serif;}
+
+.formelmB {margin:24px 50px 8px 0;padding:0;}
+.formelmB label {font-size:18px;font-family:Georgia, "Times New Roman", Times, serif;}
+
+.absenden {text-align:right !important;display:block;}
+.smallbox {float:left;display:inline!important;margin-left:170px;margin-top:-15px;width:253px;height:50px;}
+.smallbox:focus {border:1px solid #000;}
+
+.othermsg {margin-top:-20px;}
+
+/* com_rdbs_form Datepicker */
+.w2em,.w4em {width:4em!important;float:left;background:#eee!important;border-bottom:1px solid #909090!important;border-left:1px solid #CECECE!important;border-right:1px solid #CECECE!important;border-top:1px solid #E4E4E4!important;cursor:pointer;padding:3px;font-size:1em!important;}
+.ldd,.lmm {width:2em!important;padding:3px 5px!important;}
+.ldate {width:2em!important;padding:3px 5px;}
+.linline {display:inline;width:6em!important;margin-right:0!important;padding:10px 0 10px 5px!important;}
+.inline {display:inline;margin:9px 5px;}
+.ortzip {height:36px;width:59px;float:left;margin-left:10px;background:#f7f7f7;border-bottom:1px solid #ccc;}
+.ortzip2 {height:36px;width:195px;float:left;margin-right:10px;background:#f7f7f7;border-bottom:1px solid #ccc;}
+.chkbox {display:block;line-height:1.5em;}
+.chkbox label {border:0 solid!important;}
+#othermessage {width:10%;}
+
+/* Pagination */
+div.itemCommentsPagination {padding:8px 15px;}
+div.k2Pagination {padding:12px 0 8px 0;margin:15px 0; background:url(../images/jab11/separator.png) no-repeat 50% 0; border-bottom:1px solid #a89367;}
+span.pagesCounter {float:right; padding:0 5px; font:normal 16px/18px "Yanone Kaffeesatz","Trebuchet MS",Trebuchet,Arial,Verdana,Sans-serif; color:#66583b; text-transform:uppercase; text-align:center;}
+span.pagination {float:left; font:normal 15px/18px 'IM Fell DW Pica SC',"Trebuchet MS",Trebuchet,Arial,Verdana,Sans-serif; text-transform:uppercase; text-align:center;}
+span.pagination span.previous,
+span.pagination span.next {display:block; float:left; width:39px; height:21px; margin:0 3px 0 0;}
+span.pagination span.previous a,
+span.pagination span.next a {display:block; width:39px; height:21px;}
+span.pagination span.previous span,
+span.pagination span.next span {display:none;}
+span.pagination span.previous,
+span.pagination span.previous a {background:url(../images/jab11/pagination/previousBtn.png) no-repeat 0 0;}
+span.pagination span.next,
+span.pagination span.next a { background:url(../images/jab11/pagination/nextBtn.png) no-repeat 0 0;}
+span.pagination span.start,
+span.pagination span.end {display:block;padding:0 5px; height:19px; float:left; margin:0 3px 0 0;background:#cdb380; border:1px solid #a89367;}
+span.pagination span.start span,
+span.pagination span.start a,
+span.pagination span.end span,
+span.pagination span.end a {display:block; color:#66583b; font-size:13px; line-height:19px;}
+span.pagination span.pages {display:block; float:left; }
+span.pagination span.pages span,
+span.pagination span.pages a {display:block; width:20px; overflow:hidden; height:19px; text-align:center; float:left; margin:0 3px 0 0; border:1px solid #a89367;}
+span.pagination span.pages span {background:#fff; color:#66583b; line-height:18px;}
+span.pagination span.pages a {background:#cdb380; color:#66583b; line-height:18px;}
+span.pagination span.pages a span {background:none; border:0; color:#66583b; float:none;}
+
+
+/* ========================================================================== */
+/* ========================================================================== */
+/* ================================= MODULES ================================ */
+/* ========================================================================== */
+/* ========================================================================== */
+
+/* All modules */
+.module {padding:0 0 24px 0;}
+
+#moduleId42 {margin:0 auto;width:210px;}
+
+/* Breadcrumbs */
+.breadcrumbs {display:block; color:#595959; font-style:italic; line-height:16px; background:url(../images/jab11/breadcrumbsBg.png) no-repeat 0 0; padding:0 0 0 108px;}
+.breadcrumbs a {color:#595959; font-style:normal;}
+
+/* Search */
+#moduleId33 {background:url(../images/jab11/searchBg.png) no-repeat 0 0; margin:0 auto; width:210px;}
+#moduleId33 .search {padding:6px;}
+#moduleId33 .inputbox {border:0; padding:6px 10px; font-size:14px; color:#737373; font-style:italic; width:127px; float:left; font-family:"Trebuchet MS",Trebuchet,Arial,Verdana,Sans-serif;}
+#moduleId33 .button {background:none; width:51px; height:31px; border:0; padding:0; float:left; text-indent:-999px; font-size:0; line-height:0;}
+
+/* Follow on */
+div#followOn {background:url(../images/jab11/bannerFollow_210x64.png) no-repeat;width:210px;height:64px;position:relative;}
+    div#followOn a {display:block;width:32px;height:32px;margin:20px 4px 0 0;padding:0;float:left;}
+    div#followOn a.folTwitter {margin-left:52px;}
+    div#followOn a.folFacebook {}
+    div#followOn a.folRss {}
+    div#followOn a span {display:none;}
+
+/* Banner jOSCARs */
+a#bannerJoscar {display:block;width:210px;height:280px;background:url(../images/jab11/banner_joscar_210x280.png) no-repeat 0 0;margin:0 auto;padding:0;}
+
+/* Newsletter */
+.newsletterSignup {background:url(../images/jab11/newsletter_210x166.png) no-repeat;width:210px;height:166px;position:relative;margin:0 auto;}
+.newsletterSignup div form input#EMAIL {border:none;background:none;position:absolute;top:90px;left:32px;width:142px;height:24px;color:#737373;font-style:italic;}
+.newsletterSignup div form input.button {border:none;background:none;width:93px;height:32px;text-indent:-999px;overflow:hidden;position:absolute;bottom:0;left:58px;font-size:0;line-height:0;}
+    div.mcLoader {opacity:0.8;position:absolute;top:0;left:0;width:210px;height:166px;background:#000 url(../images/jab11/ajax-loader.gif) no-repeat 50% 50%;}
+    div.mcResult {opacity:0.8;position:absolute;top:0;left:0;width:190px;height:140px;background:#000;color:#fff;text-align:center;line-height:150%;padding:26px 10px 0;}
+
+/*----------------------------------------------------------------------
+    Modules: mod_k2_login
+----------------------------------------------------------------------*/
+div#k2ModuleBox18 {background:url(../images/jab11/title_UserMenu_132x52.png) no-repeat 50% 0;padding:52px 0 4px 0;margin:0 auto;width:220px;border-bottom:2px solid #A6916D;}
+
+    div#k2ModuleBox18 a.ubAvatar img {margin:4px 4px 2px 0;display:block;width:80px;height:80px;padding:17px; background:url(../images/jab11/attendee_frame_144x114.png) no-repeat;border:none;}
+    div#k2ModuleBox18 span.ubName {display:block;font-weight:bold;font-size:14px;margin-bottom:6px;}
+
+    div#k2ModuleBox18 form {text-align:right;}
+    div#k2ModuleBox18 form input.ubLogout {}
+
+/*----------------------------------------------------------------------
+    Modules: mod_k2_content - default CSS overrides here (left for reference too)
+----------------------------------------------------------------------*/
+div.k2ItemsBlock {}
+
+div.k2ItemsBlock p.modulePretext {}
+
+div.k2ItemsBlock ul {padding:0;margin:0;list-style:none;}
+div.k2ItemsBlock ul li {padding:0;}
+div.k2ItemsBlock ul li a {}
+div.k2ItemsBlock ul li a:hover {}
+
+div.k2ItemsBlock ul li a.moduleItemTitle {}
+div.k2ItemsBlock ul li a.moduleItemTitle:hover {}
+
+div.k2ItemsBlock ul li a.moduleItemAuthorLink {}
+div.k2ItemsBlock ul li a.moduleItemAuthorLink:hover {}
+
+div.k2ItemsBlock ul li img.moduleItemAuthorAvatar {display:block;float:left;background:#fff;border:1px solid #ccc;padding:2px;margin:0 4px 0 0;width:14px;height:auto;}
+
+div.k2ItemsBlock ul li p.moduleItemIntrotext {display:block;padding:4px 0;line-height:120%;}
+div.k2ItemsBlock ul li p.moduleItemIntrotext a.moduleItemImage img {float:left;margin:2px 4px 4px 0;padding:0;border:2px solid #ddd;}
+
+div.k2ItemsBlock ul li ul.moduleItemExtraFields {margin:0;padding:0;list-style:none;}
+    ul.moduleItemExtraFields li {display:block;}
+    ul.moduleItemExtraFields li span.moduleItemExtraFieldsLabel {display:block;float:left;font-weight:bold;margin:0 4px 0 0;width:30%;}
+    ul.moduleItemExtraFields li span.moduleItemExtraFieldsValue {}
+
+div.k2ItemsBlock ul li p.moduleItemVideo {}
+div.k2ItemsBlock ul li p.moduleItemVideo span.moduleItemVideoCaption {}
+div.k2ItemsBlock ul li p.moduleItemVideo span.moduleItemVideoCredits {}
+
+div.k2ItemsBlock ul li span.moduleItemDateCreated {}
+div.k2ItemsBlock ul li a.moduleItemCategory {}
+div.k2ItemsBlock ul li span.moduleItemTags {}
+div.k2ItemsBlock ul li span.moduleItemTags b {}
+div.k2ItemsBlock ul li span.moduleItemTags a {padding:0 2px;}
+div.k2ItemsBlock ul li span.moduleItemTags a:hover {}
+div.k2ItemsBlock ul li p.moduleAttachements {}
+
+div.k2ItemsBlock ul li a.moduleItemComments {font-size:12px;border-right:1px solid #A89367;padding:0 4px 0 0;margin:0 6px 0 0;}
+div.k2ItemsBlock ul li a.moduleItemComments:hover {}
+div.k2ItemsBlock ul li span.moduleItemHits {font-size:12px;border-right:1px solid #A89367;padding:0 4px 0 0;margin:0 6px 0 0;}
+div.k2ItemsBlock ul li a.moduleItemReadMore {font-size:12px;}
+div.k2ItemsBlock ul li a.moduleItemReadMore:hover {}
+
+div.k2ItemsBlock a.moduleCustomLink {}
+div.k2ItemsBlock a.moduleCustomLink:hover {}
+
+/* Blog */
+div#k2ModuleBox39 {background:url(../images/jab11/title_news_286x52.png) no-repeat 50% 0;padding-top:72px;}
+div#k2ModuleBox39 ul li {padding:0 6px 24px;}
+div#k2ModuleBox39 ul li div.moduleItemHeader {text-align:center;background:url(../images/jab11/separator.png) no-repeat 50% 100%;padding:0 0 24px 0;margin-bottom:14px;}
+div#k2ModuleBox39 ul li div.moduleItemHeader a.moduleItemTitle {display:block;font-size:28px;font-weight:normal;color:#CD4746;font-family:"Yanone Kaffeesatz","Trebuchet MS",Trebuchet,Arial,Verdana,Sans-serif;font-weight:normal;line-height:110%;padding:0 0 4px 0;margin:0;}
+div#k2ModuleBox39 ul li span.moduleItemDateCreated {color:inherit;font-size:12px;}
+div#k2ModuleBox39 ul li div.moduleItemAuthor {display:inline;padding:0 0 0 4px;margin:0 0 0 2px;font-size:12px;border-left:1px solid #A6916D;}
+div#k2ModuleBox39 ul li a.moduleItemAuthorLink {}
+div#k2ModuleBox39 ul li a.moduleItemAuthorLink:hover {}
+div#k2ModuleBox39 ul li .moduleItemImageContainer {text-align:center;}
+div#k2ModuleBox39 ul li .moduleItemImageContainer a.moduleItemImage img {margin:2px 4px 4px 0;padding:0;border:2px solid #A6916D;}
+div#k2ModuleBox39 ul li p.moduleItemIntrotext {font-size:inherit;font-weight:normal;line-height:150%;padding:0;}
+div#k2ModuleBox39 ul li a.moduleItemReadMore {}
+div#k2ModuleBox39 ul li a.moduleItemReadMore:hover {}
+
+/* Videos */
+#moduleId37 {width:220px; margin:0 auto;}
+#moduleId37 h3 {margin:0; padding:39px 0 0; background:url(../images/jab11/title_pastVideos_220x40.png) no-repeat 50% 0;}
+#moduleId37 h3 span {display:none;}
+#k2ModuleBox37 .videoLoading { background:url(../images/jab11/loadingIcon.gif) no-repeat 50% 50%; width:208px; height:140px; }
+#k2ModuleBox37 .slides-container { width:188px; float:left;}
+
+#k2ModuleBox37 ul { margin:0; padding:0; }
+#k2ModuleBox37 ul li { margin:0; padding:0; list-style:none; }
+#k2ModuleBox37 .odd, #k2ModuleBox37 .even {background:none;}
+#k2ModuleBox37 .navigationContainer {background:#c9ddfa url(../images/jab11/videos_separator_220x9.png) no-repeat 50% 100%; padding:10px 0; margin:0 0 8px 0;}
+
+#k2ModuleBox37 .slides { height:124px; }
+#k2ModuleBox37 .slide { width:85px; padding:0 4px; height:124px; float:left; overflow:hidden;}
+#k2ModuleBox37 .slide a.moduleItemImage { width:80px; }
+#k2ModuleBox37 .slide a.moduleItemImage:hover { text-decoration:none; }
+#k2ModuleBox37 .slide span.moduleItemImageInner { display:block; width:80px; height:60px; overflow:hidden; background:#4674b9; border:2px solid #4674b9; margin:0 0 10px; }
+#k2ModuleBox37 .slide span.moduleItemImageInner:hover { border:2px solid #c02942; }
+#k2ModuleBox37 .slide a.moduleItemImage img { width:80px; height:auto; }
+#k2ModuleBox37 .slide a.moduleItemImage span.moduleItemImageDefault { display:block; width:80px; height:60px; background:url(../images/jab11/defaultVideoImg.png) no-repeat 0 0; border:2px solid #4674b9; margin:0 0 10px; }
+#k2ModuleBox37 .slide a.moduleItemImage span.moduleItemImageDefault:hover { border:2px solid #c02942; }
+#k2ModuleBox37 .slide .vThumbTitle { color:#2b2a2a; font-size:11px; line-height:12px;}
+#k2ModuleBox37 .slide .vThumbTitle:hover { text-decoration:underline; }
+#k2ModuleBox37 .slide .vThumbDate { color:#999; font-size:10px; display:block; }
+
+#k2ModuleBox37 .moduleItemVideo { margin:0; padding:1px 4px 12px; background:#4674b9 url(../images/jab11/videos_separator_blue_220x9.png) no-repeat 0 100%;}
+#k2ModuleBox37 span#videoPreview { border:2px solid #033e8c; display:block; padding:0; width:208px; height:180px; min-height:140px; overflow:hidden; }
+
+#k2ModuleBox37 span#videoPreview object,
+#k2ModuleBox37 span#videoPreview embed,
+#k2ModuleBox37 .avPlayerSubContainer,
+#k2ModuleBox37 .avPlayerSubContainer object { width:208px !important; height:180px !important; }
+
+#k2ModuleBox37 span.avPlayerContainer span.avPlayerSubContainer { background:none !important; border:0; display:block; margin:0 auto !important; padding:0 !important; text-align:right; }
+#k2ModuleBox37 a.next-button,
+#k2ModuleBox37 a.previous-button {margin:40px 0 0; display:block; float:left; width:16px; height:40px; background-image:url(../images/jab11/videos_navigation_btns.png); background-repeat:no-repeat;}
+#k2ModuleBox37 a.next-button {background-position:-21px 0;}
+#k2ModuleBox37 a.previous-button {background-position:0 0;}
+#k2ModuleBox37 a.next-button span,
+#k2ModuleBox37 a.previous-button span,
+#k2ModuleBox37 a.moduleCustomLink span {display:none;}
+#k2ModuleBox37 a.moduleCustomLink {display:block; background:url(../images/jab11/button_videos_220x14.png) no-repeat 50% 0; padding:22px 0 0 0; border-bottom:2px solid #a89367; }
+
+
+/*----------------------------------------------------------------------
+    Modules: mod_k2_users + Proposed Sessions module
+----------------------------------------------------------------------*/
+
+div.k2UsersBlock {background:#fff url(../images/jab11/title_2010speakers_200x52.png) no-repeat 50% 0;padding:52px 0 0 0;margin:0 auto;width:220px;border-bottom:2px solid #A6916D;}
+div#k2ModuleBox47 {background:#fff url(../images/jab11/title_sessions.png) no-repeat 50% 0;padding:52px 0 0 0;margin:0 auto;width:220px;border-bottom:2px solid #A6916D;}
+
+div.k2UsersBlock ul, div#k2ModuleBox47 ul {padding:0;margin:0;list-style:none;}
+div.k2UsersBlock ul li.lastItem, div#k2ModuleBox47 ul li.lastItem {border:none;}
+
+div.k2UsersBlock ul li, div#k2ModuleBox47 ul li {padding:8px 0 16px 0;margin:0;background:url(../images/jab11/separator.png) no-repeat 50% 100%;border:none;}
+
+div.k2UsersBlock ul li a.ubUserAvatar, div#k2ModuleBox47 ul li a.k2Avatar {display:block;float:left;width:90px;height:90px;padding:0;margin:0 4px 0 0;overflow:hidden;}
+div.k2UsersBlock ul li a.ubUserAvatar span, div#k2ModuleBox47 ul li a.k2Avatar span {display:block;width:90px;height:90px;background:url(../images/jab11/speaker_frame_90x90.png) no-repeat 0 0;}
+
+div.k2UsersBlock ul li a.ubUserName, div#k2ModuleBox47 ul li a.moduleItemTitle {color:#4674b9;font-family:"Yanone Kaffeesatz","Trebuchet MS",Trebuchet,Arial,Verdana,Sans-serif;font-size:20px;font-weight:normal;margin:0;padding:0 0 4px 0;}
+div.k2UsersBlock ul li a.ubUserName:hover {}
+
+div.k2UsersBlock ul li div.ubUserDescription, div#k2ModuleBox47 ul li .moduleItemAuthor {margin:0;padding:0 0 4px 0;font-family:"Trebuchet MS",Trebuchet,Arial,Verdana,Sans-serif;font-size:11px;font-style:italic;line-height:130%;}
+div.k2UsersBlock ul li div.ubUserDescription a, div#k2ModuleBox47 ul li .moduleItemAuthor a {color:#c67b05;}
+div.k2UsersBlock ul li div.ubUserDescription a:hover, div#k2ModuleBox47 ul li .moduleItemAuthor a:hover {color:#4674b9}
+
+div.k2UsersBlock ul li h3, div#k2ModuleBox47 ul li h3 {clear:both;margin:8px 0 0 0;padding:0;}
+div.k2UsersBlock ul li ul.ubUserItems {}
+div.k2UsersBlock ul li ul.ubUserItems li {}
+
+div.k2UsersBlock ul li.ubUserListFooter {background:url(../images/jab11/button_speakers_220x14.png) no-repeat 0 50%;width:220px;height:14px;padding:8px 0;margin:0 auto;border:none;}
+div.k2UsersBlock ul li.ubUserListFooter a {display:block;width:220px;height:14px;}
+div.k2UsersBlock ul li.ubUserListFooter a span {display:none;}
+
+div#k2ModuleBox47 .moduleCustomLink {background:url(../images/jab11/button_sessions.png) no-repeat 0 50%;width:220px;height:14px;padding:8px 0;margin:0 auto;border:none;}
+div#k2ModuleBox47 .moduleCustomLink a {display:block;width:220px;height:14px;}
+div#k2ModuleBox47 .moduleCustomLink a span {display:none;}
+
+
+/* ========================================================================== */
+/* ========================================================================== */
+/* ================================= PLUGINS ================================ */
+/* ========================================================================== */
+/* ========================================================================== */
+
+
+
+
+/* ========================================================================== */
+/* ========================================================================== */
+/* ================================ Robert ================================== */
+/* ========================================================================== */
+/* ========================================================================== */
+
+.unseen,
+.unsichtbar {display:inline;height:0;left:-3000px;position:absolute;top:-2000px;width:0;z-index:200;}
+.wrap {border:0;clear:both;float:none;font-size:1px;height:0;line-height:1px;margin:0;padding:0;visibility:hidden;}
+.chkbox {display:block;line-height:1.5em;}
+
+
+
+
+/* ========================================================================== */
+/* ========================================================================== */
+/* ============================= component.php ============================== */
+/* ========================================================================== */
+/* ========================================================================== */
+body.contentpane {}
+
+
+
+
+
+/* ========================================================================== */
+/* =========================== END of stylesheet ============================ */
+/* ========================================================================== */

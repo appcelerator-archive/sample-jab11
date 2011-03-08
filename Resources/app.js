@@ -50,7 +50,7 @@ TiAir.init({
     // views show something to the user; a single view can contain other views, and usually receives a model
     views: {
         shared: [
-            'backButton.js', 'details.js', 'gridWithDetails.js', 'homeButton.js', 'notImplemented.js', 'pullToRefresh.js',
+            'backButton.js', 'details.js', 'detailsCSS.js', 'gridWithDetails.js', 'homeButton.js', 'notImplemented.js', 'pullToRefresh.js',
             'row.js', 'segmentedDisplay.js', 'table.js', 'titleBar.js'
         ],
         about: [
