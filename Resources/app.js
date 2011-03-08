@@ -8,10 +8,10 @@ Ti.include('TiStorage.js');
 
 Ti.UI.backgroundImage = 'content/images/loading.withoutbar.png';
 var used = [
-    Ti.UI.createView, Ti.UI.createLabel, Ti.UI.createImageView, Ti.UI.createButton,
-    Ti.UI.createWindow, Ti.UI.createWebView, Ti.UI.createAnimation, Ti.Map.createView,
-    Ti.UI.create2DMatrix, Ti.UI.createScrollView, Ti.UI.createTableView, Ti.UI.createTableViewRow,
-    Ti.Network.createHTTPClient, Ti.UI.createTextField, Ti.UI.createActivityIndicator
+    Ti.UI.createView, Ti.UI.createLabel, Ti.UI.createImageView, Ti.UI.createButton, Ti.UI.createWindow,
+    Ti.UI.createWebView, Ti.UI.createAnimation, Ti.Map.createView, Ti.UI.create2DMatrix, Ti.UI.createScrollView,
+    Ti.UI.createTableView, Ti.UI.createTableViewRow, Ti.Network.createHTTPClient, Ti.UI.createTextField,
+    Ti.UI.createActivityIndicator, Ti.UI.createAlertDialog
 ];
 
 /*
@@ -50,7 +50,7 @@ TiAir.init({
     // views show something to the user; a single view can contain other views, and usually receives a model
     views: {
         shared: [
-            'backButton.js', 'details.js', 'detailsCSS.js', 'gridWithDetails.js', 'homeButton.js', 'notImplemented.js',
+            'backButton.js', 'details.js', 'htmlHeader.js', 'htmlFooter.js', 'gridWithDetails.js', 'homeButton.js', 'notImplemented.js',
             'pullToRefresh.js', 'refreshButton.js', 'row.js', 'segmentedDisplay.js', 'table.js', 'titleBar.js'
         ],
         about: [
@@ -84,4 +84,28 @@ TiAir.init({
             'details.js', 'list.js'
         ]
     }
+});
+
+/*
+ * Handle links to external websites.
+ */
+Ti.App.addEventListener('linkClicked', function(evt) {
+    // confirm that they want to leave the app for the web browser
+    var alertDialog = new AlertDialog({
+        title: 'Opening External Website',
+        message: 'Are you sure you want to leave the app?',
+        buttonNames: ['Yes','No!'],
+        cancel: 1
+    });
+    $(alertDialog).click(function(innerEvt) {
+        if (!innerEvt.index) {
+            // turn relative links into absolute links
+            if (!evt.href.indexOf('/')) {
+                evt.href = 'http://jandbeyond.org/' + evt.href;
+            }
+            // and open the url!
+            Ti.Platform.openURL(evt.href);
+        }
+    });
+    alertDialog.show();
 });

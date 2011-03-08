@@ -15,7 +15,7 @@ view = function(model) {
 
     view.add(new WebView({
         className: 'DetailsBody',
-        html: AirView('detailsCSS') + model.bodyHTML
+        html: AirView('htmlHeader') + model.bodyHTML + AirView('htmlFooter')
     }));
 
     view.add(new ImageView({ className: 'TornEdge DetailsTornEdge' }));

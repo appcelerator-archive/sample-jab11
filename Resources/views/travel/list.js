@@ -1,7 +1,7 @@
 view = function(model) {
     var view = new View({ id: 'TravelWindow', className: 'Window' });
     view.add(AirView('titleBar', {
-        left: AirView('backButton', view),
+        left: AirView('homeButton', view),
         title: 'Travel',
         right: AirView('refreshButton', function() {
             return AirView('notImplemented');
