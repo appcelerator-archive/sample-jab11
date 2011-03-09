@@ -1,4 +1,6 @@
 view = function(model) {
+    return AirView('notImplemented');
+    
     var win = new View({ id: 'SpeakersWindow', className: 'Window' });
     win.add(AirView('titleBar', {
         left: AirView('homeButton', win),

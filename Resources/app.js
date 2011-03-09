@@ -21,6 +21,7 @@ includeRJSS(
         'content/styles/common.rjss',
         'content/styles/default.rjss',
         'content/styles/about.rjss',
+        'content/styles/social.rjss',
         'content/styles/joscars.rjss');
 
 /*
@@ -50,8 +51,9 @@ TiAir.init({
     // views show something to the user; a single view can contain other views, and usually receives a model
     views: {
         shared: [
-            'backButton.js', 'details.js', 'htmlHeader.js', 'htmlFooter.js', 'gridWithDetails.js', 'homeButton.js', 'notImplemented.js',
-            'pullToRefresh.js', 'refreshButton.js', 'row.js', 'segmentedDisplay.js', 'table.js', 'titleBar.js'
+            'addCommentButton.js', 'backButton.js', 'details.js', 'htmlHeader.js', 'htmlFooter.js', 'gridWithDetails.js',
+            'homeButton.js', 'notImplemented.js', 'pullToRefresh.js', 'refreshButton.js', 'row.js', 'segmentedDisplay.js',
+            'table.js', 'titleBar.js'
         ],
         about: [
             'about.js', 'sponsors.js'

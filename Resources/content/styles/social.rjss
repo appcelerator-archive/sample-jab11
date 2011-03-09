@@ -1,0 +1,8 @@
+.SocialRowTitle, .SocialRowSubtitle {
+    left: 60
+}
+.SocialRowImage {
+    height: 40,
+    width: 40,
+    left: 10
+}

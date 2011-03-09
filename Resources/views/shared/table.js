@@ -11,7 +11,7 @@ view = function(model) {
                 data.push(model.rows[i]);
             }
             if (i > 1) {
-                data[i - 1].add(new ImageView({ className: 'TornEdge', bottom: -5 }));
+                data[i - 1].add(new ImageView({ className: 'TornEdge', bottom: -8 }));
             }
             table.setData(data);
         }

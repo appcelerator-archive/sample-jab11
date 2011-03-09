@@ -35,6 +35,11 @@ WebView {
     width: 41,
     height: 30
 }
+.AddCommentButton {
+    backgroundImage: 'content/images/bars/comment.png',
+    width: 41,
+    height: 30
+}
 .TitleBar {
     backgroundImage: 'content/images/bars/top.png',
     top: 0, right: 0, left: 0, height: 44
@@ -84,12 +89,17 @@ WebView {
     Table
 */
 .Table {
-    backgroundColor: 'transparent'
+    backgroundColor: 'transparent',
+    borderColor: 'transparent',
+    borderWidth: 0,
+    footerView: Ti.UI.createView({ height: 1, backgroundColor: '#fff' })
 }
 .Row {
     backgroundColor: '#fff',
     selectedBackgroundColor: '#ddd',
-    height: 60
+    height: 60,
+    borderColor: 'transparent',
+    borderWidth: 0
 }
 .RowTitle {
     top: 14, right: 30, left: 10,
