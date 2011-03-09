@@ -77,7 +77,7 @@ TiAir.init({
             'list.js'
         ],
         social: [
-            'addComment.js', 'list.js'
+            'addComment.js', 'list.js', 'details.js'
         ],
         speakers: [
             'addComment.js', 'comments.js', 'details.js', 'list.js', 'rate.js', 'sessions.js'

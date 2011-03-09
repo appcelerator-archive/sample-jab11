@@ -51,7 +51,14 @@ controller = {
             return AirView();
         },
         details: function(id) {
-            return AirView('notImplemented');
+            return AirView({
+                imageURL: 'http://a3.twimg.com/profile_images/1215252283/AngryFace-Bigger_reasonably_small_reasonably_small.jpg',
+                who: 'Dawson Toth',
+                text: 'Native notifications from pure JS in #android with @appcelerator #titanium http://bit.ly/hjJYYo',
+                source: 'Facebook',
+                url: 'http://twitter.com/#!/dawsontoth/status/43801472080687104',
+                when: new Date('Mon, 06 Mar 2011 12:57:21 +0000')
+            });
         },
         update: function(callback) {
             callback({ error: 'Not Implemented'});
