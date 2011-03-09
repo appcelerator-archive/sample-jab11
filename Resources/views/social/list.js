@@ -23,14 +23,15 @@ view = function(model) {
             var item = data[i];
 
             var row = new TableViewRow({
-                className: 'Row',
+                className: 'SocialRow Row',
                 targetURL: { controller: 'social', action: 'details', id: i, navigatorOptions: { animate: 'tabSlide' } }
             });
 
             row.add(new ImageView({ className: 'SocialRowImage', image: item.imageURL }));
-            row.add(new Label({ text: item.text, className: 'SocialRowTitle RowTitle' }));
-            row.add(new Label({ text: item.when, className: 'SocialRowSubtitle RowSubtitle' }));
-            row.add(new ImageView({ className: 'RowDetailsArrow' }));
+            row.add(new ImageView({ className: 'SocialIcon SocialIcon' + item.source }));
+            row.add(new Label({ text: item.who, className: 'SocialRowTitle RowTitle' }));
+            row.add(new Label({ text: toTimeElapsed(item.when), className: 'SocialRowWhen' }));
+            row.add(new Label({ text: item.text, className: 'SocialRowSubtitle RowSubtitle' }));
 
             rows.push(row);
         }

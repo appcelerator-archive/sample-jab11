@@ -1,8 +1,31 @@
+.SocialRow {
+    height: 80
+}
 .SocialRowTitle, .SocialRowSubtitle {
-    left: 60
+    left: 80
+}
+.SocialRowSubtitle {
+    height: 32,
+    right: 10
 }
 .SocialRowImage {
-    height: 40,
-    width: 40,
+    height: 60,
+    width: 60,
     left: 10
+}
+.SocialRowWhen {
+    color: '#999',
+    top: 14, right: 33,
+    width: 'auto', height: 14,
+    font: { fontSize: 10 }
+}
+.SocialIcon {
+    top: 12, right: 10,
+    width: 18, height: 18
+}
+.SocialIconFacebook {
+    image: 'content/images/Facebook.png'
+}
+.SocialIconTwitter {
+    image: 'content/images/Twitter.png'
 }
