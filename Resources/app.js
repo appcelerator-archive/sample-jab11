@@ -52,8 +52,8 @@ TiAir.init({
     views: {
         shared: [
             'addCommentButton.js', 'backButton.js', 'details.js', 'htmlHeader.js', 'htmlFooter.js', 'gridWithDetails.js',
-            'homeButton.js', 'notImplemented.js', 'pullToRefresh.js', 'refreshButton.js', 'row.js', 'segmentedDisplay.js',
-            'table.js', 'titleBar.js'
+            'homeButton.js', 'notification.js', 'notImplemented.js', 'pullToRefresh.js', 'refreshButton.js', 'row.js',
+            'segmentedDisplay.js', 'table.js', 'titleBar.js'
         ],
         about: [
             'about.js', 'sponsors.js'

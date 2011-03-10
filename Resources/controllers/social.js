@@ -53,11 +53,12 @@ controller = {
                         }
                         maxID.value = response.max_id_str;
                         settings.update(maxID.id, maxID);
+                        AirView('notification', 'Last Updated: Just Now');
                         callback(posts.find());
                     } else if (response.error) {
                         callback(response);
                     } else {
-                        callback({ error: 'The server is temporarily unavailable; please check your internet connection, and try again.' });
+                        AirView('notification', 'The server is temporarily unavailable; please check your internet connection, and try again.');
                     }
                 }
                 catch(err) {
@@ -67,7 +68,7 @@ controller = {
             xhr.onerror = function(e) {
                 callback({ error: e });
             };
-            xhr.open('GET', 'http://search.twitter.com/search.json?q=%23jab11%20OR%20@jandbeyond%20OR%20from%3Ajandbeyond&page=1&since_id=' + maxID.value);
+            xhr.open('GET', 'http://search.twitter.com/search.json?q=%23jab11%20OR%20@jandbeyond%20OR%20from%3Ajandbeyond&page=1&since_id=' + maxID.value + '#' + new Date().getTime());
             xhr.send();
         }
     }

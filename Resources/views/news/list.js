@@ -4,9 +4,7 @@ view = function(model) {
         left: AirView('homeButton', win),
         title: 'Latest News',
         right: AirView('refreshButton', function() {
-            table.update(function() {
-                alert('Updated!');
-            });
+            table.update();
         })
     }));
     function processRows(data) {
@@ -31,7 +29,7 @@ view = function(model) {
                 callback: function(response) {
                     if (response.error) {
                         callback();
-                        alert(response.error);
+                        AirView('notification', response.error);
                     }
                     else {
                         callback(response);

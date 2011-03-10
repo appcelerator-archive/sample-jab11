@@ -1,3 +1,3 @@
 view = function() {
-    alert('Not Implemented');
+    AirView('notification', 'Oops! This hasn\'t been implemented yet.');
 };

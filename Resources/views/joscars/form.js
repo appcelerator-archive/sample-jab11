@@ -36,7 +36,7 @@ view = function(model) {
             return AirView('notImplemented');
         }
         else {
-            alert('Please nominate at least one site.');
+            AirView('notification', 'Oops! Please nominate at least one site!');
         }
     });
 

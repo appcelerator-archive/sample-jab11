@@ -6,9 +6,7 @@ view = function(model) {
         return AirView('notImplemented');
     }));
     rightView.add(AirView('refreshButton', function() {
-        table.update(function() {
-            alert('Updated!');
-        });
+        table.update();
     }));
 
     view.add(AirView('titleBar', {
@@ -47,7 +45,7 @@ view = function(model) {
                 callback: function(response) {
                     if (response.error) {
                         callback();
-                        alert(response.error);
+                        AirView('notification', response.error);
                     }
                     else {
                         callback(response);
