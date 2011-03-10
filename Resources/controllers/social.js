@@ -1,21 +1,15 @@
 controller = {
-    sample: {
-        id: 12,
-        imageURL: 'http://a3.twimg.com/profile_images/1215252283/AngryFace-Bigger_reasonably_small_reasonably_small.jpg',
-        who: 'Dawson Toth',
-        text: 'Native notifications from pure JS in #android with @appcelerator #titanium http://bit.ly/hjJYYo',
-        source: 'Facebook',
-        url: 'http://twitter.com/#!/dawsontoth/status/43801472080687104',
-        when: new Date('Mon, 06 Mar 2011 12:57:21 +0000')
-    },
     actions: {
         list: function() {
             var db = TiStorage().use('jab');
-            var posts = db.collection('SocialPosts');
+            var posts = db.collection('SocialPosts').find();
             var settings = db.collection('SocialSettings');
+            for (var i = 0, l = posts.length; i < l; i++) {
+                posts[i].targetURL = { controller: 'social', action: 'details', id: posts[i].id, navigatorOptions: { animate: 'tabSlide' } };
+            }
             return AirView({
                 lastUpdated: settings.findOne({ name: 'LastUpdated' }),
-                items: posts.find()
+                items: posts
             });
         },
         addComment: function() {
@@ -24,7 +18,7 @@ controller = {
         details: function(id) {
             var db = TiStorage().use('jab');
             var posts = db.collection('SocialPosts');
-            return posts.findOne({ id: id });
+            return AirView(posts.findOne(id));
         },
         update: function(callback) {
             this.updateTwitter(callback);
@@ -57,9 +51,11 @@ controller = {
                                 when: items[i].created_at
                             });
                         }
-                        maxID.value = response.max_id;
+                        maxID.value = response.max_id_str;
                         settings.update(maxID.id, maxID);
                         callback(posts.find());
+                    } else if (response.error) {
+                        callback(response);
                     } else {
                         callback({ error: 'The server is temporarily unavailable; please check your internet connection, and try again.' });
                     }
@@ -71,7 +67,7 @@ controller = {
             xhr.onerror = function(e) {
                 callback({ error: e });
             };
-            xhr.open('GET', 'http://search.twitter.com/search.json?q=@jandbeyond%20OR%20from%3Ajandbeyond&page=1&since_id=' + maxID.value);
+            xhr.open('GET', 'http://search.twitter.com/search.json?q=%23jab11%20OR%20@jandbeyond%20OR%20from%3Ajandbeyond&page=1&since_id=' + maxID.value);
             xhr.send();
         }
     }

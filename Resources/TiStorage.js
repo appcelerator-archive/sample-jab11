@@ -393,6 +393,9 @@ function TiStorage() {
                 }
 				return collection; // return the whole collection object
 			} else {
+                if (typeof obj != 'object' && typeof obj == 'number') {
+                    obj = { id: obj };
+                }
 				// Cache the record array
 				var record = [];
 

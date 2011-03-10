@@ -55,12 +55,16 @@ function HTMLParser(text) {
 
     var urlRegex = /((ftp|http|https):\/\/(\w+:{0,1}\w*@)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%@!\-\/]))?)/gi;
     var hashTagRegex = /#([^ ]+)/gi;
+    var mentionRegex = /@([^ ]+)/gi;
 
     this.linkifyURLs = function() {
         html = html.replace(urlRegex, '<a href="$1">$1</a>');
     };
     this.linkifyHashTags = function() {
         html = html.replace(hashTagRegex, '<a href="http://twitter.com/#!/search?q=%23$1">#$1</a>');
+    };
+    this.linkifyMentions = function() {
+        html = html.replace(mentionRegex, '<a href="http://twitter.com/#!/search?q=%40$1">@$1</a>');
     };
 
     this.getHTML = function() {
