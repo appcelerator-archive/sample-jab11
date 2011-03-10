@@ -13,8 +13,12 @@ view = function(text) {
     window.top += offset;
     offset += 40;
     window.open();
-    setTimeout(function() {
+    function close() {
+        clearTimeout(timeout);
         window.close({ opacity: 0, duration: window.fadeDuration || 500 });
         offset -= 40;
-    }, window.timeout || 3000);
+    }
+
+    var timeout = setTimeout(close, window.timeout || 3000);
+    $(window).click(close);
 };
