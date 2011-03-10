@@ -5,9 +5,10 @@ view = function(model) {
     rightView.add(AirView('addCommentButton', function() {
         return AirView('notImplemented');
     }));
-    rightView.add(AirView('refreshButton', function() {
+    var refreshButton = AirView('refreshButton', function() {
         table.update();
-    }));
+    });
+    rightView.add(refreshButton);
 
     view.add(AirView('titleBar', {
         left: AirView('homeButton', view),
@@ -48,7 +49,7 @@ view = function(model) {
                         AirView('notification', response.error);
                     }
                     else {
-                        callback(response);
+                        callback({ rows: processRows(response) });
                     }
                 }
             });
@@ -56,6 +57,10 @@ view = function(model) {
     });
     table.top = 45;
     view.add(table);
+
+    if (model.items.length == 0) {
+        $(refreshButton).click();
+    }
 
     return view;
 };
