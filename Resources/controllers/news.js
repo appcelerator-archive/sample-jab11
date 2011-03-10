@@ -12,7 +12,6 @@ controller = {
             if (news.find().length == 0) {
                 var defaultNews = AirModel('defaultNewsList').query.results.item;
                 for (var i = 0, l = defaultNews.length; i < l; i++) {
-                    defaultNews[i].id = i;
                     defaultNews[i].description = defaultNews[i].description.replace(/K2Feed/gi,'item');
                     news.create(defaultNews[i]);
                 }
@@ -35,7 +34,6 @@ controller = {
                     news.clear();
                     var items = data.item;
                     for (var i = 0, l = items.length; i < l; i++) {
-                        items[i].id = i;
                         items[i].description = items[i].description.replace(/K2Feed/gi,'item');
                         news.create(items[i]);
                     }

@@ -20,6 +20,9 @@ function toTimeElapsed(date) {
     if (!date) {
         return 'Unknown';
     }
+    if (!date.getTime) {
+        date = new Date(date);
+    }
     var ms = new Date().getTime() - date.getTime();
     var min = parseInt(ms / 60000);
     var hrs = 0;

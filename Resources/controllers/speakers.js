@@ -24,7 +24,6 @@ controller = {
             if (items.find().length == 0) {
                 var defaultItems = AirModel('defaultSpeakers').query.results.item;
                 for (var i = 0, l = defaultItems.length; i < l; i++) {
-                    defaultItems[i].id = i;
                     items.create(defaultItems[i]);
                 }
             }
@@ -41,7 +40,6 @@ controller = {
                         items.clear();
                         var items = response.query.results.item;
                         for (var i = 0, l = items.length; i < l; i++) {
-                            items[i].id = i;
                             items.create(items[i]);
                         }
                         callback(items.find());

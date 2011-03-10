@@ -10,8 +10,8 @@ view = function(model) {
             for (var i = 0, l = model.rows.length; i < l; i++) {
                 data.push(model.rows[i]);
             }
-            if (i > 1) {
-                data[i - 1].add(new ImageView({ className: 'TornEdge', bottom: -8 }));
+            if (l > 0) {
+                data[l - 1].add(new ImageView({ className: 'TornEdge', bottom: -8 }));
             }
             table.setData(data);
         }

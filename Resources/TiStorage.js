@@ -194,7 +194,7 @@ function TiStorage() {
 		this.create = function(obj) {
 			// Get the last index and the id prop.
 			var coll = this.storage[this.database][this.collection];
-			last = coll[coll.length - 1];
+			var last = coll[coll.length - 1];
 
 			// Create a new id (not perfect)
 			obj.id = last ? last.id + 1 : 0;
