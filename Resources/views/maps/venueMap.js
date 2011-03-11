@@ -1,7 +1,7 @@
 view = function(model) {
     var win = new View({ id: 'VenueMapWindow', className: 'Window' });
     win.add(AirView('titleBar', {
-        left: AirView('homeButton', win),
+        left: AirView('button', { view: win, type: 'Home' }),
         title: 'Venue Map'
     }));
     win.add(Titanium.Map.createView({

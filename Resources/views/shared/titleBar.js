@@ -1,11 +1,11 @@
 view = function(model) {
     var bar = new View({
-        className: 'TitleBar'
+        className: (model.style || 'Black') + 'TitleBar TitleBar'
     });
     if (model.title) {
         bar.add(new Label({
             text: model.title,
-            className: 'TitleBarTitle'
+            className: (model.style || 'Black') + 'TitleBarTitle TitleBarTitle'
         }));
     }
     if (model.left) {

@@ -1,7 +1,7 @@
 view = function(model) {
     var win = new View({ id: 'JOSCARsView', className: 'Window' });
     win.add(AirView('titleBar', {
-        left: AirView('homeButton', win),
+        left: AirView('button', { view: win, type: 'Home' }),
         title: 'JOSCARS'
     }));
     var scroll = new ScrollView({ id: 'JOSCARsScroll' });

@@ -1,7 +1,7 @@
 view = function(model) {
     var view = new View({ id: 'SocialDetailsView', className: 'Window' });
     view.add(AirView('titleBar', {
-        left: AirView('backButton', view),
+        left: AirView('button', { view: view, type: 'Back' }),
         title: 'Details'
     }));
 

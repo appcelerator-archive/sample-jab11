@@ -1,11 +1,11 @@
 view = function(model) {
     var win = new View({ id: 'NewsWindow', className: 'Window' });
     win.add(AirView('titleBar', {
-        left: AirView('homeButton', win),
+        left: AirView('button', { view: win, type: 'Home' }),
         title: 'Latest News',
-        right: AirView('refreshButton', function() {
+        right: AirView('button', { type: 'Refresh', callback: function() {
             table.update();
-        })
+        }})
     }));
     function processRows(data) {
         var rows = [];

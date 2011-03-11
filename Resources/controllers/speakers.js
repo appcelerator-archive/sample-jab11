@@ -10,6 +10,8 @@ controller = {
             return AirView(this.get(id)[0]);
         },
         list: function() {
+            return AirView('notImplemented');
+
             return AirView(this.get());
         },
         rate: function() {

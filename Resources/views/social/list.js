@@ -2,16 +2,18 @@ view = function(model) {
     var view = new View({ id: 'SocialWindow', className: 'Window' });
 
     var rightView = new View({ layout: 'horizontal', width: 'auto', height: 'auto' });
-    rightView.add(AirView('addCommentButton', function() {
-        return AirView('notImplemented');
-    }));
-    var refreshButton = AirView('refreshButton', function() {
+    rightView.add(AirView('button', { type: 'AddComment', callback: function(evt) {
+        TiAir.openURL({
+            controller: 'social', action: 'addComment',
+            navigatorOptions: { animate: 'pop' }
+        }, evt);
+    }}));
+    rightView.add(AirView('button', { type: 'Refresh', callback: function() {
         table.update();
-    });
-    rightView.add(refreshButton);
+    }}));
 
     view.add(AirView('titleBar', {
-        left: AirView('homeButton', view),
+        left: AirView('button', { view: view, type: 'Home' }),
         title: 'Social',
         right: rightView
     }));
@@ -62,7 +64,7 @@ view = function(model) {
     view.add(table);
 
     if (model.items.length == 0) {
-        $(refreshButton).click();
+        table.update();
     }
 
     return view;

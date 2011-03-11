@@ -1,9 +1,7 @@
 view = function(model) {
-    return AirView('notImplemented');
-    
-    var win = new View({ id: 'SpeakersWindow', className: 'Window' });
-    win.add(AirView('titleBar', {
-        left: AirView('homeButton', win),
+    var view = new View({ id: 'SpeakersWindow', className: 'Window' });
+    view.add(AirView('titleBar', {
+        left: AirView('button', { view: view, type: 'Home' }),
         title: '2011 Speakers'
     }));
     function processRows(data) {
@@ -39,6 +37,6 @@ view = function(model) {
         }
     });
     table.top = 45;
-    win.add(table);
-    return win;
+    view.add(table);
+    return view;
 };

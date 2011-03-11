@@ -58,8 +58,8 @@ WebView {
 /*
     Title Bar View
 */
-.HomeButton {
-    backgroundImage: 'content/images/bars/9dots.png',
+.AddCommentButton {
+    backgroundImage: 'content/images/bars/comment.png',
     width: 41,
     height: 30
 }
@@ -68,13 +68,28 @@ WebView {
     width: 54,
     height: 30
 }
+.CameraButton {
+    backgroundImage: 'content/images/bars/camera.png',
+    width: 41,
+    height: 30
+}
+.HomeButton {
+    backgroundImage: 'content/images/bars/9dots.png',
+    width: 41,
+    height: 30
+}
 .RefreshButton {
     backgroundImage: 'content/images/bars/refresh.png',
     width: 41,
     height: 30
 }
-.AddCommentButton {
-    backgroundImage: 'content/images/bars/comment.png',
+.SponsorsButton {
+    backgroundImage: 'content/images/bars/sponsors.png',
+    width: 72,
+    height: 30
+}
+.XButton {
+    backgroundImage: 'content/images/bars/x.png',
     width: 41,
     height: 30
 }
@@ -82,12 +97,25 @@ WebView {
     backgroundImage: 'content/images/bars/top.png',
     top: 0, right: 0, left: 0, height: 44
 }
+.BlackTitleBar {
+    backgroundImage: 'content/images/bars/top.png'
+}
+.GreyTitleBar {
+    backgroundImage: 'content/images/bars/grey.png'
+}
 .TitleBarTitle {
-    color: '#fff',
     font: { fontWeight: 'bold', fontSize: 20 },
-    textAlign: 'center',
+    textAlign: 'center'
+}
+.BlackTitleBarTitle {
+    color: '#fff',
     shadowColor: "#000",
 	shadowOffset: {x:0, y:-1}
+}
+.GreyTitleBarTitle {
+    color: '#403f3f',
+    shadowColor: "#fff",
+	shadowOffset: {x:0, y:1}
 }
 
 /*

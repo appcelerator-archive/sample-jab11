@@ -5,7 +5,7 @@
 view = function(model) {
     // create views for each of our icons
     for (var i = 0, l = model.icons.length; i < l; i++) {
-        model.icons[i].view = AirView('button', model.icons[i]);
+        model.icons[i].view = new Button(model.icons[i]);
     }
     // now create the main view; in this case, a window!
     var view = new View({ id: 'DefaultView' });

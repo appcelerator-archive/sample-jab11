@@ -5,7 +5,7 @@ view = function(model) {
         TiAir.openURL({ action: 'sponsors', controller: 'about' });
     });
     win.add(AirView('titleBar', {
-        left: AirView('homeButton', win),
+        left: AirView('button', { view: win, type: 'Home' }),
         title: 'About',
         right: sponsorsButton
     }));
