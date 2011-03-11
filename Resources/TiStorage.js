@@ -450,6 +450,33 @@ function TiStorage() {
 
 		}; // End of find();
 
+		/**
+		 * Wrapper method to sort a collection
+		 *
+		 * @param (object) obj The object that defines the sort
+		 */
+		this.sort = function(obj) {
+
+            function compare(a,b) {
+                for (var prop in obj) {
+                    if (a[prop] != b[prop])
+                    {
+                        return (obj[prop] == 1 ? a[prop] < b[prop] : a[prop] > b[prop]) ? 1 : -1;
+                    }
+                }
+                return 0;
+            }
+
+            this.storage[this.database][this.collection].sort(compare);
+
+			Ti.App.Properties.setString(this.globalStore, JSON.stringify(this.storage));
+
+            if (turnOnTiStorageLogging) {
+			    Ti.API.info('TiStorage - Sorted collection: ' + this.collection);
+            }
+
+			return this;
+		}; // End of sort();
 
 	}; // End of TiStorage.Core
 

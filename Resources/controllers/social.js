@@ -21,27 +21,31 @@ controller = {
             return AirView(posts.findOne(id));
         },
         update: function(callback) {
-            var responses = 0;
+
+            var db = TiStorage().use('jab');
+            var posts = db.collection('SocialPosts');
+            var settings = db.collection('SocialSettings');
 
             var queue = [
                 this.updateTwitter, this.updateFacebook
             ];
 
-            function processQueue(data) {
+            (function processQueue(data) {
                 var updateFunction = queue.pop();
                 if (updateFunction) {
-                    updateFunction(processQueue);
+                    updateFunction(processQueue, db, posts, settings);
                 }
                 else {
+                    posts.sort({ when: 1 });
                     callback(data);
                 }
-            }
-            processQueue();
+            })();
+            
         },
-        updateFacebook: function(callback) {
-            var db = TiStorage().use('jab');
-            var posts = db.collection('SocialPosts');
-            var settings = db.collection('SocialSettings');
+        updateFacebook: function(callback, db, posts, settings) {
+            db = db || TiStorage().use('jab');
+            posts = posts || db.collection('SocialPosts');
+            settings = settings || db.collection('SocialSettings');
 
             var lastUpdate = settings.findOne({ name: 'LastFBUpdate' }) || settings.create({ name: 'LastFBUpdate', value: 0 }).findOne({ name: 'LastFBUpdate' });
 
@@ -82,10 +86,10 @@ controller = {
             xhr.open('GET', 'https://graph.facebook.com/jandbeyond/feed?since=' + lastUpdate.value);
             xhr.send();
         },
-        updateTwitter: function(callback) {
-            var db = TiStorage().use('jab');
-            var posts = db.collection('SocialPosts');
-            var settings = db.collection('SocialSettings');
+        updateTwitter: function(callback, db, posts, settings) {
+            db = db || TiStorage().use('jab');
+            posts = posts || db.collection('SocialPosts');
+            settings = settings || db.collection('SocialSettings');
 
             var maxID = settings.findOne({ name: 'MaxID' }) || settings.create({ name: 'MaxID', value: 0 }).findOne({ name: 'MaxID' });
 
@@ -103,7 +107,7 @@ controller = {
                                     source: 'Twitter',
                                     sourceID: items[i].id,
                                     url: 'http://twitter.com/#!/' + items[i].from_user + '/status/' + items[i].id,
-                                    when: items[i].created_at
+                                    when: new Date(items[i].created_at).getTime()
                                 });
                             }
                             maxID.value = response.max_id_str;
