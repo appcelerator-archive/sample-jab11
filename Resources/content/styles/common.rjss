@@ -21,10 +21,8 @@ WebView {
     Notifications
 */
 #Notification {
-    timeout: 3000,
-    fadeDuration: 500,
-    height: 30,
-    width: 250,
+    height: 23,
+    left: 20, right: 20,
     top: 60,
     borderRadius: 10,
     backgroundColor: 'transparent',
@@ -36,17 +34,20 @@ WebView {
         Titanium.UI.LANDSCAPE_RIGHT,
     ]
 }
+#NotificationOutAnimation {
+    duration: 500,
+    timeout: 3000,
+    opacity: 0
+}
 #NotificationView {
-    height: 30,
     opacity: 0.7,
-    width: 250,
     borderRadius: 10,
     backgroundColor: '#000'
 }
 #NotificationLabel {
     color: '#fff',
-    width: 250,
-    height: 'auto',
+    top: 5,
+    height: 13,
     font: {
         fontFamily: 'Helvetica Neue',
         fontSize: 13

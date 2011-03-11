@@ -23,6 +23,7 @@ view = function(model) {
     var table = AirView('table', {
         rows: processRows(model),
         update: function(callback) {
+            AirView('notification', 'Updating...');
             AirAction({
                 controller: 'news',
                 action: 'update',
@@ -33,6 +34,7 @@ view = function(model) {
                     }
                     else {
                         callback(response);
+                        AirView('notification', 'Last Updated: Just Now');
                     }
                 }
             });

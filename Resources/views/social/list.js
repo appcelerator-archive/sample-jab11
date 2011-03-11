@@ -40,6 +40,7 @@ view = function(model) {
     var table = AirView('table', {
         rows: processRows(model.items),
         update: function(callback) {
+            AirView('notification', 'Updating...');
             AirAction({
                 controller: 'social',
                 action: 'update',

@@ -1,24 +1,23 @@
-var offset = 0;
+var offset = 0, ani = new Animation({ id: 'NotificationOutAnimation' });
+ani.addEventListener('complete', function() {
+    offset -= 40;
+});
 view = function(text) {
-    var window = new Window({
-        id: 'Notification'
-    });
-    window.add(new View({
-        id: 'NotificationView'
-    }));
+    var window = new Window({ id: 'Notification' });
+    window.add(new View({ id: 'NotificationView' }));
     window.add(new Label({
         id: 'NotificationLabel',
         text: text
     }));
     window.top += offset;
     offset += 40;
-    window.open();
+    
     function close() {
         clearTimeout(timeout);
-        window.close({ opacity: 0, duration: window.fadeDuration || 500 });
-        offset -= 40;
+        window.close(ani);
     }
-
-    var timeout = setTimeout(close, window.timeout || 3000);
+    var timeout = setTimeout(close, ani.timeout || 3000);
     $(window).click(close);
+    
+    window.open();
 };
