@@ -14,7 +14,7 @@ view = function(model) {
     var details = AirView('shared/details', {
         title: model.who,
         subtitle: toTimeElapsed(model.when),
-        bodyHTML: html
+        bodyHTML: html + '- <a href="' + model.url + '">Source</a>'
     });
     details.top = 45;
     view.add(details);
