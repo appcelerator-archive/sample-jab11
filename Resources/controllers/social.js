@@ -59,7 +59,7 @@ controller = {
                                     source: 'Facebook',
                                     sourceID: items[i].id,
                                     url: items[i].link,
-                                    when: new Date(items[i].created_time).getTime()
+                                    when: parseISODate(items[i].created_time.split('+')[0]).getTime()
                                 });
                             }
                             lastUpdate.value = parseInt(new Date().getTime() / 1000);

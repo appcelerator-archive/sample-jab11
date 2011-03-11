@@ -72,3 +72,47 @@ function HTMLParser(text) {
     };
 
 }
+
+function parseISODate(input) {
+    var year, months, days, hours, minutes, seconds, milliseconds;
+    var iso = /^(\d{4})(?:-?W(\d+)(?:-?(\d+)D?)?|(?:-(\d+))?-(\d+))(?:[T ](\d+):(\d+)(?::(\d+)(?:\.(\d+))?)?)?(?:Z(-?\d*))?$/;
+    var parts = input.match(iso);
+    if (parts == null) {
+        return null;
+    }
+    year = Number(parts[1]);
+    if (typeof parts[2] != "undefined") {
+        /* Convert weeks to days, months 0 */
+        var weeks = Number(parts[2]) - 1;
+        days = Number(parts[3]);
+        if (typeof days == "undefined") {
+            days = 0;
+        }
+        days += weeks * 7;
+        months = 0;
+    }
+    else {
+        if (typeof parts[4] != "undefined") {
+            months = Number(parts[4]) - 1;
+        }
+        else {
+            months = 0;
+        }
+        days = Number(parts[5]);
+    }
+    if (typeof parts[6] != "undefined" &&
+            typeof parts[7] != "undefined") {
+        hours = Number(parts[6]);
+        minutes = Number(parts[7]);
+        if (typeof parts[8] != "undefined") {
+            seconds = Number(parts[8]);
+            if (typeof parts[9] != "undefined") {
+                milliseconds = Number(parts[9]) / 100;
+            }
+        }
+    }
+    if (typeof parts[10] != "undefined") {
+        minutes = Number(minutes) + (parts[10] * 60 + (new Date().getTimezoneOffset()));
+    }
+    return new Date(year, months, days, hours, minutes, seconds);
+}

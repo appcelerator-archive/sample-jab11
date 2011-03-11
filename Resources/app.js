@@ -6,9 +6,6 @@ Ti.include('redux.js');
 Ti.include('TiAir.js');
 Ti.include('TiStorage.js');
 
-TiStorage().use('jab').collection('SocialPosts').clear();
-TiStorage().use('jab').collection('SocialSettings').clear();
-
 Ti.UI.backgroundImage = 'content/images/loading.withoutbar.png';
 var used = [
     Ti.UI.createView, Ti.UI.createLabel, Ti.UI.createImageView, Ti.UI.createButton, Ti.UI.createWindow,
