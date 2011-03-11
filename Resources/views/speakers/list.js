@@ -29,6 +29,7 @@ view = function(model) {
                     if (response.error) {
                         callback();
                         AirView('notification', response.error);
+                        error(response.error);
                     }
                     else {
                         callback(response);
