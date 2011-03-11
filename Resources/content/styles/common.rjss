@@ -94,7 +94,6 @@ WebView {
     height: 30
 }
 .TitleBar {
-    backgroundImage: 'content/images/bars/top.png',
     top: 0, right: 0, left: 0, height: 44
 }
 .BlackTitleBar {
@@ -103,17 +102,26 @@ WebView {
 .GreyTitleBar {
     backgroundImage: 'content/images/bars/grey.png'
 }
-.TitleBarTitle {
+.LighterGreyTitleBar {
+    backgroundImage: 'content/images/bars/lighterGrey.png'
+}
+.TitleBarText {
     font: { fontWeight: 'bold', fontSize: 20 },
     textAlign: 'center'
 }
-.BlackTitleBarTitle {
+.BlackTitleBarText {
     color: '#fff',
     shadowColor: "#000",
 	shadowOffset: {x:0, y:-1}
 }
-.GreyTitleBarTitle {
+.GreyTitleBarText {
     color: '#403f3f',
+    shadowColor: "#fff",
+	shadowOffset: {x:0, y:1}
+}
+.LighterGreyTitleBarText {
+    font: { fontWeight: 'bold', fontSize: 14 },
+    color: '#444',
     shadowColor: "#fff",
 	shadowOffset: {x:0, y:1}
 }
@@ -218,6 +226,32 @@ WebView {
 .PullToRefreshIndicator {
     left: 20, bottom: 13,
     width: 30, height: 30
+}
+
+/*
+    Pull to Refresh
+*/
+.SegmentedPicker {
+    backgroundImage: 'content/images/segmented/bg.png',
+    backgroundLeftCap: 7,
+    height: 30,
+    width: 'auto'
+}
+.SegmentedPickerText {
+    height: 30,
+    left: 10, right: 10,
+    font: { fontWeight: 'bold', fontSize: 14 },
+    width: 'auto'
+}
+.SegmentedPickerTextDeselected {
+    color: '#fff',
+	shadowColor: '#000',
+	shadowOffset: { x:0, y:-1 }
+}
+.SegmentedPickerTextSelected {
+    color: '#444',
+	shadowColor: '#fff',
+	shadowOffset: { x:0, y:1 }
 }
 
 /*

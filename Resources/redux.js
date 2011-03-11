@@ -452,6 +452,18 @@ var redux = function (selector) {
             return redux.fn.mergeObjects(args, redux.data.defaults.byType[type]);
         },
         /**
+         * Applies the styles from the passed in arguments directly to the passed in object.
+         * @param obj Any object or UI element; does not have to be created by redux.
+         * @param type The type of the object (Label, ImageView, etc)
+         * @param args The construction arguments, such as the id or className
+         */
+        applyStyle: function(obj, type, args) {
+            var styles = redux.fn.style(type, args);
+            for (var key in styles) {
+                obj[key] = styles[key];
+            }
+        },
+        /**
          * Adds a natural constructors for all the different things you can create with Ti, like Labels,
          * LoginButtons, HTTPClients, etc. Also allows you to add your own natural constructors.
          *
@@ -501,6 +513,18 @@ var redux = function (selector) {
             }
         }
     }
+
+    /**
+     * Expose the applyStyle function to selector based redux usages -- $(view).applyStyle() etc.
+     * @param type
+     * @param args
+     */
+    redux.fn.init.prototype.applyStyle = function(type, args) {
+        for (var i = 0, l = this.length; i < l; i++) {
+            redux.fn.applyStyle(this.context[i], type, args);
+        }
+        return this;
+    };
 
     /**
      * Includes a file in every JavaScript context with redux loaded that exists or that will exist.

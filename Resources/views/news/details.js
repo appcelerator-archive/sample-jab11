@@ -2,7 +2,7 @@ view = function(model) {
     var win = new View({ id: 'NewsDetailsWindow', className: 'Window' });
     win.add(AirView('titleBar', {
         left: AirView('button', { view: win, type: 'Back' }),
-        title: 'Latest News'
+        center: 'Latest News'
     }));
     var details = AirView('shared/details', {
         title: model.title,

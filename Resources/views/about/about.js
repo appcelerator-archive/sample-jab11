@@ -6,7 +6,7 @@ view = function(model) {
     });
     win.add(AirView('titleBar', {
         left: AirView('button', { view: win, type: 'Home' }),
-        title: 'About',
+        center: 'About',
         right: sponsorsButton
     }));
     var details = AirView('details', {

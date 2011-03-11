@@ -14,7 +14,7 @@ view = function(model) {
 
     view.add(AirView('titleBar', {
         left: AirView('button', { view: view, type: 'Home' }),
-        title: 'Social',
+        center: 'Social',
         right: rightView
     }));
 
