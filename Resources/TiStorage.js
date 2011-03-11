@@ -468,6 +468,11 @@ function TiStorage() {
 
             this.storage[this.database][this.collection].sort(compare);
 
+            var id = 0;
+            for (var i in this.storage[this.database][this.collection]) {
+                this.storage[this.database][this.collection][i].id = id++;
+            }
+
 			Ti.App.Properties.setString(this.globalStore, JSON.stringify(this.storage));
 
             if (turnOnTiStorageLogging) {
