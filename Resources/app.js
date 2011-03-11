@@ -18,11 +18,12 @@ var used = [
  * Include our various styles. We chose to use redux for this project, but TiAir has no dependency on redux.
  */
 includeRJSS(
-        'content/styles/common.rjss',
-        'content/styles/default.rjss',
-        'content/styles/about.rjss',
-        'content/styles/social.rjss',
-        'content/styles/joscars.rjss');
+    'content/styles/common.rjss',
+    'content/styles/default.rjss',
+    'content/styles/about.rjss',
+    'content/styles/social.rjss',
+    'content/styles/joscars.rjss'
+);
 
 /*
  * Call the init function. This will intelligently load our application, and call the default controller's action.
