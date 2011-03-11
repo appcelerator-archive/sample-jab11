@@ -27,7 +27,6 @@ var turnOnTiStorageLogging = true;
 	- Better find() filtering.  i.e. .find({ 'location': 'Florida'}, { 'last_name': 'Blalock'}
 		means: Find all records of "Blalock" where location == Florida.
 	- Limit method to only get a certain amount of rows
-	- sort() method to sort asc, desc, etc.
 	- skip() method (used with limit) to skip records to start at a specific index
 
 
