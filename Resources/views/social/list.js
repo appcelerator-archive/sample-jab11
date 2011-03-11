@@ -49,6 +49,7 @@ view = function(model) {
                         AirView('notification', response.error);
                     }
                     else {
+                        AirView('notification', 'Last Updated: Just Now');
                         callback({ rows: processRows(response) });
                     }
                 }
