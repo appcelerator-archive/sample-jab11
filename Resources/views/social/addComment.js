@@ -61,17 +61,37 @@ view = function(model) {
         count.text = text.value.length;
     });
     text.addEventListener('return', function() {
+
+        var value = text.value;
         if (!postTo.Facebook && !postTo.Twitter) {
             text.focus();
             return AirView('notification', 'Please post to at least one social site.');
         }
-        if (!text.value || !text.value.length)
-        {
+        if (!value || !value.length) {
             text.focus();
             return AirView('notification', 'Please enter some text!');
         }
 
-        TiAir.close(view);
+        var to = [];
+        if (postTo.Facebook) {
+            to.push('Facebook');
+        }
+        if (postTo.Twitter) {
+            to.push('Twitter');
+        }
+
+        TiAir.openURL({
+            controller: 'social',
+            action: 'post',
+            to: to,
+            message: value,
+            callback: function(evt) {
+                if (evt.success) {
+                    text.value = '';
+                    TiAir.close(view);
+                }
+            }
+        });
     });
     return view;
 };

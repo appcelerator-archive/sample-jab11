@@ -16,6 +16,7 @@
     <navbar-hidden>false</navbar-hidden>
     <analytics>true</analytics>
     <guid>b164f3a8-ea64-43f4-aed0-7346b900356b</guid>
+	<property name="ti.facebook.appid">125943497452698</property>
     <iphone>
         <orientations device="iphone">
             <orientation>Ti.UI.PORTRAIT</orientation>

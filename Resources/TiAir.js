@@ -252,9 +252,7 @@ var TiAir = {};
         var controller = this.getController(url.controller);
         var hash;
         for (var n in url) {
-            if (url.hasOwnProperty(n)) {
-                hash += n + ':' + url[n] + '/';
-            }
+            hash += n + ':' + url[n] + '/';
         }
         var args = Array().slice.call(arguments);
         var navigator = this.getNavigator();
@@ -274,7 +272,7 @@ var TiAir = {};
             var actionArgs = [], expectedArgs = controller.actions[actionID].toString().split('(')[1].split(')')[0].split(',');
             if (expectedArgs.length > 0 && expectedArgs[0] != '') {
                 for (var i = 0, l = expectedArgs.length; i < l; i++) {
-                    actionArgs.push(url[expectedArgs[i]]);
+                    actionArgs.push(url[expectedArgs[i].split(' ').join('')]);
                 }
             }
             // call the view

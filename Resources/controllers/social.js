@@ -20,15 +20,73 @@ controller = {
             var posts = db.collection('SocialPosts');
             return AirView(posts.findOne(id));
         },
+        post: function(to, message, callback) {
+            function processQueue(postTo) {
+                controller.actions['postTo' + postTo](message, function(response) {
+                    if (response.error) {
+                        callback(response);
+                    }
+                    else if (to.length) {
+                        processQueue(to.pop());
+                    }
+                    else {
+                        callback(response);
+                    }
+                });
+            }
+            processQueue(to.pop());
+        },
+        postToFacebook: function(message, callback) {
+
+            var facebook = require('facebook');
+            facebook.appid = '125943497452698';
+            facebook.permissions = ['publish_stream'];
+            facebook.authorize();
+
+            /** IMAGE POST - Uncomment to try out **/
+            // var img = Ti.UI.createImageView({
+            // 	image: 'icontest.png'
+            // });
+            //
+            // Ti.Facebook.request('photos.upload', { picture: img.toBlob() },function(e) {
+            //    if (e.success) {
+            //      alert('success!');
+            //    }
+            //    else {
+            //      alert(e.error);
+            //    }
+            // });
+            AirView('notification', 'Posting to Facebook...');
+
+            var data = {
+                message: message,
+                link: 'http://jandbeyond.org/'
+            };
+            facebook.requestWithGraphPath('me/feed', data, 'POST', function (evt) {
+                if (evt.success) {
+                    AirView('notification', 'Posted to Facebook!');
+                    callback(evt);
+                } else {
+                    if (evt.error) {
+                        AirView('notification', 'Oops! Facebook says: ' + evt.error);
+                        callback(evt);
+                    } else {
+                        AirView('notification', 'Facebook didn\'t respond properly.');
+                        callback(evt);
+                    }
+                }
+            });
+        },
+        postToTwitter: function(message, callback) {
+            callback();
+        },
         update: function(callback) {
 
             var db = TiStorage().use('jab');
             var posts = db.collection('SocialPosts');
             var settings = db.collection('SocialSettings');
 
-            var queue = [
-                this.updateTwitter, this.updateFacebook
-            ];
+            var queue = [ this.updateTwitter, this.updateFacebook ];
 
             (function processQueue(data) {
                 var updateFunction = queue.pop();
@@ -40,7 +98,7 @@ controller = {
                     callback(data);
                 }
             })();
-            
+
         },
         updateFacebook: function(callback, db, posts, settings) {
             db = db || TiStorage().use('jab');
