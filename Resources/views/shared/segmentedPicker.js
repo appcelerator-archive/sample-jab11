@@ -13,7 +13,7 @@
 
 view = function(model) {
     var picker = new View({
-        className: 'SegmentedPicker'
+        className: model.className + 'SegmentedPicker SegmentedPicker'
     });
     if (!picker.layout) {
         picker.layout = 'horizontal';
@@ -27,10 +27,10 @@ view = function(model) {
                 ? option
                 : new Label({
             text: option,
-            className: 'SegmentedPickerText'
+            className: model.className + 'SegmentedPickerText SegmentedPickerText'
         });
         var container = new View({
-            className: 'SegmentedPickerView'
+            className: model.className + 'SegmentedPickerView SegmentedPickerView'
         });
         container.add(text);
         container.text = text;

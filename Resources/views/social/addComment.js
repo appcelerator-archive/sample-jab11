@@ -1,16 +1,30 @@
 view = function(model) {
     var view = new View({ id: 'SocialAddComment', className: 'Window' });
 
+    var options = [
+        new Label({
+            text: 'Facebook',
+            className: 'SocialSegmentedPickerText SegmentedPickerText'
+        }),
+        new Label({
+            text: 'Twitter',
+            className: 'SocialSegmentedPickerText SegmentedPickerText'
+        })
+    ];
+    for (var i = 0, l = options.length; i < l; i++) {
+        options[i].add(new ImageView({ left: -23, className: 'SocialIcon' + options[i].text }));
+    }
     var secondBar = AirView('titleBar', {
         left: 'Post to:',
         style: 'LighterGrey',
         right: AirView('segmentedPicker', {
+            className: 'Social',
             selectMultiple: true,
             onSelect: function(evt) {
             },
             onDeselect: function(evt) {
             },
-            options: ['Facebook', 'Twitter']
+            options: options
         })
     });
     secondBar.top = 42;

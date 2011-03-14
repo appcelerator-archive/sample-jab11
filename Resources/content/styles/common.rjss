@@ -229,7 +229,7 @@ WebView {
 }
 
 /*
-    Pull to Refresh
+    Segmented Picker
 */
 .SegmentedPicker {
     backgroundImage: 'content/images/segmented/bg.png',
