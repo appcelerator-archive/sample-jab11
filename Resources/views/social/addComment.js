@@ -38,5 +38,13 @@ view = function(model) {
         }}),
         style: 'Grey'
     }));
+
+    var text = new TextArea({ id: 'SocialTextArea' });
+    var count = new Label({ id:'SocialCount' });
+    text.add(count);
+    view.add(text);
+    $(text).change(function() {
+        count.text = text.value.length;
+    });
     return view;
 };
