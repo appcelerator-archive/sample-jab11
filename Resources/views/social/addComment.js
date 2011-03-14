@@ -1,9 +1,27 @@
 view = function(model) {
 
-    var postTo = { Facebook: true, Twitter: false };
-
     var view = new View({ id: 'SocialAddComment', className: 'Window' });
 
+    /*
+     Create our title bar. The left button will close the pop up, the right will launch the camera.
+     */
+    view.add(AirView('titleBar', {
+        left: AirView('button', { type: 'X', callback: function() {
+            text.blur();
+            TiAir.close(view);
+        }}),
+        center: 'Add Comment',
+        right: AirView('button', { type: 'Camera', callback: function() {
+            AirView('notImplemented');
+        }}),
+        style: 'Grey'
+    }));
+
+    /*
+     Now place a bar right below it that will let the user choose where they want to post their comment. Note that
+     Facebook starts off selected, but Facebook does not.
+     */
+    var postTo = { Facebook: true, Twitter: false };
     var options = [
         new Label({
             text: 'Facebook',
@@ -36,42 +54,42 @@ view = function(model) {
     secondBar.top = 42;
     view.add(secondBar);
 
-    view.add(AirView('titleBar', {
-        left: AirView('button', { type: 'X', callback: function() {
-            text.blur();
-            TiAir.close(view);
-        }}),
-        center: 'Add Comment',
-        right: AirView('button', { type: 'Camera', callback: function() {
-            AirView('notImplemented');
-        }}),
-        style: 'Grey'
-    }));
-
-    var text = new TextArea({ id: 'SocialTextArea' });
+    /*
+     Add a text area with a counter in its bottom right corner.
+     */
+    var text = new TextArea({ id: 'SocialTextArea', text: model && model.text });
     var count = new Label({ id:'SocialCount' });
     text.add(count);
     view.add(text);
-
-    view.addEventListener('open', function() {
-        text.focus();
-    });
-
     $(text).change(function() {
         count.text = text.value.length;
     });
+
+    $(view).open(function() {
+        text.focus();
+    });
+
+    /*
+     When the user hits the "SEND" button on the keyboard, perform some validation then send off the message to the
+     appropriate controller.
+     */
+    // we unfortunately can't use the redux bindings for this next line, because "return" is a reserved keyword...
     text.addEventListener('return', function() {
 
-        var value = text.value;
+        // did they select at least one place to post?
         if (!postTo.Facebook && !postTo.Twitter) {
             text.focus();
             return AirView('notification', 'Please post to at least one social site.');
         }
+
+        // did they fill in a value?
+        var value = text.value;
         if (!value || !value.length) {
             text.focus();
             return AirView('notification', 'Please enter some text!');
         }
 
+        // we're good! lets turn the "postTo" into an array (because that's what the controller wants to receive)
         var to = [];
         if (postTo.Facebook) {
             to.push('Facebook');
@@ -80,6 +98,7 @@ view = function(model) {
             to.push('Twitter');
         }
 
+        // and finally send off the request to the controller! Check out "Resources/controllers/social.js:post" now.
         TiAir.openURL({
             controller: 'social',
             action: 'post',
