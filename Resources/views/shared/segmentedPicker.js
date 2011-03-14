@@ -36,7 +36,7 @@ view = function(model) {
         container.text = text;
 
         // initialize whether or not the view is selected
-        container.selected = container.selected || false;
+        container.selected = container.selected || text.selected || false;
 
         function syncUI() {
             var append = container.selected ? 'Selected' : 'Deselected';

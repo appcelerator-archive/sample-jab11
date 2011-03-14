@@ -1,10 +1,14 @@
 view = function(model) {
+
+    var postTo = { Facebook: true, Twitter: false };
+
     var view = new View({ id: 'SocialAddComment', className: 'Window' });
 
     var options = [
         new Label({
             text: 'Facebook',
-            className: 'SocialSegmentedPickerText SegmentedPickerText'
+            className: 'SocialSegmentedPickerText SegmentedPickerText',
+            selected: true
         }),
         new Label({
             text: 'Twitter',
@@ -21,8 +25,10 @@ view = function(model) {
             className: 'Social',
             selectMultiple: true,
             onSelect: function(evt) {
+                postTo[evt.source.text.text] = true;
             },
             onDeselect: function(evt) {
+                postTo[evt.source.text.text] = false;
             },
             options: options
         })
@@ -31,7 +37,10 @@ view = function(model) {
     view.add(secondBar);
 
     view.add(AirView('titleBar', {
-        left: AirView('button', { view: view, type: 'X' }),
+        left: AirView('button', { type: 'X', callback: function() {
+            text.blur();
+            TiAir.close(view);
+        }}),
         center: 'Add Comment',
         right: AirView('button', { type: 'Camera', callback: function() {
             AirView('notImplemented');
@@ -43,8 +52,26 @@ view = function(model) {
     var count = new Label({ id:'SocialCount' });
     text.add(count);
     view.add(text);
+
+    view.addEventListener('open', function() {
+        text.focus();
+    });
+
     $(text).change(function() {
         count.text = text.value.length;
+    });
+    text.addEventListener('return', function() {
+        if (!postTo.Facebook && !postTo.Twitter) {
+            text.focus();
+            return AirView('notification', 'Please post to at least one social site.');
+        }
+        if (!text.value || !text.value.length)
+        {
+            text.focus();
+            return AirView('notification', 'Please enter some text!');
+        }
+
+        TiAir.close(view);
     });
     return view;
 };

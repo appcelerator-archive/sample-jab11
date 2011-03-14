@@ -36,7 +36,7 @@
 }
 #SocialTextArea {
     top: 99, left: 10, right: 10, height: 130,
-    font: { fontSize: 20 },
+    font: { fontSize: 18 },
     appearance: Titanium.UI.KEYBOARD_APPEARANCE_ALERT,
     returnKeyType: Titanium.UI.RETURNKEY_SEND,
     borderWidth: 1,
