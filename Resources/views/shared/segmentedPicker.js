@@ -21,44 +21,59 @@ view = function(model) {
 
     this.selected = [];
 
-    function createOption(option) {
+    function createOption(option, isLeftCap, isRightCap) {
         // based on what they pass in, wrap strings with labels
-        var view = typeof option != 'string'
+        var text = typeof option != 'string'
                 ? option
                 : new Label({
             text: option,
             className: 'SegmentedPickerText'
         });
+        var container = new View({
+            className: 'SegmentedPickerView'
+        });
+        container.add(text);
+        container.text = text;
 
         // initialize whether or not the view is selected
-        view.selected = view.selected || false;
+        container.selected = container.selected || false;
 
         function syncUI() {
-            $(view).applyStyle('Label', {
-                className: 'SegmentedPickerText' + (view.selected ? 'Selected' : 'Deselected')
-            });
+            var append = container.selected ? 'Selected' : 'Deselected';
+            var className;
+            if (isLeftCap) {
+                className = 'SegmentedPickerLeft' + append;
+            }
+            else if (isRightCap) {
+                className = 'SegmentedPickerRight' + append;
+            }
+            else {
+                className = ' SegmentedPickerCenter' + append;
+            }
+            $(container).applyStyle('View', { className: className });
+            $(text).applyStyle('Label', { className: 'SegmentedPickerText' + append });
         }
         syncUI();
 
-        view.select = function() {
-            view.selected = true;
-            model.onSelect && model.onSelect({ source: view });
+        container.select = function() {
+            container.selected = true;
+            model.onSelect && model.onSelect({ source: container });
             syncUI();
         };
-        view.deselect = function() {
-            view.selected = false;
-            model.onDeselect && model.onDeselect({ source: view });
+        container.deselect = function() {
+            container.selected = false;
+            model.onDeselect && model.onDeselect({ source: container });
             syncUI();
         };
-        $(view).click(function(evt) {
-            view[view.selected ? 'deselect' : 'select']();
+        $(container).click(function(evt) {
+            container[container.selected ? 'deselect' : 'select']();
         });
 
-        return view;
+        return container;
     }
 
     for (var i = 0, l = model.options.length; i < l; i++) {
-        picker.add(createOption(model.options[i]));
+        picker.add(createOption(model.options[i], i == 0, i == l-1));
     }
     return picker;
 };

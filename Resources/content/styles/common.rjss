@@ -237,22 +237,33 @@ WebView {
     height: 30,
     width: 'auto'
 }
+.SegmentedPickerView {
+    height: 30,
+    width: 'auto'
+}
 .SegmentedPickerText {
     height: 30,
     left: 10, right: 10,
     font: { fontWeight: 'bold', fontSize: 14 },
     width: 'auto'
 }
-.SegmentedPickerTextDeselected {
+.SegmentedPickerTextSelected {
     color: '#fff',
 	shadowColor: '#000',
 	shadowOffset: { x:0, y:-1 }
 }
-.SegmentedPickerTextSelected {
+.SegmentedPickerLeftSelected { backgroundImage: 'content/images/segmented/roundedLeft-on.png', backgroundLeftCap: 7 }
+.SegmentedPickerRightSelected { backgroundImage: 'content/images/segmented/roundedRight-on.png', backgroundLeftCap: 7 }
+.SegmentedPickerCenterSelected { backgroundImage: 'content/images/segmented/center-on.png', backgroundLeftCap: 1 }
+
+.SegmentedPickerTextDeselected {
     color: '#444',
 	shadowColor: '#fff',
 	shadowOffset: { x:0, y:1 }
 }
+.SegmentedPickerLeftDeselected { backgroundImage: 'content/images/segmented/roundedLeft.png', backgroundLeftCap: 7 }
+.SegmentedPickerRightDeselected { backgroundImage: 'content/images/segmented/roundedRight.png', backgroundLeftCap: 7 }
+.SegmentedPickerCenterDeselected { backgroundImage: 'content/images/segmented/center.png', backgroundLeftCap: 1 }
 
 /*
     Animations
