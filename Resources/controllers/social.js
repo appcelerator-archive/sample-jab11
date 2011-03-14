@@ -23,23 +23,26 @@ controller = {
         post: function(to, message, callback) {
             function processQueue(postTo) {
                 controller.actions['postTo' + postTo](message, function(response) {
-                    if (response.error) {
+                    if (response && response.error) {
                         callback(response);
                     }
                     else if (to.length) {
                         processQueue(to.pop());
                     }
                     else {
-                        callback(response);
+                        callback({ success: true });
                     }
                 });
             }
+
             processQueue(to.pop());
         },
         postToFacebook: function(message, callback) {
 
+            AirView('notification', 'Posting to Facebook...');
+
             var facebook = require('facebook');
-            facebook.appid = '125943497452698';
+            facebook.appid = String(constants.FacebookAppID);
             facebook.permissions = ['publish_stream'];
             facebook.authorize();
 
@@ -56,11 +59,10 @@ controller = {
             //      alert(e.error);
             //    }
             // });
-            AirView('notification', 'Posting to Facebook...');
 
             var data = {
                 message: message,
-                link: 'http://jandbeyond.org/'
+                link: constants.Website
             };
             facebook.requestWithGraphPath('me/feed', data, 'POST', function (evt) {
                 if (evt.success) {
@@ -78,7 +80,45 @@ controller = {
             });
         },
         postToTwitter: function(message, callback) {
-            callback();
+            AirView('notification', 'Posting to Twitter...');
+
+            var oAuthAdapter = new OAuthAdapter(
+                    constants.TwitterConsumerSecret,
+                    constants.TwitterConsumerKey,
+                    'HMAC-SHA1');
+
+            // load the access token for the service (if previously saved)
+            oAuthAdapter.loadAccessToken('twitter');
+
+            // consume a service API - in this case the status update by Twitter
+            oAuthAdapter.send(
+                    'https://api.twitter.com/1/statuses/update.json',
+                    [
+                        ['status', message]
+                    ],
+                    'Twitter',
+                    function() {
+                        AirView('notification', 'Posted to Twitter!');
+                        callback();
+                    },
+                    function(err) {
+                        AirView('notification', 'Oops! Twitter says: ' + err);
+                        callback({ error: err });
+                    });
+
+            // if the client is not authorized, ask for authorization. the previous tweet will be sent automatically after authorization
+            if (!oAuthAdapter.isAuthorized()) {
+                // this function will be called as soon as the application is authorized
+                var receivePin = function() {
+                    // get the access token with the provided pin/oauth_verifier
+                    oAuthAdapter.getAccessToken('https://api.twitter.com/oauth/access_token');
+                    // save the access token
+                    oAuthAdapter.saveAccessToken('twitter');
+                };
+
+                // show the authorization UI and call back the receive PIN function
+                oAuthAdapter.showAuthorizeUI('https://api.twitter.com/oauth/authorize?' + oAuthAdapter.getRequestToken('https://api.twitter.com/oauth/request_token'), receivePin);
+            }
         },
         update: function(callback) {
 
@@ -141,7 +181,7 @@ controller = {
                     callback({ error: e });
                 }
             });
-            xhr.open('GET', 'https://graph.facebook.com/jandbeyond/feed?since=' + lastUpdate.value);
+            xhr.open('GET', constants.FacebookUpdateURL + '?since=' + lastUpdate.value);
             xhr.send();
         },
         updateTwitter: function(callback, db, posts, settings) {
@@ -185,7 +225,7 @@ controller = {
                     callback({ error: e });
                 }
             });
-            xhr.open('GET', 'http://search.twitter.com/search.json?q=%23jab11%20OR%20@jandbeyond%20OR%20from%3Ajandbeyond&page=1&since_id=' + maxID.value + '#' + new Date().getTime());
+            xhr.open('GET', constants.TwitterUpdateURL + '&page=1&since_id=' + maxID.value + '#' + new Date().getTime());
             xhr.send();
         }
     }

@@ -1,6 +1,6 @@
 var offset = 0, ani = new Animation({ id: 'NotificationOutAnimation' });
 ani.addEventListener('complete', function() {
-    offset -= 40;
+    offset -= 33;
 });
 view = function(text) {
     var window = new Window({ id: 'Notification' });
@@ -10,7 +10,7 @@ view = function(text) {
         text: text
     }));
     window.top += offset;
-    offset += 40;
+    offset += 33;
     
     function close() {
         clearTimeout(timeout);

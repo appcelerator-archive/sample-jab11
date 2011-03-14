@@ -1,10 +1,13 @@
 /*
  * Include the libraries we will use. These libraries are NOT dependent on each other.
  */
-Ti.include('utility.js');
-Ti.include('redux.js');
-Ti.include('TiAir.js');
-Ti.include('TiStorage.js');
+Ti.include(
+    'utility.js',
+    'lib/redux.js',
+    'lib/oauth_adapter.js',
+    'lib/TiAir.js',
+    'lib/TiStorage.js'
+);
 
 Ti.UI.backgroundImage = 'content/images/loading.withoutbar.png';
 var used = [
@@ -13,6 +16,15 @@ var used = [
     Ti.UI.createTableView, Ti.UI.createTableViewRow, Ti.Network.createHTTPClient, Ti.UI.createTextField,
     Ti.UI.createActivityIndicator, Ti.UI.createAlertDialog, Ti.UI.createTextArea
 ];
+
+var constants = {
+    TwitterConsumerKey: '9U7332KAWsGzdIZDNpWkw',
+    TwitterConsumerSecret: 'zG0SgCPfxFcwPyVatmYik9tUXMwcMQaKZjj2wOqQeag',
+    Website: 'http://jandbeyond.org/',
+    FacebookAppID: '125943497452698',
+    TwitterUpdateURL: 'http://search.twitter.com/search.json?q=%23jab11%20OR%20@jandbeyond%20OR%20from%3Ajandbeyond',
+    FacebookUpdateURL: 'https://graph.facebook.com/jandbeyond/feed'
+};
 
 /*
  * Include our various styles. We chose to use redux for this project, but TiAir has no dependency on redux.
