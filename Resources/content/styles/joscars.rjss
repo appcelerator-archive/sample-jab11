@@ -15,12 +15,22 @@
     font: { fontSize: 13 },
     height: 26
 }
-.JOSCARsCategory {
-    top: 5,
-    left: 10,
+.JOSCARsGroup {
+    top: 15,
+    left: 15,
     textAlign: 'left',
     color: '#4674b9',
     font: { fontSize: 18, fontWeight: 'bold' },
+    height: 'auto',
+    shadowColor: '#fff',
+    shadowOffset: { x: 0, y: -1}
+}
+.JOSCARsCategory {
+    top: 5,
+    left: 15,
+    textAlign: 'left',
+    color: '#000',
+    font: { fontSize: 16 },
     height: 'auto'
 }
 .JOSCARsText {
@@ -29,7 +39,7 @@
     width: 293, height: 36
 }
 #JOSCARsSubmit {
+    backgroundImage: 'content/images/joscars/submitMyNominations.png',
     top: 15, bottom: 15,
-    width: 278, height: 45,
-    backgroundImage: 'content/images/joscars/submitMyNominations.png'
+    width: 278, height: 45
 }
