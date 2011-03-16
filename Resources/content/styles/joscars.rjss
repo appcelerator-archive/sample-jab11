@@ -15,6 +15,14 @@
     font: { fontSize: 13 },
     height: 26
 }
+#JOSCARsPassed {
+    text: 'As of April 15th, nominations for the JOSCARs are closed. Thank you!',
+    textAlign: 'center',
+    color: '#900',
+    font: { fontSize: 18, fontWeight: 'bold' },
+    height: 'auto',
+    top: 20, right: 20, left: 20
+}
 .JOSCARsGroup {
     top: 15,
     left: 15,

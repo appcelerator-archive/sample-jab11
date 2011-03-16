@@ -4,9 +4,18 @@ view = function(model) {
         left: AirView('button', { view: win, type: 'Home' }),
         center: 'JOSCARS'
     }));
+
     var scroll = new ScrollView({ id: 'JOSCARsScroll' });
     win.add(scroll);
     scroll.add(new ImageView({ id: 'JOSCARsBannerImage' }));
+
+    var deadline = new Date(2011, 3, 15);
+    // todo: flip comparison
+    if (deadline < new Date()) {
+        scroll.add(new Label({ id: 'JOSCARsPassed' }));
+        return win;
+    }
+
     scroll.add(new Label({ id: 'JOSCARsSubtitle' }));
 
     var textFields = [];
