@@ -272,25 +272,18 @@ Animation {
     duration: 300,
     curve: Ti.UI.ANIMATION_CURVE_EASE_IN_OUT
 }
-.FadeIn {
+.FadeIn, .PopOut, .SlideIn {
     opacity: 1
 }
-.FadeOut {
+.FadeOut, .PopIn, .SlideOut {
     opacity: 0
 }
-.PopOut {
-    transform: Ti.UI.create2DMatrix(),
-    opacity: 1
+.PopOut, .SlideIn {
+    transform: Ti.UI.create2DMatrix()
 }
 .PopIn {
-    transform: Ti.UI.create2DMatrix().scale(0.1, 0.1),
-    opacity: 0
-}
-.SlideIn {
-    transform: Ti.UI.create2DMatrix(),
-    opacity: 1
+    transform: Ti.UI.create2DMatrix().scale(0.1, 0.1)
 }
 .SlideOut {
-    transform: Ti.UI.create2DMatrix().translate(320, 0),
-    opacity: 0
+    transform: Ti.UI.create2DMatrix().translate(320, 0)
 }

@@ -1,0 +1,11 @@
+#VenueMapScroll {
+    contentHeight: 'auto',
+    contentWidth: 'auto',
+    maxZoomScale: 1,
+    minZoomScale: 0.2
+}
+#VenueMapImageView {
+    image: 'content/images/venueMap.gif',
+    width: 2396,
+    height: 1409
+}
