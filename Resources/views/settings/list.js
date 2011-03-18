@@ -4,5 +4,11 @@ view = function(model) {
         left: AirView('button', { view: win, type: 'Home' }),
         center: 'Settings'
     }));
+
+    Ti.Facebook.appid = String(constants.FacebookAppID);
+    Ti.Facebook.permissions = ['publish_stream'];
+    var fb = new LoginButton();
+    win.add(fb);
+
     return win;
 };
