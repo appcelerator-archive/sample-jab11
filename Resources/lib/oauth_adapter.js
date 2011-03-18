@@ -112,7 +112,7 @@ var OAuthAdapter = function(pConsumerSecret, pConsumerKey, pSignatureMethod)
         Ti.API.debug('Loading access token for service [' + pService + '].');
 
         var file = Ti.Filesystem.getFile(Ti.Filesystem.applicationDataDirectory, pService + '.config');
-        if (file.exists == false) return;
+        if (!file.exists()) return;
 
         var contents = file.read();
         if (contents == null) return;
@@ -130,11 +130,29 @@ var OAuthAdapter = function(pConsumerSecret, pConsumerKey, pSignatureMethod)
 
         Ti.API.debug('Loading access token: done [accessToken:' + accessToken + '][accessTokenSecret:' + accessTokenSecret + '].');
     };
+    this.clearAccessToken = function(pService)
+    {
+        Ti.API.debug('Clearing access token for service [' + pService + '].');
+
+        var file = Ti.Filesystem.getFile(Ti.Filesystem.applicationDataDirectory, pService + '.config');
+        if (!file.exists()) return;
+
+        try
+        {
+            file.deleteFile();
+        }
+        catch(ex)
+        {
+            Ti.API.error('Failed to delete access token [accessToken:' + accessToken + '][error:' + ex + '].');
+            return;
+        }
+            Ti.API.error('Deleted accessToken [accessToken:' + accessToken + '].');
+    };
     this.saveAccessToken = function(pService)
     {
         Ti.API.debug('Saving access token [' + pService + '].');
         var file = Ti.Filesystem.getFile(Ti.Filesystem.applicationDataDirectory, pService + '.config');
-        if (file == null) file = Ti.Filesystem.createFile(Ti.Filesystem.applicationDataDirectory, pService + '.config');
+        if (!file.exists()) file = Ti.Filesystem.createFile(Ti.Filesystem.applicationDataDirectory, pService + '.config');
         file.write(JSON.stringify(
         {
             accessToken: accessToken,

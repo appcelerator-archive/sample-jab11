@@ -117,7 +117,8 @@ controller = {
                 };
 
                 // show the authorization UI and call back the receive PIN function
-                oAuthAdapter.showAuthorizeUI('https://api.twitter.com/oauth/authorize?' + oAuthAdapter.getRequestToken('https://api.twitter.com/oauth/request_token'), receivePin);
+                oAuthAdapter.showAuthorizeUI('https://api.twitter.com/oauth/authorize?'
+                        + oAuthAdapter.getRequestToken('https://api.twitter.com/oauth/request_token'), receivePin);
             }
         },
         update: function(callback) {

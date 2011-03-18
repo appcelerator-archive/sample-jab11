@@ -1,0 +1,19 @@
+#FacebookButton {
+    left: 70
+}
+#TwitterButton {
+    right: 70,
+    width: 90, height: 30,
+    style: 0,
+    color: '#000',
+    borderRadius: 5, borderThickness: 1, borderColor: '#777',
+    font: { fontSize: 14, fontWeight: 'bold' },
+    backgroundGradient: {
+        type: 'linear',
+        colors: ['#d7eef7', '#c7e6f0', '#a7d9e3', '#a6d8e2'],
+        startPoint: { x: 0, y: 0 },
+        endPoint: { x: 0, y: 30 },
+        backFillStart: false
+    },
+    selectedColor: '#4b8b9e'
+}

@@ -33,6 +33,7 @@ includeRJSS(
     'content/styles/common.rjss',
     'content/styles/default.rjss',
     'content/styles/about.rjss',
+    'content/styles/settings.rjss',
     'content/styles/social.rjss',
     'content/styles/maps.rjss',
     'content/styles/joscars.rjss'
