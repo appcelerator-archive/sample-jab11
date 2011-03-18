@@ -23,7 +23,8 @@ var constants = {
     Website: 'http://jandbeyond.org/',
     FacebookAppID: '125943497452698',
     TwitterUpdateURL: 'http://search.twitter.com/search.json?q=%23jab11%20OR%20@jandbeyond%20OR%20from%3Ajandbeyond',
-    FacebookUpdateURL: 'https://graph.facebook.com/jandbeyond/feed'
+    FacebookUpdateURL: 'https://graph.facebook.com/jandbeyond/feed',
+    DefaultComment: '#jab11'
 };
 
 /*

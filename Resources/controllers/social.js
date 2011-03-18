@@ -13,7 +13,7 @@ controller = {
             });
         },
         addComment: function() {
-            return AirView();
+            return AirView({ text: constants.DefaultComment });
         },
         details: function(id) {
             var db = TiStorage().use('jab');

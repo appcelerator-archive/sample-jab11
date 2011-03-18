@@ -57,8 +57,8 @@ view = function(model) {
     /*
      Add a text area with a counter in its bottom right corner.
      */
-    var text = new TextArea({ id: 'SocialTextArea', text: model && model.text });
-    var count = new Label({ id:'SocialCount' });
+    var text = new TextArea({ id: 'SocialTextArea', value: model && model.text });
+    var count = new Label({ id:'SocialCount', value: text.value && text.value.length });
     text.add(count);
     view.add(text);
     $(text).change(function() {
