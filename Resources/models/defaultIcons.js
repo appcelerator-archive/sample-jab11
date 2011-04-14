@@ -1,6 +1,6 @@
 model = {
     // May 9th, 2011, 9am in the morning
-    conferenceDate: new Date(2011, 5, 6, 9, 0, 0, 0),
+    conferenceDate: new Date(2011, 4, 6, 9, 0, 0, 0),
     icons: [
 
         { className: 'Icon', id: 'AboutIcon',
