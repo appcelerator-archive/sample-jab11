@@ -52,12 +52,7 @@ model = {
             }
         },
 
-        { className: 'Icon', id: 'JOSCARSIcon',
-            targetURL: {
-                controller: 'joscars', action: 'form',
-                navigatorOptions: { animate: 'pop' }
-            }
-        },
+        { className: 'Icon BlankIcon' },
 
         { className: 'Icon', id: 'SettingsIcon',
             targetURL: {
