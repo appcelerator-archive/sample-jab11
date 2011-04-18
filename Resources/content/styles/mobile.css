@@ -9,3 +9,6 @@ div.itemIntroText p {
     margin-top: 0;
     padding-top: 0;
 }
+.itemIntroText ul li, .itemFullText ul li, .catItemIntroText ul li {
+    background: url(../images/liBullet_10x11.png) no-repeat 0 4px !important;
+}
