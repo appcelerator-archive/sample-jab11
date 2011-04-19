@@ -7,7 +7,7 @@ view = function(model) {
     var details = AirView('shared/details', {
         title: model.Title,
         subtitle: model.UserName,
-        bodyHTML: model.TitleLink
+        bodyHTML: (model.Details && model.Details.description) || 'The details for this particular talk have not been downloaded yet.'
     });
     details.top = 45;
     win.add(details);

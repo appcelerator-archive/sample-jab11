@@ -4,15 +4,24 @@ controller = {
             return AirView(this.get());
         },
         details: function(id) {
-            return AirView(this.get(id)[0]);
+            return AirView(this.get(id));
         },
         get: function(id) {
-            var program = TiStorage().use('jab').collection('Program');
+            var jab = TiStorage().use('jab');
+            var program = jab.collection('Program');
+            var programDetails = jab.collection('ProgramDetails');
             // if we don't have anything in our database, load in the default data.
             if (program.find().length == 0) {
                 this.handlePayload(program, AirModel('defaultProgram'));
             }
-            return program.find(id == undefined ? undefined : { id: id });
+            if (id == undefined) {
+                return program.find();
+            }
+            else {
+                var specificEvent = program.find({ id: id })[0];
+                specificEvent.Details = programDetails.find({ guid: specificEvent.TitleLink })[0];
+                return specificEvent;
+            }
         },
         update: function(callback) {
 
@@ -46,7 +55,6 @@ controller = {
         },
         handlePayload: function(collection, data) {
             var rows = data.substring(3, data.length - 3).split('"],["');
-            var titleLinkMap = {};
             for (var i = 0, l = rows.length; i < l; i++) {
                 var cells = rows[i].split('","');
                 collection.create({
@@ -56,9 +64,9 @@ controller = {
                     End: cells[2],
                     EndFloat: parseFloat(cells[2].split(':').join('.')),
                     Title: cells[3],
-                    TitleLink: cells[4],
+                    TitleLink: cells[4].split('\\/').join('/'),
                     UserName: cells[5],
-                    UserLink: cells[6],
+                    UserLink: cells[6].split('\\/').join('/'),
                     Day: cells[7]
                 });
             }
@@ -95,6 +103,7 @@ controller = {
                 });
             }
 
+            programDetails.clear();
             downloadProgramDetails(0);
         }
     }
