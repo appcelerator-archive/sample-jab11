@@ -46,6 +46,7 @@ controller = {
         },
         handlePayload: function(collection, data) {
             var rows = data.substring(3, data.length - 3).split('"],["');
+            var titleLinkMap = {};
             for (var i = 0, l = rows.length; i < l; i++) {
                 var cells = rows[i].split('","');
                 collection.create({
@@ -61,6 +62,40 @@ controller = {
                     Day: cells[7]
                 });
             }
+            var n = new Date();
+            var timestamp = '' + n.getUTCFullYear() + toTwoDigits(n.getUTCMonth() + 1) + toTwoDigits(n.getUTCDate()) + toTwoDigits(n.getUTCHours());
+            var query = 'SELECT guid,description FROM feed WHERE url="http://jandbeyond.org/attendees/proposed-talks-and-sessions.feed?start={START}&export=json?t=' + timestamp + '"';
+
+            var programDetails = TiStorage().use('jab').collection('ProgramDetails');
+            function downloadProgramDetails(start) {
+                var percent = start / rows.length;
+                if (percent > 1) {
+                    percent = 1;
+                }
+                AirView('notification', 'Downloading details: ' + parseInt(percent * 100, 0) + '%');
+                Ti.Yahoo.yql(query.split('{START}').join(start), function(response) {
+                    if (!response.success) {
+                        AirView('notification', 'Interrupted while downloading details!');
+                    }
+                    else {
+                        if (response.data) {
+                            var data = response.data;
+                            for (var j = 0, k = data.item.length; j < k; j++) {
+                                var item = data.item[j];
+                                item.description = item.description.replace(/K2Feed/gi, 'item');
+                                programDetails.create(item);
+                            }
+                            downloadProgramDetails(start + 10);
+                        }
+                        else {
+                            // we're done!
+                            AirView('notification', 'Downloading details: Complete!');
+                        }
+                    }
+                });
+            }
+
+            downloadProgramDetails(0);
         }
     }
 };
