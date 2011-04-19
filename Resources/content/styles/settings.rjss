@@ -3,11 +3,11 @@
 }
 #TwitterButton {
     right: 70,
-    width: 90, height: 30,
+    width: 80, height: 30,
     style: 0,
     color: '#000',
     borderRadius: 5, borderThickness: 1, borderColor: '#777',
-    font: { fontSize: 14, fontWeight: 'bold' },
+    font: { fontSize: 12, fontWeight: 'bold' },
     backgroundGradient: {
         type: 'linear',
         colors: ['#d7eef7', '#c7e6f0', '#a7d9e3', '#a6d8e2'],

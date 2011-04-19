@@ -14,7 +14,7 @@ view = function(model) {
     var oAuthAdapter = new OAuthAdapter(constants.TwitterConsumerSecret, constants.TwitterConsumerKey, 'HMAC-SHA1');
     oAuthAdapter.loadAccessToken('twitter');
     var isAuthorized = oAuthAdapter.isAuthorized();
-    var twitter = new Button({ id: 'TwitterButton', title: '      ' + (isAuthorized ? 'Logout' : 'Login') });
+    var twitter = new Button({ id: 'TwitterButton', title: '       ' + (isAuthorized ? 'Logout' : 'Login') });
     twitter.add(new ImageView({ left: 10, className: 'SocialIconTwitter' }));
     win.add(twitter);
     $(twitter).click(function() {
