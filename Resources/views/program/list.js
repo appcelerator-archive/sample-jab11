@@ -11,11 +11,14 @@ view = function(model) {
         var rows = [];
         for (var i = 0, l = data.length; i < l; i++) {
             var item = data[i];
-            rows.push(AirView('row', {
+            var rowData = {
                 title: item.Title,
-                subtitle: item.UserName,
-                targetURL: { controller: 'program', action: 'details', id: i, navigatorOptions: { animate: 'tabSlide' } }
-            }));
+                subtitle: item.UserName
+            };
+            if (item.TitleLink) {
+                rowData.targetURL = { controller: 'program', action: 'details', id: i, navigatorOptions: { animate: 'tabSlide' } };
+            }
+            rows.push(AirView('row', rowData));
         }
         return rows;
     }

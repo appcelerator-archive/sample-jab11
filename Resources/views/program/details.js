@@ -7,7 +7,7 @@ view = function(model) {
     var details = AirView('shared/details', {
         title: model.Title,
         subtitle: model.UserName,
-        bodyHTML: model.Title
+        bodyHTML: model.TitleLink
     });
     details.top = 45;
     win.add(details);
