@@ -38,6 +38,9 @@
     width: 102,
     height: 85
 }
+.BlankIcon {
+    backgroundImage: 'content/images/default/blank.png', touchEnabled: false
+}
 #AboutIcon {
     backgroundImage: 'content/images/default/about.png'
 }
@@ -55,9 +58,6 @@
 }
 #SocialIcon {
     backgroundImage: 'content/images/default/social.png'
-}
-#JOSCARSIcon {
-    backgroundImage: 'content/images/default/joscars.png'
 }
 #SettingsIcon {
     backgroundImage: 'content/images/default/settings.png'

@@ -1,13 +1,11 @@
 /*
  * Include the libraries we will use. These libraries are NOT dependent on each other.
  */
-Ti.include(
-    'utility.js',
-    'lib/redux.js',
-    'lib/oauth_adapter.js',
-    'lib/TiAir.js',
-    'lib/TiStorage.js'
-);
+Ti.include('utility.js');
+Ti.include('lib/redux.js');
+Ti.include('lib/oauth_adapter.js');
+Ti.include('lib/TiAir.js');
+Ti.include('lib/TiStorage.js');
 
 Ti.UI.backgroundImage = 'content/images/loading.withoutbar.png';
 var used = [
@@ -17,7 +15,7 @@ var used = [
     Ti.UI.createActivityIndicator, Ti.UI.createAlertDialog, Ti.UI.createTextArea
 ];
 
-var constants = {
+constants = {
     TwitterConsumerKey: '9U7332KAWsGzdIZDNpWkw',
     TwitterConsumerSecret: 'zG0SgCPfxFcwPyVatmYik9tUXMwcMQaKZjj2wOqQeag',
     Website: 'http://jandbeyond.org/',
@@ -36,8 +34,7 @@ includeRJSS(
     'content/styles/about.rjss',
     'content/styles/settings.rjss',
     'content/styles/social.rjss',
-    'content/styles/maps.rjss',
-    'content/styles/joscars.rjss'
+    'content/styles/maps.rjss'
 );
 
 /*
@@ -52,13 +49,13 @@ TiAir.init({
 
     // your controllers decide who is going to do stuff, and what they are going to do it with
     controllers: [
-        'about.js', 'default.js', 'joscars.js', 'maps.js', 'news.js', 'schedule.js', 'settings.js', 'social.js',
+        'about.js', 'default.js', 'maps.js', 'news.js', 'schedule.js', 'settings.js', 'social.js',
         'speakers.js', 'travel.js'
     ],
 
     // models contain data
     models: [
-        'about.js', 'defaultIcons.js', 'defaultNewsList.js', 'defaultTravel.js', 'joscars.js', 'venueMap.js'
+        'about.js', 'defaultIcons.js', 'defaultNewsList.js', 'defaultTravel.js', 'venueMap.js'
     ],
 
     // navigators control the transitions between views in your app
@@ -75,9 +72,6 @@ TiAir.init({
         ],
         'default': [
             'daysUntil.js', 'list.js'
-        ],
-        joscars: [
-            'form.js'
         ],
         maps: [
             'venueMap.js'
