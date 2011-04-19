@@ -1,4 +1,4 @@
-var turnOnTiStorageLogging = true;
+var turnOnTiStorageLogging = false;
 /**
  * TiStorage
  *

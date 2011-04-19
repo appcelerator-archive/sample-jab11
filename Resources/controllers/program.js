@@ -80,10 +80,10 @@ controller = {
                 if (percent > 1) {
                     percent = 1;
                 }
-                AirView('notification', 'Downloading details: ' + parseInt(percent * 100, 0) + '%');
+                AirView('notification', { text: 'Downloading details: ' + parseInt(percent * 100, 0) + '%', id: 'programDownloadUpdates'});
                 Ti.Yahoo.yql(query.split('{START}').join(start), function(response) {
                     if (!response.success) {
-                        AirView('notification', 'Interrupted while downloading details!');
+                        AirView('notification', { text: 'Interrupted while downloading details!', id: 'programDownloadUpdates'});
                     }
                     else {
                         if (response.data) {
@@ -97,7 +97,7 @@ controller = {
                         }
                         else {
                             // we're done!
-                            AirView('notification', 'Downloading details: Complete!');
+                            AirView('notification', { text: 'Downloading details: Complete!', id: 'programDownloadUpdates'});
                         }
                     }
                 });
