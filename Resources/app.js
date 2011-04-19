@@ -19,6 +19,7 @@ constants = {
     TwitterConsumerKey: '9U7332KAWsGzdIZDNpWkw',
     TwitterConsumerSecret: 'zG0SgCPfxFcwPyVatmYik9tUXMwcMQaKZjj2wOqQeag',
     Website: 'http://jandbeyond.org/',
+    ProgramUpdateURL: 'http://jandbeyond.org/index.php?option=com_jab_program&type=1&format=raw',
     FacebookAppID: '125943497452698',
     TwitterUpdateURL: 'http://search.twitter.com/search.json?q=%23jab11%20OR%20@jandbeyond%20OR%20from%3Ajandbeyond',
     FacebookUpdateURL: 'https://graph.facebook.com/jandbeyond/feed',
@@ -55,7 +56,7 @@ TiAir.init({
 
     // models contain data
     models: [
-        'about.js', 'defaultIcons.js', 'defaultNewsList.js', 'defaultTravel.js', 'venueMap.js'
+        'about.js', 'defaultIcons.js', 'defaultNewsList.js', 'defaultProgram.js', 'defaultTravel.js', 'venueMap.js'
     ],
 
     // navigators control the transitions between views in your app
