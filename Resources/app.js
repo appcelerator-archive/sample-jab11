@@ -49,7 +49,7 @@ TiAir.init({
 
     // your controllers decide who is going to do stuff, and what they are going to do it with
     controllers: [
-        'about.js', 'default.js', 'maps.js', 'news.js', 'schedule.js', 'settings.js', 'social.js',
+        'about.js', 'default.js', 'maps.js', 'news.js', 'program.js', 'settings.js', 'social.js',
         'speakers.js', 'travel.js'
     ],
 
@@ -79,7 +79,7 @@ TiAir.init({
         news: [
             'details.js', 'list.js'
         ],
-        schedule: [
+        program: [
             'details.js', 'list.js'
         ],
         settings: [

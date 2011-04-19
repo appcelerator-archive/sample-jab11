@@ -40,7 +40,7 @@ model = {
 
         { className: 'Icon', id: 'ProgramIcon',
             targetURL: {
-                controller: 'schedule', action: 'list',
+                controller: 'program', action: 'list',
                 navigatorOptions: { animate: 'pop' }
             }
         },
