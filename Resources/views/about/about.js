@@ -1,13 +1,8 @@
 view = function(model) {
     var win = new View({ id: 'AboutWindow', className: 'Window' });
-    var sponsorsButton = new Button({ id: 'SponsorsButton' });
-    $(sponsorsButton).click(function() {
-        TiAir.openURL({ action: 'sponsors', controller: 'about' });
-    });
     win.add(AirView('titleBar', {
         left: AirView('button', { view: win, type: 'Home' }),
-        center: 'About',
-        right: sponsorsButton
+        center: 'About'
     }));
     var details = AirView('details', {
         title: model.title,
