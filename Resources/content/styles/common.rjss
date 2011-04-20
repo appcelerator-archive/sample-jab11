@@ -258,7 +258,7 @@ WebView {
 
 .SegmentedPickerTextDeselected {
     color: '#444',
-	shadowColor: '#fff',
+	shadowColor: '#ddd',
 	shadowOffset: { x:0, y:1 }
 }
 .SegmentedPickerLeftDeselected { backgroundImage: 'content/images/segmented/roundedLeft.png', backgroundLeftCap: 7 }

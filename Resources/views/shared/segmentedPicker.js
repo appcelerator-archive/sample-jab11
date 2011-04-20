@@ -18,8 +18,10 @@ view = function(model) {
     if (!picker.layout) {
         picker.layout = 'horizontal';
     }
-
-    this.selected = [];
+    
+    var selectMultiple = model.selectMultiple;
+    var allowNoneSelected = model.allowNoneSelected;
+    var lastSelected;
 
     function createOption(option, isLeftCap, isRightCap) {
         // based on what they pass in, wrap strings with labels
@@ -37,6 +39,9 @@ view = function(model) {
 
         // initialize whether or not the view is selected
         container.selected = container.selected || text.selected || false;
+        if (container.selected) {
+            lastSelected = container;
+        }
 
         function syncUI() {
             var append = container.selected ? 'Selected' : 'Deselected';
@@ -56,11 +61,20 @@ view = function(model) {
         syncUI();
 
         container.select = function() {
+            if (!selectMultiple && lastSelected != container) {
+                var toDeselect = lastSelected;
+                lastSelected = null;
+                toDeselect.deselect();
+            }
+            lastSelected = container;
             container.selected = true;
             model.onSelect && model.onSelect({ source: container });
             syncUI();
         };
         container.deselect = function() {
+            if (!allowNoneSelected && !selectMultiple && lastSelected == container) {
+                return;
+            }
             container.selected = false;
             model.onDeselect && model.onDeselect({ source: container });
             syncUI();

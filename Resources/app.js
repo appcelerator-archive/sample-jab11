@@ -19,6 +19,7 @@ constants = {
     TwitterConsumerKey: '9U7332KAWsGzdIZDNpWkw',
     TwitterConsumerSecret: 'zG0SgCPfxFcwPyVatmYik9tUXMwcMQaKZjj2wOqQeag',
     Website: 'http://jandbeyond.org/',
+    ProgramUpdateURL: 'http://jandbeyond.org/index.php?option=com_jab_program&type=1&format=raw',
     FacebookAppID: '125943497452698',
     TwitterUpdateURL: 'http://search.twitter.com/search.json?q=%23jab11%20OR%20@jandbeyond%20OR%20from%3Ajandbeyond',
     FacebookUpdateURL: 'https://graph.facebook.com/jandbeyond/feed',
@@ -34,6 +35,7 @@ includeRJSS(
     'content/styles/about.rjss',
     'content/styles/settings.rjss',
     'content/styles/social.rjss',
+    'content/styles/speakers.rjss',
     'content/styles/maps.rjss'
 );
 
@@ -49,13 +51,13 @@ TiAir.init({
 
     // your controllers decide who is going to do stuff, and what they are going to do it with
     controllers: [
-        'about.js', 'default.js', 'maps.js', 'news.js', 'schedule.js', 'settings.js', 'social.js',
+        'about.js', 'default.js', 'maps.js', 'news.js', 'program.js', 'settings.js', 'social.js',
         'speakers.js', 'travel.js'
     ],
 
     // models contain data
     models: [
-        'about.js', 'defaultIcons.js', 'defaultNewsList.js', 'defaultTravel.js', 'venueMap.js'
+        'about.js', 'defaultIcons.js', 'defaultNewsList.js', 'defaultProgram.js', 'defaultTravel.js', 'venueMap.js'
     ],
 
     // navigators control the transitions between views in your app
@@ -79,7 +81,7 @@ TiAir.init({
         news: [
             'details.js', 'list.js'
         ],
-        schedule: [
+        program: [
             'details.js', 'list.js'
         ],
         settings: [

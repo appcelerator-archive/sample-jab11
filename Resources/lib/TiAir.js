@@ -352,9 +352,11 @@ var TiAir = {};
         var actionArgs = [], expectedArgs = controller.actions[actionID].toString().split('(')[1].split(')')[0].split(',');
         if (expectedArgs.length > 0 && expectedArgs[0] != '') {
             for (var i = 0, l = expectedArgs.length; i < l; i++) {
-                actionArgs.push(url[expectedArgs[i]]);
+                var expectedArg = expectedArgs[i].split(' ').join('');
+                actionArgs.push(url[expectedArg]);
             }
         }
+
         // call the action
         var retVal = controller.actions[actionID].apply(controller.actions, actionArgs);
         actionID = currentActionID;
