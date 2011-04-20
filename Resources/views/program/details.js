@@ -36,13 +36,20 @@ view = function(model) {
         id: 'AddToCalendarButton',
         isOn: AirAction({ controller: 'program', action: 'isInMySchedule', gripPos: model.GripPos }) || false
     });
+
     function syncButtonUI() {
         $(calendarButton).applyStyle('Button', { className: 'AddToCalendarButton' + (calendarButton.isOn ? 'On' : 'Off') });
     }
+
     syncButtonUI();
     $(calendarButton).click(function() {
         calendarButton.isOn = !calendarButton.isOn;
-        AirAction({ controller: 'program', action: 'setMySchedule', gripPos: model.GripPos, val: calendarButton.isOn });
+        AirAction({
+            controller: 'program', action: 'setMySchedule',
+            gripPos: model.GripPos,
+            val: calendarButton.isOn ? model : null
+        });
+
         syncButtonUI();
     });
     details.add(calendarButton);

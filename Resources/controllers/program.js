@@ -28,9 +28,18 @@ controller = {
         isInMySchedule: function(gripPos) {
             return mySchedule[gripPos];
         },
+        getMySchedule: function() {
+            return mySchedule;
+        },
         setMySchedule: function(gripPos, val) {
-            mySchedule[gripPos] = val;
+            if (val == null) {
+                delete mySchedule[gripPos];
+            }
+            else {
+                mySchedule[gripPos] = val;
+            }
             Ti.App.Properties.setString('MySchedule', JSON.stringify(mySchedule));
+            Ti.App.fireEvent('MySchedule-Updated', { GripPos: gripPos });
         },
         update: function(callback) {
 

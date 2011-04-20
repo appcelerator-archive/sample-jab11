@@ -11,6 +11,33 @@ view = function(model) {
         }})
     }));
 
+    function getMyScheduleRows() {
+        var mySchedule = AirAction({ controller: 'program', action: 'getMySchedule' }) || [];
+        var rows = [], lastHeader;
+        for (var key in mySchedule) {
+            var item = mySchedule[key];
+            var rowData = {
+                title: item.Title,
+                subtitle: item.UserName
+            };
+            if (item.TitleLink) {
+                rowData.targetURL = { controller: 'program', action: 'details', id: item.id, navigatorOptions: { animate: 'tabSlide' } };
+            }
+            var row = AirView('row', rowData);
+            var header = item.Start + ' - ' + item.End;
+            if (header != lastHeader) {
+                row.header = lastHeader = header;
+            }
+            row.Day = item.Day;
+            rows.push(row);
+        }
+        return rows;
+    }
+
+    Ti.App.addEventListener('MySchedule-Updated', function() {
+        tables['My'].updateRows({ rows: getMyScheduleRows() });
+    });
+
     function updateTables(data) {
         var tableRows = {}, lastHeader = {};
         for (var i = 0, l = data.length; i < l; i++) {
@@ -21,7 +48,7 @@ view = function(model) {
                 subtitle: item.UserName
             };
             if (item.TitleLink) {
-                rowData.targetURL = { controller: 'program', action: 'details', id: i, navigatorOptions: { animate: 'tabSlide' } };
+                rowData.targetURL = { controller: 'program', action: 'details', id: item.id, navigatorOptions: { animate: 'tabSlide' } };
             }
             var row = AirView('row', rowData);
             var header = item.Start + ' - ' + item.End;
@@ -31,6 +58,7 @@ view = function(model) {
             row.Day = item.Day;
             rows.push(row);
         }
+        tableRows['My'] = getMyScheduleRows();
         for (var day in tables) {
             tables[day].updateRows({ rows: tableRows[day] });
         }
