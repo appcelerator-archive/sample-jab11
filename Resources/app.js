@@ -32,7 +32,6 @@ constants = {
 includeRJSS(
     'content/styles/common.rjss',
     'content/styles/default.rjss',
-    'content/styles/about.rjss',
     'content/styles/settings.rjss',
     'content/styles/social.rjss',
     'content/styles/speakers.rjss',
@@ -70,7 +69,7 @@ TiAir.init({
             'notImplemented.js', 'pullToRefresh.js', 'row.js', 'segmentedPicker.js', 'table.js', 'titleBar.js'
         ],
         about: [
-            'about.js', 'sponsors.js'
+            'about.js'
         ],
         'default': [
             'daysUntil.js', 'list.js'
