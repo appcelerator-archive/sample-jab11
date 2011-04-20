@@ -8,3 +8,23 @@
 .AddToCalendarButtonOff {
     backgroundImage: 'content/images/bars/calendar-off.png'
 }
+
+
+.MyScheduleRowTitle {
+    right: 120
+}
+.MyScheduleRowSubtitle {
+    right: 120
+}
+.MyScheduleTimeRow {
+    top: 14, right: 30,
+    height: 13, width: 'auto',
+    font: { fontWeight: 'bold', fontSize: 14 },
+    color: '#4674b9'
+}
+.MyScheduleDateRow {
+    top: 32, right: 30,
+    height: 13, width: 'auto',
+    font: { fontSize: 12 },
+    color: '#000'
+}

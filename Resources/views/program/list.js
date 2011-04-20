@@ -1,7 +1,7 @@
 view = function(model) {
 
     var days = { My: false, Friday: true, Saturday: false, Sunday: false };
-    
+
     var win = new View({ id: 'ProgramWindow', className: 'Window' });
     win.add(AirView('titleBar', {
         left: AirView('button', { view: win, type: 'Home' }),
@@ -13,23 +13,38 @@ view = function(model) {
 
     function getMyScheduleRows() {
         var mySchedule = AirAction({ controller: 'program', action: 'getMySchedule' }) || [];
-        var rows = [], lastHeader;
+        var rows = [];
         for (var key in mySchedule) {
             var item = mySchedule[key];
             var rowData = {
                 title: item.Title,
-                subtitle: item.UserName
+                subtitle: item.UserName,
+                targetURL: { controller: 'program', action: 'details', id: item.id, navigatorOptions: { animate: 'tabSlide' } },
+                className: 'MySchedule'
             };
-            if (item.TitleLink) {
-                rowData.targetURL = { controller: 'program', action: 'details', id: item.id, navigatorOptions: { animate: 'tabSlide' } };
+            var date;
+            switch (item.Day) {
+                case 'Friday':
+                    date = 'Fri. 6/5/11';
+                    break;
+                case 'Saturday':
+                    date = 'Sat. 6/6/11';
+                    break;
+                case 'Sunday':
+                    date = 'Sun. 6/7/11';
+                    break;
             }
             var row = AirView('row', rowData);
-            var header = item.Start + ' - ' + item.End;
-            if (header != lastHeader) {
-                row.header = lastHeader = header;
-            }
+            row.add(new Label({ className: 'MyScheduleTimeRow', text: item.Start + '-' + item.End }));
+            row.add(new Label({ className: 'MyScheduleDateRow', text: date }));
             row.Day = item.Day;
             rows.push(row);
+        }
+        if (rows.length == 0) {
+            rows.push(AirView('row', {
+                title: 'Nothing in your schedule yet!',
+                subtitle: 'Tap a calendar icon, it\'ll show up here.'
+            }));
         }
         return rows;
     }
