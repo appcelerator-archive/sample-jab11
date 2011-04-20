@@ -13,9 +13,9 @@ view = function(model) {
 
     function getMyScheduleRows() {
         var mySchedule = AirAction({ controller: 'program', action: 'getMySchedule' }) || [];
-        var rows = [];
-        for (var key in mySchedule) {
-            var item = mySchedule[key];
+        var rows = [], lastHeader;
+        for (var i = 0, l = mySchedule.length; i < l; i++) {
+            var item = mySchedule[i];
             var rowData = {
                 title: item.Title,
                 subtitle: item.UserName,
@@ -38,6 +38,9 @@ view = function(model) {
             row.add(new Label({ className: 'MyScheduleTimeRow', text: item.Start + '-' + item.End }));
             row.add(new Label({ className: 'MyScheduleDateRow', text: date }));
             row.Day = item.Day;
+            if (item.Day != lastHeader) {
+                row.header = lastHeader = item.Day;
+            }
             rows.push(row);
         }
         if (rows.length == 0) {

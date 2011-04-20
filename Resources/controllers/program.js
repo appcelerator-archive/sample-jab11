@@ -29,7 +29,23 @@ controller = {
             return mySchedule[gripPos];
         },
         getMySchedule: function() {
-            return mySchedule;
+            var retVal = [];
+            for (var key in mySchedule) {
+                retVal.push(mySchedule[key])
+            }
+            retVal.sort(function compareEventsChronologically(a, b) {
+                if (a.Day == b.Day) {
+                    if (a.Start == b.Start) {
+                        if (a.End == b.End) {
+                            return 0;
+                        }
+                        return a.End < b.End ? -1 : 1;
+                    }
+                    return a.Start < b.Start ? -1 : 1;
+                }
+                return a.Day < b.Day ? -1 : 1;
+            });
+            return retVal;
         },
         setMySchedule: function(gripPos, val) {
             if (val == null) {
@@ -93,6 +109,7 @@ controller = {
             var query = 'SELECT guid,description FROM feed WHERE url="http://jandbeyond.org/attendees/proposed-talks-and-sessions.feed?start={START}&export=json?t=' + timestamp + '"';
 
             var programDetails = TiStorage().use('jab').collection('ProgramDetails');
+
             function downloadProgramDetails(start) {
                 var percent = start / rows.length;
                 if (percent > 1) {
