@@ -8,7 +8,7 @@ view = function(model) {
         }})
     }));
     function processRows(data) {
-        var rows = [];
+        var rows = [], lastStart;
         for (var i = 0, l = data.length; i < l; i++) {
             var item = data[i];
             var rowData = {
@@ -18,7 +18,11 @@ view = function(model) {
             if (item.TitleLink) {
                 rowData.targetURL = { controller: 'program', action: 'details', id: i, navigatorOptions: { animate: 'tabSlide' } };
             }
-            rows.push(AirView('row', rowData));
+            var row = AirView('row', rowData);
+            if (item.Start != lastStart) {
+                row.header = lastStart = item.Start;
+            }
+            rows.push(row);
         }
         return rows;
     }
