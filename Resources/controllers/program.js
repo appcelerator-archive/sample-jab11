@@ -88,6 +88,17 @@ controller = {
 
         },
         handlePayload: function(collection, data) {
+
+            function cleanText(text) {
+                //String.fromCharCode
+                return text
+                    .split('\\/').join('/')
+                    .split('\\"').join('"')
+                    .split('\\u00e9').join('é')
+                    .split('\\u2026').join('…')
+                    .split('\\u010d').join('č')
+                    .split('<br \\/>').join('');
+            }
             var rows = data.substring(3, data.length - 3).split('"],["');
             for (var i = 0, l = rows.length; i < l; i++) {
                 var cells = rows[i].split('","');
@@ -97,10 +108,10 @@ controller = {
                     StartFloat: parseFloat(cells[1].split(':').join('.')),
                     End: cells[2],
                     EndFloat: parseFloat(cells[2].split(':').join('.')),
-                    Title: cells[3],
-                    TitleLink: cells[4].split('\\/').join('/'),
-                    UserName: cells[5],
-                    UserLink: cells[6].split('\\/').join('/'),
+                    Title: cleanText(cells[3]),
+                    TitleLink: cleanText(cells[4]),
+                    UserName: cleanText(cells[5]),
+                    UserLink: cleanText(cells[6]),
                     Day: cells[7]
                 });
             }
