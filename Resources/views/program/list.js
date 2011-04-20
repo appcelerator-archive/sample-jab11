@@ -21,6 +21,7 @@ view = function(model) {
         style: 'LighterGrey',
         right: AirView('segmentedPicker', {
             selectMultiple: false,
+            allowNoneSelected: false,
             onSelect: function(evt) {
                 show[evt.source.text.text] = true;
                 // TODO: adjust filter
