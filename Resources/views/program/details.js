@@ -3,7 +3,7 @@ view = function(model) {
     var win = new View({ id: 'ProgramDetailsWindow', className: 'Window' });
     win.add(AirView('titleBar', {
         left: AirView('button', { view: win, type: 'Back' }),
-        center: '2011 Speakers'
+        center: '2011 Program'
     }));
 
     var notFoundMessage = 'The details for this particular talk have not been downloaded yet. Please go back to the list and hit the Refresh button in the top right.';
