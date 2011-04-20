@@ -12,3 +12,16 @@ div.itemIntroText p {
 .itemIntroText ul li, .itemFullText ul li, .catItemIntroText ul li {
     background: url(../images/liBullet_10x11.png) no-repeat 0 4px !important;
 }
+.mobileAppHeader {
+    color: #b94646;
+    margin-top: 10px;
+    font-size: x-large;
+    font-weight: bold;
+    text-align: center;
+}
+.mobileAppSubtitle {
+    color: #4674b9;
+    margin-bottom: 20px;
+    font-size: small;
+    text-align: center;
+}

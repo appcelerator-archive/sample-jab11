@@ -1,3 +1,5 @@
+var mySchedule = JSON.parse(Ti.App.Properties.getString('MySchedule')) || {};
+
 controller = {
     actions: {
         list: function() {
@@ -22,6 +24,13 @@ controller = {
                 specificEvent.Details = programDetails.find({ guid: specificEvent.TitleLink })[0];
                 return specificEvent;
             }
+        },
+        isInMySchedule: function(gripPos) {
+            return mySchedule[gripPos];
+        },
+        setMySchedule: function(gripPos, val) {
+            mySchedule[gripPos] = val;
+            Ti.App.Properties.setString('MySchedule', JSON.stringify(mySchedule));
         },
         update: function(callback) {
 

@@ -35,6 +35,7 @@ includeRJSS(
     'content/styles/about.rjss',
     'content/styles/settings.rjss',
     'content/styles/social.rjss',
+    'content/styles/speakers.rjss',
     'content/styles/maps.rjss'
 );
 

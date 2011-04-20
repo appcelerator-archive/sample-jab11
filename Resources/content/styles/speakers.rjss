@@ -1,0 +1,10 @@
+#AddToCalendarButton {
+    width: 46, height: 40,
+    left: 10, top: 10
+}
+.AddToCalendarButtonOn {
+    backgroundImage: 'content/images/bars/calendar-on.png'
+}
+.AddToCalendarButtonOff {
+    backgroundImage: 'content/images/bars/calendar-off.png'
+}
