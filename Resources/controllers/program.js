@@ -114,7 +114,6 @@ controller = {
                     UserLink: cleanText(cells[6]),
                     Day: cells[7]
                 });
-                warn(cleanText(cells[6]));
             }
             var n = new Date();
             var timestamp = '' + n.getUTCFullYear() + toTwoDigits(n.getUTCMonth() + 1) + toTwoDigits(n.getUTCDate()) + toTwoDigits(n.getUTCHours());
