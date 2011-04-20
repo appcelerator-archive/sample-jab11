@@ -3,7 +3,7 @@ view = function(model) {
     var win = new View({ id: 'ProgramDetailsWindow', className: 'Window' });
     win.add(AirView('titleBar', {
         left: AirView('button', { view: win, type: 'Back' }),
-        center: '2011 Speakers'
+        center: '2011 Program'
     }));
 
     var notFoundMessage = 'The details for this particular talk have not been downloaded yet. Please go back to the list and hit the Refresh button in the top right.';
@@ -36,13 +36,20 @@ view = function(model) {
         id: 'AddToCalendarButton',
         isOn: AirAction({ controller: 'program', action: 'isInMySchedule', gripPos: model.GripPos }) || false
     });
+
     function syncButtonUI() {
         $(calendarButton).applyStyle('Button', { className: 'AddToCalendarButton' + (calendarButton.isOn ? 'On' : 'Off') });
     }
+
     syncButtonUI();
     $(calendarButton).click(function() {
         calendarButton.isOn = !calendarButton.isOn;
-        AirAction({ controller: 'program', action: 'setMySchedule', gripPos: model.GripPos, val: calendarButton.isOn });
+        AirAction({
+            controller: 'program', action: 'setMySchedule',
+            gripPos: model.GripPos,
+            val: calendarButton.isOn ? model : null
+        });
+
         syncButtonUI();
     });
     details.add(calendarButton);

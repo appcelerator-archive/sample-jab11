@@ -28,9 +28,34 @@ controller = {
         isInMySchedule: function(gripPos) {
             return mySchedule[gripPos];
         },
+        getMySchedule: function() {
+            var retVal = [];
+            for (var key in mySchedule) {
+                retVal.push(mySchedule[key])
+            }
+            retVal.sort(function compareEventsChronologically(a, b) {
+                if (a.Day == b.Day) {
+                    if (a.Start == b.Start) {
+                        if (a.End == b.End) {
+                            return 0;
+                        }
+                        return a.End < b.End ? -1 : 1;
+                    }
+                    return a.Start < b.Start ? -1 : 1;
+                }
+                return a.Day < b.Day ? -1 : 1;
+            });
+            return retVal;
+        },
         setMySchedule: function(gripPos, val) {
-            mySchedule[gripPos] = val;
+            if (val == null) {
+                delete mySchedule[gripPos];
+            }
+            else {
+                mySchedule[gripPos] = val;
+            }
             Ti.App.Properties.setString('MySchedule', JSON.stringify(mySchedule));
+            Ti.App.fireEvent('MySchedule-Updated', { GripPos: gripPos });
         },
         update: function(callback) {
 
@@ -63,6 +88,17 @@ controller = {
 
         },
         handlePayload: function(collection, data) {
+
+            function cleanText(text) {
+                //String.fromCharCode
+                return text
+                    .split('\\/').join('/')
+                    .split('\\"').join('"')
+                    .split('\\u00e9').join('é')
+                    .split('\\u2026').join('…')
+                    .split('\\u010d').join('č')
+                    .split('<br \\/>').join('');
+            }
             var rows = data.substring(3, data.length - 3).split('"],["');
             for (var i = 0, l = rows.length; i < l; i++) {
                 var cells = rows[i].split('","');
@@ -72,10 +108,10 @@ controller = {
                     StartFloat: parseFloat(cells[1].split(':').join('.')),
                     End: cells[2],
                     EndFloat: parseFloat(cells[2].split(':').join('.')),
-                    Title: cells[3],
-                    TitleLink: cells[4].split('\\/').join('/'),
-                    UserName: cells[5],
-                    UserLink: cells[6].split('\\/').join('/'),
+                    Title: cleanText(cells[3]),
+                    TitleLink: cleanText(cells[4]),
+                    UserName: cleanText(cells[5]),
+                    UserLink: cleanText(cells[6]),
                     Day: cells[7]
                 });
             }
@@ -84,6 +120,7 @@ controller = {
             var query = 'SELECT guid,description FROM feed WHERE url="http://jandbeyond.org/attendees/proposed-talks-and-sessions.feed?start={START}&export=json?t=' + timestamp + '"';
 
             var programDetails = TiStorage().use('jab').collection('ProgramDetails');
+
             function downloadProgramDetails(start) {
                 var percent = start / rows.length;
                 if (percent > 1) {
