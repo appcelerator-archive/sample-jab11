@@ -7,6 +7,30 @@ view = function(model) {
             table.update();
         }})
     }));
+
+    /*
+     Now place a bar right below it that will let the user choose day.
+     */
+    var show = { My: false, Friday: true, Saturday: false, Sunday: false };
+    var options = [];
+    for (var key in show) {
+        options.push(new Label({ text: key, className: 'SegmentedPickerText', selected: show[key] }))
+    }
+    var secondBar = AirView('titleBar', {
+        left: 'Post to:',
+        style: 'LighterGrey',
+        right: AirView('segmentedPicker', {
+            selectMultiple: false,
+            onSelect: function(evt) {
+                show[evt.source.text.text] = true;
+                // TODO: adjust filter
+            },
+            options: options
+        })
+    });
+    secondBar.top = 42;
+    win.add(secondBar);
+
     function processRows(data) {
         var rows = [], lastStart;
         for (var i = 0, l = data.length; i < l; i++) {
@@ -48,7 +72,7 @@ view = function(model) {
             });
         }
     });
-    table.top = 45;
+    table.top = 86;
     win.add(table);
     return win;
 };
