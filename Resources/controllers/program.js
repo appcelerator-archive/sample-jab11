@@ -10,19 +10,19 @@ controller = {
         },
         get: function(id) {
             var jab = TiStorage().use('jab');
-            var program = jab.collection('Program');
-            var programDetails = jab.collection('ProgramDetails');
+            var collection = jab.collection('Program');
+            var collectionDetails = jab.collection('ProgramDetails');
             // if we don't have anything in our database, load in the default data.
-            if (program.find().length == 0) {
-                this.handlePayload(program, AirModel('defaultProgram'));
+            if (collection.find().length == 0) {
+                this.handlePayload(collection, AirModel('defaultProgram'));
             }
             if (id == undefined) {
-                return program.find();
+                return collection.find();
             }
             else {
-                var specificEvent = program.find({ id: id })[0];
-                specificEvent.Details = programDetails.find({ guid: specificEvent.TitleLink })[0];
-                return specificEvent;
+                var item = collection.find({ id: id })[0];
+                item.Details = collectionDetails.find({ guid: item.TitleLink })[0];
+                return item;
             }
         },
         isInMySchedule: function(gripPos) {
@@ -72,7 +72,7 @@ controller = {
                         } else if (response.error) {
                             callback(response);
                         } else {
-                            AirView('notification', 'The server is temporarily unavailable; please check your internet connection, and try again.');
+                            callback({ error: 'The server is temporarily unavailable; please check your internet connection, and try again.' });
                         }
                     }
                     catch(err) {
@@ -90,7 +90,6 @@ controller = {
         handlePayload: function(collection, data) {
 
             function cleanText(text) {
-                //String.fromCharCode
                 return text
                     .split('\\/').join('/')
                     .split('\\"').join('"')
@@ -126,10 +125,10 @@ controller = {
                 if (percent > 1) {
                     percent = 1;
                 }
-                AirView('notification', { text: 'Downloading details: ' + parseInt(percent * 100, 0) + '%', id: 'programDownloadUpdates'});
+                AirView('notification', { text: 'Downloading details: ' + parseInt(percent * 100, 0) + '%', id: 'Program'});
                 Ti.Yahoo.yql(query.split('{START}').join(start), function(response) {
                     if (!response.success) {
-                        AirView('notification', { text: 'Interrupted while downloading details!', id: 'programDownloadUpdates'});
+                        AirView('notification', { text: 'Interrupted while downloading details!', id: 'Program'});
                     }
                     else {
                         if (response.data) {
@@ -143,7 +142,7 @@ controller = {
                         }
                         else {
                             // we're done!
-                            AirView('notification', { text: 'Downloading details: Complete!', id: 'programDownloadUpdates'});
+                            AirView('notification', { text: 'Downloading details: Complete!', id: 'Program'});
                         }
                     }
                 });

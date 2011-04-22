@@ -12,14 +12,16 @@ var used = [
     Ti.UI.createView, Ti.UI.createLabel, Ti.UI.createImageView, Ti.UI.createButton, Ti.UI.createWindow,
     Ti.UI.createWebView, Ti.UI.createAnimation, Ti.Map.createView, Ti.UI.create2DMatrix, Ti.UI.createScrollView,
     Ti.UI.createTableView, Ti.UI.createTableViewRow, Ti.Network.createHTTPClient, Ti.UI.createTextField,
-    Ti.UI.createActivityIndicator, Ti.UI.createAlertDialog, Ti.UI.createTextArea
+    Ti.UI.createActivityIndicator, Ti.UI.createAlertDialog, Ti.UI.createTextArea, Ti.UI.createProgressBar
 ];
 
 constants = {
     TwitterConsumerKey: '9U7332KAWsGzdIZDNpWkw',
     TwitterConsumerSecret: 'zG0SgCPfxFcwPyVatmYik9tUXMwcMQaKZjj2wOqQeag',
+    TwitPicKey: '269c295a7bd82d7ddb991a201bd50114',
     Website: 'http://jandbeyond.org/',
     ProgramUpdateURL: 'http://jandbeyond.org/index.php?option=com_jab_program&type=1&format=raw',
+    SpeakerUpdateURL: 'http://jandbeyond.org/index.php?option=com_jab_program&type=2&format=raw',
     FacebookAppID: '125943497452698',
     TwitterUpdateURL: 'http://search.twitter.com/search.json?q=%23jab11%20OR%20@jandbeyond%20OR%20from%3Ajandbeyond',
     FacebookUpdateURL: 'https://graph.facebook.com/jandbeyond/feed',
@@ -56,7 +58,8 @@ TiAir.init({
 
     // models contain data
     models: [
-        'about.js', 'defaultIcons.js', 'defaultNewsList.js', 'defaultProgram.js', 'defaultTravel.js', 'venueMap.js'
+        'about.js', 'defaultIcons.js', 'defaultNewsList.js', 'defaultProgram.js', 'defaultSpeakers.js',
+        'defaultTravel.js', 'venueMap.js'
     ],
 
     // navigators control the transitions between views in your app
@@ -87,10 +90,10 @@ TiAir.init({
             'list.js'
         ],
         social: [
-            'addComment.js', 'list.js', 'details.js'
+            'addComment.js', 'details.js', 'getPhoto.js', 'list.js'
         ],
         speakers: [
-            'addComment.js', 'comments.js', 'details.js', 'list.js', 'rate.js', 'sessions.js'
+            'details.js', 'list.js', 'sessions.js'
         ],
         travel: [
             'details.js', 'list.js'

@@ -1,69 +1,82 @@
 controller = {
     actions: {
-        addComment: function() {
-            return AirView();
-        },
-        comments: function() {
-            return AirView();
-        },
-        details: function() {
-            return AirView(this.get(id)[0]);
-        },
-        list: function() {
-            return AirView('notImplemented');
-
-            return AirView(this.get());
-        },
-        rate: function() {
-            return AirView();
-        },
         sessions: function() {
             return AirView();
         },
+        list: function() {
+            return AirView(this.get());
+        },
+        details: function(id) {
+            return AirView(this.get(id));
+        },
         get: function(id) {
-            var items = TiStorage().use('jab').collection('Speakers');
+            var collection = TiStorage().use('jab').collection('Speakers');
             // if we don't have anything in our database, load in the default data.
-            if (items.find().length == 0) {
-                var defaultItems = AirModel('defaultSpeakers').query.results.item;
-                for (var i = 0, l = defaultItems.length; i < l; i++) {
-                    items.create(defaultItems[i]);
-                }
+            if (collection.find().length == 0) {
+                this.handlePayload(collection, AirModel('defaultSpeakers'));
             }
-            return items.find(id == undefined ? undefined : { id: id })
+            if (id == undefined) {
+                return collection.find();
+            }
+            else {
+                return collection.find({ id: id })[0];
+            }
         },
         update: function(callback) {
-            var xhr = new HTTPClient();
 
-            xhr.onload = function() {
-                try {
-                    var response = JSON.parse(this.responseData);
-                    if (response) {
-                        var items = TiStorage().use('jab').collection('Speakers');
-                        items.clear();
-                        var items = response.query.results.item;
-                        for (var i = 0, l = items.length; i < l; i++) {
-                            items.create(items[i]);
+            var collection = TiStorage().use('jab').collection('Speakers');
+            var self = this;
+            var xhr = new HTTPClient({
+                onload: function() {
+                    try {
+                        var response = this.responseText;
+                        if (response) {
+                            collection.clear();
+                            self.handlePayload(collection, response);
+                            callback(collection.find());
+                        } else if (response.error) {
+                            callback(response);
+                        } else {
+                            callback({ error: 'The server is temporarily unavailable; please check your internet connection, and try again.' });
                         }
-                        callback(items.find());
-                    } else {
-                        callback({ error: 'The server is temporarily unavailable; please check your internet connection, and try again.' });
                     }
+                    catch(err) {
+                        callback({ error: err });
+                    }
+                },
+                onerror: function(e) {
+                    callback({ error: e });
                 }
-                catch(err) {
-                    callback({ error: err });
-                }
-            };
-            xhr.onerror = function(e) {
-                callback({ error: e });
-            };
-            // open the client
-            function pad(num) {
-                return num < 10 ? '0' + String(num) : num;
-            }
-            var n = new Date();
-            var timestamp = '' + n.getUTCFullYear() + pad(n.getUTCMonth()+1) + pad(n.getUTCDate()) + pad(n.getUTCHours());
-            xhr.open('GET', 'http://query.yahooapis.com/v1/public/yql?q=SELECT+*+FROM+feed+WHERE+url%3D%22http://jandbeyond.org/blog.feed%3Fexport%3Djson%3Ft%3D' + timestamp + '%22&format=json&callback=');
+            });
+            xhr.open('GET', constants.SpeakerUpdateURL);
             xhr.send();
+
+        },
+        handlePayload: function(collection, data) {
+
+            function cleanText(text) {
+                return text
+                    .split('\\/').join('/')
+                    .split('\\"').join('"')
+                    .split('\\r\\n').join('<br />')
+                    .split('\\u00e9').join('é')
+                    .split('\\u2026').join('…')
+                    .split('\\u010d').join('č');
+            }
+            var rows = data.substring(3, data.length - 3).split('"],["');
+            for (var i = 0, l = rows.length; i < l; i++) {
+                var cells = rows[i].split('","');
+                collection.create({
+                    ServerID: cells[0],
+                    UserName: cells[1],
+                    UserLink: cleanText(cells[2]),
+                    BiographyHTML: cleanText(cells[3]),
+                    ThumbnailURL: cleanText(cells[4]),
+                    EmailAddress: cleanText(cells[5])
+                });
+            }
+            
+            collection.sort({ UserName : -1 });
         }
     }
 };

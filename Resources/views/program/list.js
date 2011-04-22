@@ -83,14 +83,14 @@ view = function(model) {
     }
 
     function update(callback) {
-        AirView('notification', 'Updating...');
+        AirView('notification', { text: 'Updating...', id: 'Program' });
         AirAction({
             controller: 'program',
             action: 'update',
             callback: function(response) {
                 if (response.error) {
                     callback && callback();
-                    AirView('notification', response.error);
+                    AirView('notification', { text: response.error, id: 'Program' });
                     error(response.error);
                 }
                 else {

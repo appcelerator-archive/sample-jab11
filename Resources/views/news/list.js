@@ -14,7 +14,7 @@ view = function(model) {
             rows.push(AirView('row', {
                 title: item.title,
                 subtitle: item.pubDate,
-                targetURL: { controller: 'news', action: 'details', id: i, navigatorOptions: { animate: 'tabSlide' } }
+                targetURL: { controller: 'news', action: 'details', id: item.id, navigatorOptions: { animate: 'tabSlide' } }
             }));
         }
         return rows;
@@ -23,19 +23,19 @@ view = function(model) {
     var table = AirView('table', {
         rows: processRows(model),
         update: function(callback) {
-            AirView('notification', 'Updating...');
+            AirView('notification', { text: 'Updating...', id: 'News' });
             AirAction({
                 controller: 'news',
                 action: 'update',
                 callback: function(response) {
                     if (response.error) {
                         callback();
-                        AirView('notification', response.error);
+                        AirView('notification', { text: response.error, id: 'News' });
                         error(response.error);
                     }
                     else {
                         callback(response);
-                        AirView('notification', 'Last Updated: Just Now');
+                        AirView('notification', { text: 'Last Updated: Just Now', id: 'News' });
                     }
                 }
             });

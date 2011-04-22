@@ -2,13 +2,7 @@ view = function(model) {
     var view = new View({ id: 'TravelWindow', className: 'Window' });
     view.add(AirView('titleBar', {
         left: AirView('button', { view: view, type: 'Home' }),
-        center: 'Travel',
-        right: AirView('button', {
-            type: 'Refresh',
-            callback: function() {
-                return AirView('notImplemented');
-            }
-        })
+        center: 'Travel'
     }));
     var details = AirView('shared/details', {
         title: model.title,
