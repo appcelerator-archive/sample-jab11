@@ -11,8 +11,17 @@ view = function(model) {
             TiAir.close(view);
         }}),
         center: 'Add Comment',
-        right: AirView('button', { type: 'Camera', callback: function() {
-            AirView('notImplemented');
+        right: !Ti.Media.isCameraSupported ? null : AirView('button', { type: 'Camera', callback: function() {
+            Ti.Media.showCamera({
+                success:function(event) {
+                    AirView('getPhoto', {
+                        event: event,
+                        callback: function(evt) {
+                            alert(evt);
+                        }
+                    });
+                }
+            });
         }}),
         style: 'Grey'
     }));

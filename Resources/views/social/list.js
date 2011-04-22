@@ -25,7 +25,7 @@ view = function(model) {
 
             var row = new TableViewRow({
                 className: 'SocialRow Row',
-                targetURL: { controller: 'social', action: 'details', id: i, navigatorOptions: { animate: 'tabSlide' } }
+                targetURL: { controller: 'social', action: 'details', id: item.id, navigatorOptions: { animate: 'tabSlide' } }
             });
 
             row.add(new ImageView({ className: 'SocialRowImage', image: item.imageURL }));
@@ -42,18 +42,18 @@ view = function(model) {
     var table = AirView('table', {
         rows: processRows(model.items),
         update: function(callback) {
-            AirView('notification', 'Updating...');
+            AirView('notification', { text: 'Updating...', id: 'Social' });
             AirAction({
                 controller: 'social',
                 action: 'update',
                 callback: function(response) {
                     if (response.error) {
                         callback();
-                        AirView('notification', response.error);
+                        AirView('notification', { text: response.error, id: 'Social' });
                         error(response.error);
                     }
                     else {
-                        AirView('notification', 'Last Updated: Just Now');
+                        AirView('notification', { text: 'Last Updated: Just Now', id: 'Social' });
                         callback({ rows: processRows(response) });
                     }
                 }
@@ -66,6 +66,15 @@ view = function(model) {
     if (model.items.length == 0) {
         table.update();
     }
+
+
+    AirView('getPhoto', {
+        event: { media: Ti.Filesystem.getFile('content/images/icon.png') },
+        callback: function(evt) {
+            alert(evt);
+        }
+    });
+
 
     return view;
 };

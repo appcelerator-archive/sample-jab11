@@ -71,7 +71,7 @@ var TiAir = {};
                 });
             }
             else {
-                Ti.API.warn('TiAir :: Warning :: Model ' + file.nativePath.split('.') + '');
+                Ti.API.warn('TiAir :: Warning :: Model ' + result.file.nativePath.split('.') + '');
             }
         }, 'models');
     };
@@ -258,7 +258,7 @@ var TiAir = {};
         var navigator = this.getNavigator();
 
         var toOpen;
-        if (openCache[hash]) {
+        if (!url.cache && openCache[hash]) {
             toOpen = openCache[hash];
         }
         else {

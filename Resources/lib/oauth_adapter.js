@@ -107,6 +107,14 @@ var OAuthAdapter = function(pConsumerSecret, pConsumerKey, pSignatureMethod)
     var webView = null;
     var receivePinCallback = null;
 
+     this.getOAuthToken = function() {
+         return accessToken;
+     };
+     this.getOAuthTokenSecret = function() {
+         return accessTokenSecret;
+     };
+
+
     this.loadAccessToken = function(pService)
     {
         Ti.API.debug('Loading access token for service [' + pService + '].');
@@ -208,7 +216,7 @@ var OAuthAdapter = function(pConsumerSecret, pConsumerKey, pSignatureMethod)
         Ti.API.debug('request token got the following response: ' + client.responseText);
 
         return client.responseText;
-    }
+    };
 
     // unloads the UI used to have the user authorize the application
     var destroyAuthorizeUI = function()
@@ -326,6 +334,10 @@ var OAuthAdapter = function(pConsumerSecret, pConsumerKey, pSignatureMethod)
         view.animate(animation);
     };
 
+     this.getAccessor = function() {
+         return accessor;
+     };
+
     this.getAccessToken = function(pUrl)
     {
         accessor.tokenSecret = requestTokenSecret;
@@ -367,7 +379,7 @@ var OAuthAdapter = function(pConsumerSecret, pConsumerKey, pSignatureMethod)
     };
 
     // TODO: remove this on a separate Twitter library
-    var send = function(pUrl, pParameters, pTitle, success, error)
+    var send = this.send = function(pUrl, pParameters, pTitle, success, error)
     {
         Ti.API.debug('Sending a message to the service at [' + pUrl + '] with the following params: ' + JSON.stringify(pParameters));
 
@@ -413,6 +425,4 @@ var OAuthAdapter = function(pConsumerSecret, pConsumerKey, pSignatureMethod)
         return client.responseText;
 
     };
-    this.send = send;
-
 };

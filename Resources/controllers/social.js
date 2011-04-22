@@ -15,6 +15,9 @@ controller = {
         addComment: function() {
             return AirView({ text: constants.DefaultComment });
         },
+        getPhoto: function(event, callback) {
+            return AirView({ event: event, callback: callback });
+        },
         details: function(id) {
             var db = TiStorage().use('jab');
             var posts = db.collection('SocialPosts');
@@ -171,7 +174,7 @@ controller = {
                         } else if (response.error) {
                             callback(response);
                         } else {
-                            AirView('notification', 'The server is temporarily unavailable; please check your internet connection, and try again.');
+                            callback({ error: 'The server is temporarily unavailable; please check your internet connection, and try again.' });
                         }
                     }
                     catch(err) {
@@ -215,7 +218,7 @@ controller = {
                         } else if (response.error) {
                             callback(response);
                         } else {
-                            AirView('notification', 'The server is temporarily unavailable; please check your internet connection, and try again.');
+                            callback({ error: 'The server is temporarily unavailable; please check your internet connection, and try again.' });
                         }
                     }
                     catch(err) {
