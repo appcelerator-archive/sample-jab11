@@ -15,8 +15,8 @@ view = function(model) {
                 // TODO: switch visible
             },
             options: [
-                new Label({ text: 'Sessions', className: 'SegmentedPickerText', selected: false }),
-                new Label({ text: 'Bio', className: 'SegmentedPickerText', selected: true })
+                new Label({ text: 'Sessions', className: 'SegmentedPickerText', selected: true }),
+                new Label({ text: 'Bio', className: 'SegmentedPickerText', selected: false })
             ]
         })
     });

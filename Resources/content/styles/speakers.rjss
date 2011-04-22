@@ -28,3 +28,31 @@
     font: { fontSize: 12 },
     color: '#000'
 }
+
+#SpeakerGrid {
+     layout: 'horizontal',
+     top: 44,
+     contentHeight: 'auto',
+     showVerticalScrollIndicator: true
+}
+.SpeakerTile, .SpeakerWithThumbnail, .SpeakerNoThumbnail {
+    width: 160, height: 120
+}
+.SpeakerImage {
+    width: 80, height: 80,
+    top: 14, left: 42,
+    backgroundColor: '#fff'
+}
+.SpeakerWithThumbnail {
+    image: 'content/images/speakers/tile.png'
+}
+.SpeakerNoThumbnail {
+    image: 'content/images/speakers/empty.png'
+}
+.SpeakerName {
+    font: { fontWeight: 'bold', fontSize: 14 },
+    color: '#4674b9',
+    height: 'auto',
+    textAlign: 'center',
+    top: 88
+}

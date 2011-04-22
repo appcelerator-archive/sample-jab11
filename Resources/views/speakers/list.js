@@ -4,43 +4,73 @@ view = function(model) {
         left: AirView('button', { view: view, type: 'Home' }),
         center: '2011 Speakers',
         right: AirView('button', { type: 'Refresh', callback: function() {
-            table.update();
+            update();
         }})
     }));
-    function processRows(data) {
-        var rows = [];
+
+    var grid;
+
+    function displaySpeakers(data) {
+        var newGrid = new ScrollView({ id: 'SpeakerGrid' });
+
+        // create our new grid
         for (var i = 0, l = data.length; i < l; i++) {
-            var item = data[i];
-            rows.push(AirView('row', {
-                title: item.UserName,
-                targetURL: { controller: 'speakers', action: 'details', id: item.id, navigatorOptions: { animate: 'tabSlide' } }
-            }));
+            newGrid.add(createTile(data[i]));
         }
-        return rows;
+        if (l > 0) {
+            newGrid.add(new ImageView({ className: 'TornEdge', bottom: -8 }));
+        }
+
+        // and swap the new grid in for the old grid
+        view.add(newGrid);
+        if (grid) {
+            view.remove(grid);
+        }
+        grid = newGrid;
     }
 
-    var table = AirView('table', {
-        rows: processRows(model),
-        update: function(callback) {
-            AirView('notification', { text: 'Updating...', id: 'Speakers' });
-            AirAction({
-                controller: 'speakers',
-                action: 'update',
-                callback: function(response) {
-                    if (response.error) {
-                        callback();
-                        AirView('notification', { text: response.error, id: 'Speakers' });
-                        error(response.error);
-                    }
-                    else {
-                        callback(response);
-                        AirView('notification', { text: 'Last Updated: Just Now', id: 'Speakers' });
-                    }
-                }
-            });
+    function createTile(item) {
+        var tile = new View({ className: 'SpeakerTile' });
+        if (item.ThumbnailURL) {
+            tile.add(new ImageView({ image: item.ThumbnailURL, className: 'SpeakerImage' }));
+            tile.add(new ImageView({ className: 'SpeakerWithThumbnail' }));
         }
-    });
-    table.top = 45;
-    view.add(table);
+        else {
+            tile.add(new ImageView({ className: 'SpeakerNoThumbnail' }));
+        }
+        tile.add(new Label({ text: item.UserName, className: 'SpeakerName' }));
+
+        $(tile).click(function() {
+            TiAir.openURL({
+                controller: 'speakers', action: 'details',
+                id: item.id,
+                navigatorOptions: { animate: 'tabSlide' }
+            });
+        });
+        return tile;
+    }
+
+    function update() {
+        AirView('notification', { text: 'Updating...', id: 'Speakers' });
+        AirAction({
+            controller: 'speakers',
+            action: 'update',
+            callback: function(response) {
+                if (response.error) {
+                    AirView('notification', { text: response.error, id: 'Speakers' });
+                    error(response.error);
+                }
+                else {
+                    AirView('notification', { text: 'Last Updated: Just Now', id: 'Speakers' });
+                    displaySpeakers(response);
+                }
+            }
+        });
+    }
+
+
+    displaySpeakers(model);
+
+    view.add(grid);
     return view;
 };
