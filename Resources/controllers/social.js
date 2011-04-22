@@ -132,14 +132,23 @@ controller = {
 
             var queue = [ this.updateTwitter, this.updateFacebook ];
 
-            (function processQueue(data) {
+            var newPosts = [];
+
+            (function processQueue() {
                 var updateFunction = queue.pop();
                 if (updateFunction) {
                     updateFunction(processQueue, db, posts, settings);
                 }
                 else {
                     posts.sort({ when: 1 });
-                    callback(data);
+                    newPosts.sort(function(a,b) {
+                        if (a.when != b.when)
+                        {
+                            return (a.when < b.when) ? 1 : -1;
+                        }
+                        return 0;
+                    });
+                    callback(newPosts);
                 }
             })();
 
@@ -151,6 +160,7 @@ controller = {
 
             var lastUpdate = settings.findOne({ name: 'LastFBUpdate' }) || settings.create({ name: 'LastFBUpdate', value: 0 }).findOne({ name: 'LastFBUpdate' });
 
+            var newPosts = [];
             var xhr = new HTTPClient({
                 onload: function() {
                     try {
@@ -158,7 +168,7 @@ controller = {
                         if (response) {
                             var items = response.data;
                             for (var i = 0, l = items.length; i < l; i++) {
-                                posts.create({
+                                var newPost = {
                                     imageURL: items[i].picture,
                                     who: items[i].from.name,
                                     text: items[i].message,
@@ -166,11 +176,13 @@ controller = {
                                     sourceID: items[i].id,
                                     url: items[i].link,
                                     when: parseISODate(items[i].created_time.split('+')[0]).getTime()
-                                });
+                                };
+                                posts.create(newPost);
+                                newPosts.push(newPost);
                             }
                             lastUpdate.value = parseInt(new Date().getTime() / 1000);
                             settings.update(lastUpdate.id, lastUpdate);
-                            callback(posts.find());
+                            callback(newPosts);
                         } else if (response.error) {
                             callback(response);
                         } else {
@@ -195,6 +207,8 @@ controller = {
 
             var maxID = settings.findOne({ name: 'MaxID' }) || settings.create({ name: 'MaxID', value: 0 }).findOne({ name: 'MaxID' });
 
+            var newPosts = [];
+            
             var xhr = new HTTPClient({
                 onload: function() {
                     try {
@@ -202,7 +216,7 @@ controller = {
                         if (response) {
                             var items = response.results;
                             for (var i = 0, l = items.length; i < l; i++) {
-                                posts.create({
+                                var newPost = {
                                     imageURL: items[i].profile_image_url,
                                     who: items[i].from_user,
                                     text: items[i].text,
@@ -210,11 +224,14 @@ controller = {
                                     sourceID: items[i].id,
                                     url: 'http://twitter.com/#!/' + items[i].from_user + '/status/' + items[i].id,
                                     when: new Date(items[i].created_at).getTime()
-                                });
+                                };
+                                posts.create(newPost);
+                                newPosts.push(newPost);
+                                warn(newPost);
                             }
                             maxID.value = response.max_id_str;
                             settings.update(maxID.id, maxID);
-                            callback(posts.find());
+                            callback(newPosts);
                         } else if (response.error) {
                             callback(response);
                         } else {
