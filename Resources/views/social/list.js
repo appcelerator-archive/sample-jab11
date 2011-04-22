@@ -18,25 +18,63 @@ view = function(model) {
         right: rightView
     }));
 
+    var rows = [];
+
+    var iconStore = Ti.Filesystem.applicationDataDirectory + '/SocialIcons';
+    var dir = Ti.Filesystem.getFile(iconStore);
+    if (!dir.exists()) {
+        dir.createDirectory();
+    }
+
+    function grabRowFromItem(item) {
+        var row = new TableViewRow({
+            className: 'SocialRow Row',
+            item: item,
+            targetURL: { controller: 'social', action: 'details', id: item.id, navigatorOptions: { animate: 'tabSlide' } }
+        });
+
+        if (item.imageURL) {
+            var hashedSource = Titanium.Utils.md5HexDigest(item.imageURL + '') + '.' + item.imageURL.split('.').pop();
+            var localIcon = Ti.Filesystem.getFile(iconStore, hashedSource);
+            if (localIcon.exists()) {
+                warn('exists ' + localIcon.nativePath);
+                row.add(new ImageView({ className: 'SocialRowImage', image: localIcon.nativePath }));
+            }
+            else {
+                row.add(row.socialImage = new ImageView({ className: 'SocialRowImage', image: item.imageURL }));
+                $(row.socialImage).load(function() {
+                    localIcon.write(row.socialImage.toImage());
+                });
+            }
+        }
+
+        row.add(new ImageView({ className: 'SocialIcon SocialIcon' + item.source }));
+        row.add(new Label({ text: item.who, className: 'SocialRowTitle RowTitle' }));
+        row.add(row.whenLabel = new Label({ text: toTimeElapsed(item.when), className: 'SocialRowWhen' }));
+        row.add(new Label({ text: item.text, className: 'SocialRowSubtitle RowSubtitle' }));
+        return row;
+    }
+
     function processRows(data) {
-        var rows = [];
         for (var i = 0, l = data.length; i < l; i++) {
-            var item = data[i];
-
-            var row = new TableViewRow({
-                className: 'SocialRow Row',
-                targetURL: { controller: 'social', action: 'details', id: item.id, navigatorOptions: { animate: 'tabSlide' } }
-            });
-
-            row.add(new ImageView({ className: 'SocialRowImage', image: item.imageURL }));
-            row.add(new ImageView({ className: 'SocialIcon SocialIcon' + item.source }));
-            row.add(new Label({ text: item.who, className: 'SocialRowTitle RowTitle' }));
-            row.add(new Label({ text: toTimeElapsed(item.when), className: 'SocialRowWhen' }));
-            row.add(new Label({ text: item.text, className: 'SocialRowSubtitle RowSubtitle' }));
-
-            rows.push(row);
+            rows.push(grabRowFromItem(data[i]));
         }
         return rows;
+    }
+
+    function insertAndUpdate(data) {
+        // spin through the existing rows and update their timestamps
+        for (var i = 0, l = rows.length; i < l; i++) {
+            rows[i].whenLabel.text = toTimeElapsed(rows[i].item.when);
+            rows[i].whenLabel.width = 'auto';
+        }
+        // and insert the new rows we have downloaded
+        // note how we do this in reverse order!
+        for (var j = data.length - 1; j >= 0; j--) {
+            var row = grabRowFromItem(data[j]);
+            table.insertRowBefore(0, row);
+            rows.unshift(row);
+        }
     }
 
     var table = AirView('table', {
@@ -54,7 +92,8 @@ view = function(model) {
                     }
                     else {
                         AirView('notification', { text: 'Last Updated: Just Now', id: 'Social' });
-                        callback({ rows: processRows(response) });
+                        insertAndUpdate(response);
+                        callback();
                     }
                 }
             });
@@ -68,12 +107,12 @@ view = function(model) {
     }
 
 
-    AirView('getPhoto', {
+    /*AirView('getPhoto', {
         event: { media: Ti.Filesystem.getFile('content/images/icon.png') },
         callback: function(evt) {
             alert(evt);
         }
-    });
+    });*/
 
 
     return view;
