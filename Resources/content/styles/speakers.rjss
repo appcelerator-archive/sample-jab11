@@ -29,6 +29,9 @@
     color: '#000'
 }
 
+/*
+    List
+*/
 #SpeakerGrid {
      layout: 'horizontal',
      top: 44,
@@ -55,4 +58,42 @@
     height: 'auto',
     textAlign: 'center',
     top: 88
+}
+
+/*
+    Details
+*/
+.SpeakerDetailsImage, .SpeakerDetailsWithThumbnail, .SpeakerDetailsNoThumbnail {
+    width: 96, height: 96,
+    top: 10, left: 10
+}
+.SpeakerDetailsImage {
+    backgroundColor: '#fff'
+}
+.SpeakerDetailsWithThumbnail {
+    image: 'content/images/speakers/portrait.png'
+}
+.SpeakerDetailsNoThumbnail {
+    image: 'content/images/speakers/portraitEmpty.png'
+}
+.SpeakerDetailsTitleContainer {
+    height: 120
+}
+.SpeakerDetailsBody {
+    top: 122
+}
+.SpeakerDetailsTornEdge {
+    top: 120
+}
+.SpeakerDetailsName {
+    font: { fontWeight: 'bold', fontSize: 26 },
+    color: '#4674b9',
+    textAlign: 'left',
+    top: 0, left: 120,
+    height: 110
+}
+.EmailButton {
+    width: 36, height: 36,
+    top: 4, right: 10,
+    backgroundImage: 'content/images/speakers/email.png'
 }
