@@ -84,7 +84,7 @@ TiAir.init({
             'details.js', 'list.js'
         ],
         program: [
-            'details.js', 'list.js'
+            'details.js', 'list.js', 'myScheduleRows.js'
         ],
         settings: [
             'list.js'
@@ -93,7 +93,7 @@ TiAir.init({
             'addComment.js', 'details.js', 'getPhoto.js', 'list.js'
         ],
         speakers: [
-            'details.js', 'list.js', 'sessions.js'
+            'details.js', 'list.js'
         ],
         travel: [
             'details.js', 'list.js'

@@ -28,23 +28,36 @@ controller = {
         isInMySchedule: function(gripPos) {
             return mySchedule[gripPos];
         },
+        compareEventsChronologically: function (a, b) {
+            if (a.Day == b.Day) {
+                if (a.Start == b.Start) {
+                    if (a.End == b.End) {
+                        return 0;
+                    }
+                    return a.End < b.End ? -1 : 1;
+                }
+                return a.Start < b.Start ? -1 : 1;
+            }
+            return a.Day < b.Day ? -1 : 1;
+        },
         getMySchedule: function() {
             var retVal = [];
             for (var key in mySchedule) {
                 retVal.push(mySchedule[key])
             }
-            retVal.sort(function compareEventsChronologically(a, b) {
-                if (a.Day == b.Day) {
-                    if (a.Start == b.Start) {
-                        if (a.End == b.End) {
-                            return 0;
-                        }
-                        return a.End < b.End ? -1 : 1;
-                    }
-                    return a.Start < b.Start ? -1 : 1;
+            retVal.sort(this.compareEventsChronologically);
+            return retVal;
+        },
+        __cachedAllSpeeches: null,
+        getForSpeaker: function(userLink) {
+            var allSpeeches = this.__cachedAllSpeeches || this.get();
+            var retVal = [];
+            for (var i = allSpeeches.length - 1; i >= 0; i--) {
+                if (allSpeeches[i].UserLink == userLink) {
+                    retVal.push(allSpeeches[i]);
                 }
-                return a.Day < b.Day ? -1 : 1;
-            });
+            }
+            retVal.sort(this.compareEventsChronologically);
             return retVal;
         },
         setMySchedule: function(gripPos, val) {
@@ -91,13 +104,14 @@ controller = {
 
             function cleanText(text) {
                 return text
-                    .split('\\/').join('/')
-                    .split('\\"').join('"')
-                    .split('\\u00e9').join('é')
-                    .split('\\u2026').join('…')
-                    .split('\\u010d').join('č')
-                    .split('<br \\/>').join('');
+                        .split('\\/').join('/')
+                        .split('\\"').join('"')
+                        .split('\\u00e9').join('é')
+                        .split('\\u2026').join('…')
+                        .split('\\u010d').join('č')
+                        .split('<br \\/>').join('');
             }
+
             var rows = data.substring(3, data.length - 3).split('"],["');
             for (var i = 0, l = rows.length; i < l; i++) {
                 var cells = rows[i].split('","');

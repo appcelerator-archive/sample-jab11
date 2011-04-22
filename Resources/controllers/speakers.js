@@ -68,7 +68,7 @@ controller = {
                 var cells = rows[i].split('","');
                 collection.create({
                     ServerID: cells[0],
-                    UserName: cells[1],
+                    UserName: cleanText(cells[1]),
                     UserLink: cleanText(cells[2]),
                     BiographyHTML: cleanText(cells[3]),
                     ThumbnailURL: cleanText(cells[4]),
