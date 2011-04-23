@@ -42,26 +42,12 @@ controller = {
         },
         postToFacebook: function(message, callback) {
 
-            AirView('notification', 'Posting to Facebook...');
+            AirView('notification', { text: 'Posting to Facebook...', id: 'PostToFacebook' });
 
             var facebook = require('facebook');
             facebook.appid = String(constants.FacebookAppID);
             facebook.permissions = ['publish_stream'];
             facebook.authorize();
-
-            /** IMAGE POST - Uncomment to try out **/
-            // var img = Ti.UI.createImageView({
-            // 	image: 'icontest.png'
-            // });
-            //
-            // Ti.Facebook.request('photos.upload', { picture: img.toBlob() },function(e) {
-            //    if (e.success) {
-            //      alert('success!');
-            //    }
-            //    else {
-            //      alert(e.error);
-            //    }
-            // });
 
             var data = {
                 message: message,
@@ -69,60 +55,33 @@ controller = {
             };
             facebook.requestWithGraphPath('me/feed', data, 'POST', function (evt) {
                 if (evt.success) {
-                    AirView('notification', 'Posted to Facebook!');
+                    AirView('notification', { text: 'Posted to Facebook!', id: 'PostToFacebook' });
                     callback(evt);
                 } else {
                     if (evt.error) {
-                        AirView('notification', 'Oops! Facebook says: ' + evt.error);
+                        AirView('notification', { text: 'Oops! Facebook says: ' + evt.error, id: 'PostToFacebook' });
                         callback(evt);
                     } else {
-                        AirView('notification', 'Facebook didn\'t respond properly.');
+                        AirView('notification', { text: 'Facebook didn\'t respond properly.', id: 'PostToFacebook' });
                         callback(evt);
                     }
                 }
             });
         },
         postToTwitter: function(message, callback) {
-            AirView('notification', 'Posting to Twitter...');
+            AirView('notification', { text: 'Posting to Twitter...', id: 'PostToTwitter' });
 
-            var oAuthAdapter = new OAuthAdapter(
-                    constants.TwitterConsumerSecret,
-                    constants.TwitterConsumerKey,
-                    'HMAC-SHA1');
-
-            // load the access token for the service (if previously saved)
-            oAuthAdapter.loadAccessToken('twitter');
-
-            // consume a service API - in this case the status update by Twitter
-            oAuthAdapter.send(
-                    'https://api.twitter.com/1/statuses/update.json',
-                    [
-                        ['status', message]
-                    ],
-                    'Twitter',
-                    function() {
-                        AirView('notification', 'Posted to Twitter!');
-                        callback();
-                    },
-                    function(err) {
-                        AirView('notification', 'Oops! Twitter says: ' + err);
-                        callback({ error: err });
-                    });
-
-            // if the client is not authorized, ask for authorization. the previous tweet will be sent automatically after authorization
-            if (!oAuthAdapter.isAuthorized()) {
-                // this function will be called as soon as the application is authorized
-                var receivePin = function() {
-                    // get the access token with the provided pin/oauth_verifier
-                    oAuthAdapter.getAccessToken('https://api.twitter.com/oauth/access_token');
-                    // save the access token
-                    oAuthAdapter.saveAccessToken('twitter');
-                };
-
-                // show the authorization UI and call back the receive PIN function
-                oAuthAdapter.showAuthorizeUI('https://api.twitter.com/oauth/authorize?'
-                        + oAuthAdapter.getRequestToken('https://api.twitter.com/oauth/request_token'), receivePin);
-            }
+            oauthWrapper.sendToTwitter({
+                message: message,
+                success: function() {
+                    AirView('notification', { text: 'Posted to Twitter!', id: 'PostToTwitter' });
+                    callback();
+                },
+                error: function(err) {
+                    AirView('notification', { text: 'Oops! Twitter says: ' + err, id: 'PostToTwitter' });
+                    callback({ error: err });
+                }
+            });
         },
         update: function(callback) {
 
@@ -144,9 +103,8 @@ controller = {
                 }
                 else {
                     posts.sort({ when: 1 });
-                    newPosts.sort(function(a,b) {
-                        if (a.when != b.when)
-                        {
+                    newPosts.sort(function(a, b) {
+                        if (a.when != b.when) {
                             return (a.when < b.when) ? 1 : -1;
                         }
                         return 0;
@@ -211,7 +169,7 @@ controller = {
             var maxID = settings.findOne({ name: 'MaxID' }) || settings.create({ name: 'MaxID', value: 0 }).findOne({ name: 'MaxID' });
 
             var newPosts = [];
-            
+
             var xhr = new HTTPClient({
                 onload: function() {
                     try {

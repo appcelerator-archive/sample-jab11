@@ -104,13 +104,6 @@ view = function(model) {
         table.update();
     }
 
-    /*AirView('getPhoto', {
-        event: { media: Ti.Filesystem.getFile('content/images/icon.png') },
-        callback: function(evt) {
-            alert(evt);
-        }
-    });*/
-
 
     return view;
 };

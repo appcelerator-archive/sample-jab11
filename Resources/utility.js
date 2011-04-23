@@ -137,3 +137,118 @@ function cacheRemoteURL(image, imageURL) {
         }
     }
 }
+
+var oauthWrapper = {
+    settings : {},
+    store: {},
+    setup: function(settings) {
+        this.settings = settings;
+        
+        // namespace created for issues with android in the initial oAuth process, need to refactor all code into namespace for all twitter api calls.
+        var oa = {};
+
+        this.store.adapter = oa.oAuthAdapter = new OAuthAdapterNew(
+                settings.secret,
+                settings.key,
+                'HMAC-SHA1');
+
+        oa.oAuthAdapter.loadAccessToken('twitter');
+        if (!oa.oAuthAdapter.isAuthorized()) {
+            // this function will be called as soon as the application is authorized
+            var receivePin = function() {
+                // get the access token with the provided pin/oauth_verifier
+                var accessTokens = oa.oAuthAdapter.getAccessToken({pURL: 'https://api.twitter.com/oauth/access_token', requestToken: requestToken, requestTokenSecret: requestTokenSecret});
+
+                setTimeout(function() {
+                    Ti.API.debug(JSON.stringify(accessTokens));
+                    Ti.API.debug('Access Tokens: ' + accessTokens); // Losing one of the tokens at this stage prior to saving.
+                    // oa.oAuthAdapter.saveAccessToken('twitter');
+                }, 4000);
+            };
+
+            var accessor = {
+                consumerSecret: settings.secret,
+                tokenSecret: ''
+            };
+
+            accessor.tokenSecret = '';
+            var toaURL = 'https://api.twitter.com/oauth/request_token';
+            var message = oa.oAuthAdapter.createMessage(toaURL, 'POST');
+            OAuth.setTimestampAndNonce(message);
+            OAuth.setParameter(message, "oauth_timestamp", OAuth.timestamp());
+            OAuth.SignatureMethod.sign(message, accessor);
+            var finalUrl = OAuth.addToURL(message.action, message.parameters);
+
+            var client = Ti.Network.createHTTPClient();
+
+            client.onload = function() {
+                try {
+                    oa.authTokens = client.responseText;
+                    var responseParams = OAuth.getParameterMap(oa.authTokens);
+                    var requestToken = responseParams.oauth_token;
+                    var requestTokenSecret = responseParams.oauth_token_secret;
+                    Ti.API.debug('Ready State: ' + client.readyState);
+                    Ti.API.debug('Status: ' + client.status);
+                    Ti.API.debug('Reponse text: ' + oa.authTokens);
+                    setTimeout(function() {
+                        Ti.API.debug(oa.authTokens);
+
+                        // Ti.API.info('Request token from twitter.js settings: ' + client.responseText);
+                        oa.oAuthAdapter.showAuthorizeUI('https://api.twitter.com/oauth/authorize?' + oa.authTokens, receivePin);
+                    }, 4000);
+
+                } catch(e) {
+                    Ti.API.debug('onload function error ' + e);
+                    alert(e);
+                }
+            };
+            Ti.API.debug(finalUrl + ' Is the finalURL for auth step 1');
+            client.open('POST', finalUrl, false);
+            client.setRequestHeader('X-Requested-With', null);
+            client.send();
+        }
+    },
+    isAuthorized: function() {
+        return this.store.adapter.isAuthorized();
+    },
+    deAuthorize: function() {
+        this.store.adapter.clearAccessToken('twitter');
+    },
+    authorize: function(callback) {
+        var adapter = this.store.adapter;
+        if (adapter.isAuthorized() != false) {
+            adapter.send({
+                url: 'http://api.twitter.com/1/account/verify_credentials.json',
+                parameters: [],
+                method: 'GET',
+                onSuccess: function(response) {
+                    //response = JSON.parse(response);
+                    //alert(response.screen_name + ' authenticated');
+                    callback();
+                }
+            });
+        }
+    },
+    /**
+     * Sends an tweet. Authorizes if necessary.
+     * @param options Should include a message parameter, and two function callback parameters, success and error.
+     */
+    sendToTwitter: function(options) {
+        this.store.adapter.send({
+            url: 'https://api.twitter.com/1/statuses/update.json',
+            parameters: [
+                ['status', options.message]
+            ],
+            title: 'Twitter',
+            onSuccess: options.success,
+            onError: options.error
+        });
+        this.authorize();
+    },
+    getAccessToken: function() {
+        return this.store.adapter.getStoredAccessToken();
+    },
+    getAccessTokenSecret: function() {
+        return this.store.adapter.getStoredAccessTokenSecret();
+    }
+};
