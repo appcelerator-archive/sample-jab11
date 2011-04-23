@@ -70,10 +70,18 @@ view = function(model) {
         }
         // and insert the new rows we have downloaded
         // note how we do this in reverse order!
-        for (var j = data.length - 1; j >= 0; j--) {
-            var row = grabRowFromItem(data[j]);
-            table.insertRowBefore(0, row);
-            rows.unshift(row);
+        if (rows.length == 0) {
+            for (var j = 0, k = data.length; j < k; j++) {
+                rows.push(grabRowFromItem(data[j]));
+            }
+            table.updateRows({ rows: rows });
+        }
+        else {
+            for (var m = data.length - 1; m >= 0; m--) {
+                var row = grabRowFromItem(data[m]);
+                table.insertRowBefore(0, row);
+                rows.unshift(row);
+            }
         }
     }
 
@@ -105,7 +113,6 @@ view = function(model) {
     if (model.items.length == 0) {
         table.update();
     }
-
 
     /*AirView('getPhoto', {
         event: { media: Ti.Filesystem.getFile('content/images/icon.png') },

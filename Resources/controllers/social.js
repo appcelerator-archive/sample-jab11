@@ -134,8 +134,11 @@ controller = {
 
             var newPosts = [];
 
-            (function processQueue() {
+            (function processQueue(data) {
                 var updateFunction = queue.pop();
+                if (data) {
+                    newPosts = newPosts.concat(data);
+                }
                 if (updateFunction) {
                     updateFunction(processQueue, db, posts, settings);
                 }
@@ -227,7 +230,6 @@ controller = {
                                 };
                                 posts.create(newPost);
                                 newPosts.push(newPost);
-                                warn(newPost);
                             }
                             maxID.value = response.max_id_str;
                             settings.update(maxID.id, maxID);
