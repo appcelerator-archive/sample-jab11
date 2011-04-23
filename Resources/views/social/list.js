@@ -34,18 +34,8 @@ view = function(model) {
         });
 
         if (item.imageURL) {
-            var hashedSource = Titanium.Utils.md5HexDigest(item.imageURL + '') + '.' + item.imageURL.split('.').pop();
-            var localIcon = Ti.Filesystem.getFile(iconStore, hashedSource);
-            if (localIcon.exists()) {
-                warn('exists ' + localIcon.nativePath);
-                row.add(new ImageView({ className: 'SocialRowImage', image: localIcon.nativePath }));
-            }
-            else {
-                row.add(row.socialImage = new ImageView({ className: 'SocialRowImage', image: item.imageURL }));
-                $(row.socialImage).load(function() {
-                    localIcon.write(row.socialImage.toImage());
-                });
-            }
+            row.add(row.socialImage = new ImageView({ className: 'SocialRowImage' }));
+            cacheRemoteURL(row.socialImage, item.imageURL);
         }
 
         row.add(new ImageView({ className: 'SocialIcon SocialIcon' + item.source }));

@@ -116,3 +116,24 @@ function parseISODate(input) {
     }
     return new Date(year, months, days, hours, minutes, seconds);
 }
+
+var iconStore = Ti.Filesystem.applicationDataDirectory + '/CachedRemoteImages';
+var dir = Ti.Filesystem.getFile(iconStore);
+if (!dir.exists()) {
+    dir.createDirectory();
+}
+function cacheRemoteURL(image, imageURL) {
+    if (imageURL) {
+        var hashedSource = Ti.Utils.md5HexDigest(imageURL + '') + '.' + imageURL.split('.').pop();
+        var localIcon = Ti.Filesystem.getFile(iconStore, hashedSource);
+        if (localIcon.exists()) {
+            image.image = localIcon.nativePath;
+        }
+        else {
+            image.image = imageURL;
+            image.addEventListener('load', function() {
+                localIcon.write(image.toImage());
+            });
+        }
+    }
+}
