@@ -6,12 +6,9 @@ view = function(model) {
 
     table.updateRows = function(model) {
         if (model && model.rows) {
-            var data = [];
-            for (var i = 0, l = model.rows.length; i < l; i++) {
-                data.push(model.rows[i]);
-            }
-            if (l > 0) {
-                data[l - 1].add(new ImageView({ className: 'TornEdge', bottom: -8 }));
+            var data = model.rows;
+            if (model.rows.length > 0) {
+                data[model.rows.length - 1].add(new ImageView({ className: 'TornEdge', bottom: -8 }));
             }
             table.setData(data);
         }

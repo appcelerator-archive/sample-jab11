@@ -16,8 +16,9 @@ view = function(model) {
                 success:function(event) {
                     AirView('getPhoto', {
                         event: event,
-                        callback: function(evt) {
-                            alert(evt);
+                        callback: function(url) {
+                            text.text += ' ' + url;
+                            $(text).change();
                         }
                     });
                 }

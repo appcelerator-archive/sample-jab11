@@ -1,20 +1,6 @@
 /*
- * Include the libraries we will use. These libraries are NOT dependent on each other.
+ * Set up some constants that we will use throughout the app.
  */
-Ti.include('utility.js');
-Ti.include('lib/redux.js');
-Ti.include('lib/oauth_adapter.js');
-Ti.include('lib/TiAir.js');
-Ti.include('lib/TiStorage.js');
-
-Ti.UI.backgroundImage = 'content/images/loading.withoutbar.png';
-var used = [
-    Ti.UI.createView, Ti.UI.createLabel, Ti.UI.createImageView, Ti.UI.createButton, Ti.UI.createWindow,
-    Ti.UI.createWebView, Ti.UI.createAnimation, Ti.Map.createView, Ti.UI.create2DMatrix, Ti.UI.createScrollView,
-    Ti.UI.createTableView, Ti.UI.createTableViewRow, Ti.Network.createHTTPClient, Ti.UI.createTextField,
-    Ti.UI.createActivityIndicator, Ti.UI.createAlertDialog, Ti.UI.createTextArea, Ti.UI.createProgressBar
-];
-
 constants = {
     TwitterConsumerKey: '9U7332KAWsGzdIZDNpWkw',
     TwitterConsumerSecret: 'zG0SgCPfxFcwPyVatmYik9tUXMwcMQaKZjj2wOqQeag',
@@ -29,6 +15,25 @@ constants = {
 };
 
 /*
+ * Include the libraries we will use.
+ */
+Ti.include('lib/oauth.js');
+Ti.include('lib/sha1.js');
+Ti.include('lib/oauth_adapter.js');
+Ti.include('utility.js');
+Ti.include('lib/redux.js');
+Ti.include('lib/TiAir.js');
+Ti.include('lib/TiStorage.js');
+
+Ti.UI.backgroundImage = 'content/images/loading.withoutbar.png';
+var used = [
+    Ti.UI.createView, Ti.UI.createLabel, Ti.UI.createImageView, Ti.UI.createButton, Ti.UI.createWindow,
+    Ti.UI.createWebView, Ti.UI.createAnimation, Ti.Map.createView, Ti.UI.create2DMatrix, Ti.UI.createScrollView,
+    Ti.UI.createTableView, Ti.UI.createTableViewRow, Ti.Network.createHTTPClient, Ti.UI.createTextField,
+    Ti.UI.createActivityIndicator, Ti.UI.createAlertDialog, Ti.UI.createTextArea, Ti.UI.createProgressBar
+];
+
+/*
  * Include our various styles. We chose to use redux for this project, but TiAir has no dependency on redux.
  */
 includeRJSS(
@@ -39,6 +44,11 @@ includeRJSS(
     'content/styles/speakers.rjss',
     'content/styles/maps.rjss'
 );
+
+oauthWrapper.setup({
+    secret: constants.TwitterConsumerSecret,
+    key: constants.TwitterConsumerKey
+});
 
 /*
  * Call the init function. This will intelligently load our application, and call the default controller's action.

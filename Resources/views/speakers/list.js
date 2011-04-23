@@ -32,7 +32,8 @@ view = function(model) {
     function createTile(item) {
         var tile = new View({ className: 'SpeakerTile' });
         if (item.ThumbnailURL) {
-            tile.add(new ImageView({ image: item.ThumbnailURL, className: 'SpeakerImage' }));
+            tile.add(tile.image = new ImageView({ image: item.ThumbnailURL, className: 'SpeakerImage' }));
+            cacheRemoteURL(tile.image, item.ThumbnailURL);
             tile.add(new ImageView({ className: 'SpeakerWithThumbnail' }));
         }
         else {
