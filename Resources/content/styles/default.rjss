@@ -65,3 +65,6 @@
 #TravelIcon {
     backgroundImage: 'content/images/default/travel.png'
 }
+#SponsorsIcon {
+    backgroundImage: 'content/images/default/sponsors.png'
+}
