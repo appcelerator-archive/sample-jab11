@@ -64,13 +64,13 @@ TiAir.init({
     // your controllers decide who is going to do stuff, and what they are going to do it with
     controllers: [
         'about.js', 'default.js', 'maps.js', 'news.js', 'program.js', 'settings.js', 'social.js',
-        'speakers.js', 'travel.js'
+        'speakers.js', 'sponsors.js', 'travel.js'
     ],
 
     // models contain data
     models: [
         'about.js', 'defaultIcons.js', 'defaultNewsList.js', 'defaultProgram.js', 'defaultSpeakers.js',
-        'defaultTravel.js', 'venueMap.js'
+        'defaultTravel.js', 'sponsors.js', 'venueMap.js'
     ],
 
     // navigators control the transitions between views in your app
@@ -105,6 +105,9 @@ TiAir.init({
         ],
         speakers: [
             'details.js', 'list.js'
+        ],
+        sponsors: [
+        	'sponsors.js'
         ],
         travel: [
             'details.js', 'list.js'

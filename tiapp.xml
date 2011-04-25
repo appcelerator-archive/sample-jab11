@@ -8,10 +8,10 @@
 <id>com.appcelerator.jab11</id>
 <name>Jab11</name>
 <version>1.0</version>
-<publisher>dawson</publisher>
+<publisher>Appcelerator</publisher>
 <url>http://www.appcelerator.com</url>
 <description>No description provided</description>
-<copyright>2011 by dawson</copyright>
+<copyright>2011 by Appcelerator &amp; Joomla</copyright>
 <icon>appicon.png</icon>
     <persistent-wifi>false</persistent-wifi>
     <prerendered-icon>true</prerendered-icon>

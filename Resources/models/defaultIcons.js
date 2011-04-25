@@ -59,7 +59,13 @@ model = {
             }
         },
 
-        { className: 'Icon BlankIcon' },
+        { className: 'Icon', id: 'SpeakersIcon', 
+            targetURL: {
+                controller: 'sponsors', action: 'sponsors',
+                navigatorOptions: { animate: 'pop' },
+                cache: true
+            }        
+        },
 
         { className: 'Icon', id: 'SettingsIcon',
             targetURL: {
