@@ -1,6 +1,6 @@
 /*!
  * Titanium Air by Dawson Toth and Rick Blalock
- * http://www.appcelerator.com/
+ * https://github.com/dawsontoth/TiAir
  *
  * Provides a light, dynamic, MVC framework for building Titanium Mobile applications.
  *
