@@ -6,49 +6,56 @@ model = {
         { className: 'Icon', id: 'AboutIcon',
             targetURL: {
                 controller: 'about', action: 'about',
-                navigatorOptions: { animate: 'pop' }
+                navigatorOptions: { animate: 'pop' },
+                cache: true
             }
         },
 
         { className: 'Icon', id: 'MapsIcon',
             targetURL: {
                 controller: 'maps', action: 'venueMap',
-                navigatorOptions: { animate: 'pop' }
+                navigatorOptions: { animate: 'pop' },
+                cache: true
             }
         },
 
         { className: 'Icon', id: 'TravelIcon',
             targetURL: {
                 controller: 'travel', action: 'list',
-                navigatorOptions: { animate: 'pop' }
+                navigatorOptions: { animate: 'pop' },
+                cache: true
             }
         },
 
         { className: 'Icon', id: 'LatestNewsIcon',
             targetURL: {
                 controller: 'news', action: 'list',
-                navigatorOptions: { animate: 'pop' }
+                navigatorOptions: { animate: 'pop' },
+                cache: true
             }
         },
 
         { className: 'Icon', id: 'SpeakersIcon',
             targetURL: {
                 controller: 'speakers', action: 'list',
-                navigatorOptions: { animate: 'pop' }
+                navigatorOptions: { animate: 'pop' },
+                cache: true
             }
         },
 
         { className: 'Icon', id: 'ProgramIcon',
             targetURL: {
                 controller: 'program', action: 'list',
-                navigatorOptions: { animate: 'pop' }
+                navigatorOptions: { animate: 'pop' },
+                cache: true
             }
         },
 
         { className: 'Icon', id: 'SocialIcon',
             targetURL: {
                 controller: 'social', action: 'list',
-                navigatorOptions: { animate: 'pop' }
+                navigatorOptions: { animate: 'pop' },
+                cache: true
             }
         },
 
@@ -57,7 +64,8 @@ model = {
         { className: 'Icon', id: 'SettingsIcon',
             targetURL: {
                 controller: 'settings', action: 'list',
-                navigatorOptions: { animate: 'pop' }
+                navigatorOptions: { animate: 'pop' },
+                cache: true
             }
         }
 
