@@ -68,7 +68,8 @@ view = function(model) {
      */
     var title = new View();
     if (model.ThumbnailURL) {
-        title.add(new ImageView({ image: model.ThumbnailURL, className: 'SpeakerDetailsImage' }));
+        title.add(title.image = new ImageView({ image: model.ThumbnailURL, className: 'SpeakerDetailsImage' }));
+        cacheRemoteURL(title.image, model.ThumbnailURL);
         title.add(new ImageView({ className: 'SpeakerDetailsWithThumbnail' }));
     }
     else {
