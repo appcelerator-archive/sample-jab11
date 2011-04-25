@@ -59,7 +59,7 @@ model = {
             }
         },
 
-        { className: 'Icon', id: 'SpeakersIcon', 
+        { className: 'Icon', id: 'SponsorsIcon', 
             targetURL: {
                 controller: 'sponsors', action: 'sponsors',
                 navigatorOptions: { animate: 'pop' },
