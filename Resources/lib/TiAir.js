@@ -258,7 +258,7 @@ var TiAir = {};
         var navigator = this.getNavigator();
 
         var toOpen;
-        if (!url.cache && openCache[hash]) {
+        if (openCache[hash]) {
             toOpen = openCache[hash];
         }
         else {
@@ -276,7 +276,10 @@ var TiAir = {};
                 }
             }
             // call the view
-            toOpen = openCache[hash] = controller.actions[actionID].apply(controller.actions, actionArgs);
+            toOpen = controller.actions[actionID].apply(controller.actions, actionArgs);
+            if (url.cache) {
+                openCache[hash] = toOpen;
+            }
         }
 
         if (toOpen != null) {

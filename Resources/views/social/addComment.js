@@ -13,12 +13,18 @@ view = function(model) {
         center: 'Add Comment',
         right: !Ti.Media.isCameraSupported ? null : AirView('button', { type: 'Camera', callback: function() {
             Ti.Media.showCamera({
-                success:function(event) {
+                success: function(event) {
                     AirView('getPhoto', {
                         event: event,
-                        callback: function(url) {
-                            text.text += ' ' + url;
-                            $(text).change();
+                        callback: function(evt) {
+                            if (evt.error) {
+                                AirView('notification', 'TwitPic Upload Failed: ' + evt.error);
+                            }
+                            else {
+                                text.value += ' ' + evt.url;
+                                $(text).change();
+                                text.focus();
+                            }
                         }
                     });
                 }
