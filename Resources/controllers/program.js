@@ -109,7 +109,7 @@ controller = {
                         .split('\\u00e9').join('é')
                         .split('\\u2026').join('…')
                         .split('\\u010d').join('č')
-                        .split('<br \\/>').join('');
+                        .split('<br />').join('');
             }
 
             var rows = data.substring(3, data.length - 3).split('"],["');
