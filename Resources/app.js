@@ -8,7 +8,7 @@ constants = {
     Website: 'http://jandbeyond.org/',
     ProgramUpdateURL: 'http://jandbeyond.org/index.php?option=com_jab_program&type=1&format=raw',
     SpeakerUpdateURL: 'http://jandbeyond.org/index.php?option=com_jab_program&type=2&format=raw',
-    FacebookAppID: '125943497452698',
+    FacebookAppID: '213079428719971',
     TwitterUpdateURL: 'http://search.twitter.com/search.json?q=%23jab11%20OR%20@jandbeyond%20OR%20from%3Ajandbeyond',
     FacebookUpdateURL: 'https://graph.facebook.com/jandbeyond/feed',
     DefaultComment: '#jab11'
