@@ -227,53 +227,49 @@ var OAuthAdapter = function(pConsumerSecret, pConsumerKey, pSignatureMethod) {
     this.showAuthorizeUI = function(pUrl, pReceivePinCallback) {
         receivePinCallback = pReceivePinCallback;
 
-        window = Ti.UI.createWindow({
-            modal: true,
-            fullscreen: true
-        });
         var transform = Ti.UI.create2DMatrix().scale(0);
-        view = Ti.UI.createView({
-            top: 5,
-            width: 310,
-            height: 450,
-            border: 10,
-            backgroundColor: 'white',
-            borderColor: '#aaa',
-            borderRadius: 20,
-            borderWidth: 5,
-            zIndex: -1,
+        window = Ti.UI.createWindow({
+            backgroundColor: 'transparent',
             transform: transform
         });
-        var closeLabel = Ti.UI.createLabel({
-            textAlign: 'right',
+        view = Ti.UI.createView({
+            top: 10, right: 10, bottom: 10, left: 10,
+            backgroundColor: 'white',
+            border: 10,
+            borderColor: '#aaa', borderRadius: 20, borderWidth: 5,
+            zIndex: -1
+        });
+        var closeLabel = Ti.UI.createButton({
             font: {
                 fontWeight: 'bold',
-                fontSize: '12pt'
+                fontSize: '18pt'
             },
-            text: '(X)',
-            top: 10,
-            right: 12,
-            height: 14
+            backgroundColor: '#aaa',
+            color: '#fff',
+            style: 0,
+            borderRadius: 10,
+            title: 'X',
+            top: 8, right: 8,
+            width: 30, height: 30
         });
+        closeLabel.addEventListener('click', destroyAuthorizeUI);
         window.open();
 
         webView = Ti.UI.createWebView({
             url: pUrl,
             autoDetect:[Ti.UI.AUTODETECT_NONE]
         });
-        Ti.API.debug('Setting:[' + Ti.UI.AUTODETECT_NONE + ']');
         webView.addEventListener('load', authorizeUICallback);
         view.add(webView);
 
-        closeLabel.addEventListener('click', destroyAuthorizeUI);
-        view.add(closeLabel);
 
         window.add(view);
+        window.add(closeLabel);
 
-        var animation = Ti.UI.createAnimation();
-        animation.transform = Ti.UI.create2DMatrix();
-        animation.duration = 500;
-        view.animate(animation);
+        window.animate(Ti.UI.createAnimation({
+            transform: Ti.UI.create2DMatrix(),
+            duration: 500
+        }));
     };
 
     this.getAccessToken = function(pUrl) {
