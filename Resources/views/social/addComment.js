@@ -2,6 +2,30 @@ view = function(model) {
 
     var view = new View({ id: 'SocialAddComment', className: 'Window' });
 
+    function showCamera() {
+        Ti.Media.showCamera({
+            success: getPhotoView
+        });
+    }
+
+    function getPhotoView(event) {
+        AirView('getPhoto', {
+            event: event,
+            callback: handleUploadResponse
+        });
+    }
+
+    function handleUploadResponse(evt) {
+        if (evt.error) {
+            AirView('notification', 'TwitPic Upload Failed: ' + evt.error);
+        }
+        else {
+            text.value += ' ' + evt.url;
+            $(text).change();
+            text.focus();
+        }
+    }
+
     /*
      Create our title bar. The left button will close the pop up, the right will launch the camera.
      */
@@ -11,25 +35,7 @@ view = function(model) {
             TiAir.close(view);
         }}),
         center: 'Add Comment',
-        right: !Ti.Media.isCameraSupported ? null : AirView('button', { type: 'Camera', callback: function() {
-            Ti.Media.showCamera({
-                success: function(event) {
-                    AirView('getPhoto', {
-                        event: event,
-                        callback: function(evt) {
-                            if (evt.error) {
-                                AirView('notification', 'TwitPic Upload Failed: ' + evt.error);
-                            }
-                            else {
-                                text.value += ' ' + evt.url;
-                                $(text).change();
-                                text.focus();
-                            }
-                        }
-                    });
-                }
-            });
-        }}),
+        right: !Ti.Media.isCameraSupported ? null : AirView('button', { type: 'Camera', callback: showCamera }),
         style: 'Grey'
     }));
 
