@@ -211,34 +211,16 @@ var OAuthAdapter = function(pConsumerSecret, pConsumerKey, pSignatureMethod) {
         }
     };
 
+
     // looks for the PIN everytime the user clicks on the WebView to authorize the APP
     // currently works with TWITTER
     var authorizeUICallback = function(e) {
-        Ti.API.debug('authorizeUILoaded');
-
-        var xmlDocument = Ti.XML.parseString(e.source.html);
-        var nodeList = xmlDocument.getElementsByTagName('div');
-
-        for (var i = 0; i < nodeList.length; i++) {
-            var node = nodeList.item(i);
-            var id = node.attributes.getNamedItem('id');
-            if (id && id.nodeValue == 'oauth_pin') {
-                pin = node.text;
-
-                if (receivePinCallback) setTimeout(receivePinCallback, 100);
-
-                id = null;
-                node = null;
-
-                destroyAuthorizeUI();
-
-                break;
-            }
+        var response = e.source.evalJS('(p = document.getElementById("oauth_pin")) && p.innerHTML;');
+        if (response) {
+            pin = response.split('<code>')[1].split('</code>')[0];
+            receivePinCallback();
+            destroyAuthorizeUI();
         }
-
-        nodeList = null;
-        xmlDocument = null;
-
     };
 
     // shows the authorization UI
@@ -262,7 +244,7 @@ var OAuthAdapter = function(pConsumerSecret, pConsumerKey, pSignatureMethod) {
             zIndex: -1,
             transform: transform
         });
-        closeLabel = Ti.UI.createLabel({
+        var closeLabel = Ti.UI.createLabel({
             textAlign: 'right',
             font: {
                 fontWeight: 'bold',
