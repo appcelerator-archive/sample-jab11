@@ -45,28 +45,27 @@
  // if the client is not authorized, ask for authorization. the previous tweet will be sent automatically after authorization
  if (oAuthAdapter.isAuthorized() == false)
  {
-         // this function will be called as soon as the application is authorized
-     var receivePin = function() {
-                 // get the access token with the provided pin/oauth_verifier
-         oAuthAdapter.getAccessToken('https://api.twitter.com/oauth/access_token');
-                 // save the access token
-         oAuthAdapter.saveAccessToken('twitter');
-     };
+ // this function will be called as soon as the application is authorized
+ var receivePin = function() {
+ // get the access token with the provided pin/oauth_verifier
+ oAuthAdapter.getAccessToken('https://api.twitter.com/oauth/access_token');
+ // save the access token
+ oAuthAdapter.saveAccessToken('twitter');
+ };
 
-         // show the authorization UI and call back the receive PIN function
-     oAuthAdapter.showAuthorizeUI('https://api.twitter.com/oauth/authorize?' + oAuthAdapter.getRequestToken('https://api.twitter.com/oauth/request_token'), receivePin);
+ // show the authorization UI and call back the receive PIN function
+ oAuthAdapter.showAuthorizeUI('https://api.twitter.com/oauth/authorize?' + oAuthAdapter.getRequestToken('https://api.twitter.com/oauth/request_token'), receivePin);
  }
 
  */
 
 // create an OAuthAdapter instance
-var OAuthAdapter = function(pConsumerSecret, pConsumerKey, pSignatureMethod)
- {
-        
-        Ti.API.info('*********************************************');
-        Ti.API.info('If you like the OAuth Adapter, consider donating at');
-        Ti.API.info('https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=T5HUU4J5EQTJU&lc=IT&item_name=OAuth%20Adapter&currency_code=USD&bn=PP%2dDonationsBF%3abtn_donate_LG%2egif%3aNonHosted');
-        Ti.API.info('*********************************************');   
+var OAuthAdapter = function(pConsumerSecret, pConsumerKey, pSignatureMethod) {
+
+    Ti.API.info('*********************************************');
+    Ti.API.info('If you like the OAuth Adapter, consider donating at');
+    Ti.API.info('https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=T5HUU4J5EQTJU&lc=IT&item_name=OAuth%20Adapter&currency_code=USD&bn=PP%2dDonationsBF%3abtn_donate_LG%2egif%3aNonHosted');
+    Ti.API.info('*********************************************');
 
     // will hold the consumer secret and consumer key as provided by the caller
     var consumerSecret = pConsumerSecret;
@@ -99,8 +98,7 @@ var OAuthAdapter = function(pConsumerSecret, pConsumerKey, pSignatureMethod)
     var webView = null;
     var receivePinCallback = null;
 
-    this.loadAccessToken = function(pService)
-    {
+    this.loadAccessToken = function(pService) {
         Ti.API.debug('Loading access token for service [' + pService + '].');
 
         var file = Ti.Filesystem.getFile(Ti.Filesystem.applicationDataDirectory, pService + '.config');
@@ -109,12 +107,10 @@ var OAuthAdapter = function(pConsumerSecret, pConsumerKey, pSignatureMethod)
         var contents = file.read();
         if (contents == null) return;
 
-        try
-        {
+        try {
             var config = JSON.parse(contents.text);
         }
-        catch(ex)
-        {
+        catch(ex) {
             return;
         }
         if (config.accessToken) accessToken = config.accessToken;
@@ -122,8 +118,7 @@ var OAuthAdapter = function(pConsumerSecret, pConsumerKey, pSignatureMethod)
 
         Ti.API.debug('Loading access token: done [accessToken:' + accessToken + '][accessTokenSecret:' + accessTokenSecret + '].');
     };
-    this.saveAccessToken = function(pService)
-    {
+    this.saveAccessToken = function(pService) {
         Ti.API.debug('Saving access token [' + pService + '].');
         var file = Ti.Filesystem.getFile(Ti.Filesystem.applicationDataDirectory, pService + '.config');
         if (file == null) file = Ti.Filesystem.createFile(Ti.Filesystem.applicationDataDirectory, pService + '.config');
@@ -132,29 +127,26 @@ var OAuthAdapter = function(pConsumerSecret, pConsumerKey, pSignatureMethod)
             accessToken: accessToken,
             accessTokenSecret: accessTokenSecret
         }
-        ));
+                ));
         Ti.API.debug('Saving access token: done.');
     };
-    this.clearAccessToken = function(pService)
-    {
+    this.clearAccessToken = function(pService) {
         var file = Ti.Filesystem.getFile(Ti.Filesystem.applicationDataDirectory, pService + '.config');
         if (file.exists()) {
             file.deleteFile();
         }
-        accessToken =  null;
+        accessToken = null;
         accessTokenSecret = null;
         Ti.API.debug('Clearing access token: done.');
     };
 
     // will tell if the consumer is authorized
-    this.isAuthorized = function()
-    {
+    this.isAuthorized = function() {
         return ! (accessToken == null || accessTokenSecret == null);
     };
 
     // creates a message to send to the service
-    var createMessage = function(pUrl)
-    {
+    var createMessage = function(pUrl) {
         var message = {
             action: pUrl
             ,
@@ -173,8 +165,7 @@ var OAuthAdapter = function(pConsumerSecret, pConsumerKey, pSignatureMethod)
     };
 
     // requests a requet token with the given Url
-    this.getRequestToken = function(pUrl)
-    {
+    this.getRequestToken = function(pUrl) {
         accessor.tokenSecret = '';
 
         var message = createMessage(pUrl);
@@ -195,49 +186,43 @@ var OAuthAdapter = function(pConsumerSecret, pConsumerKey, pSignatureMethod)
     };
 
     // unloads the UI used to have the user authorize the application
-    var destroyAuthorizeUI = function()
-    {
+    var destroyAuthorizeUI = function() {
         Ti.API.debug('destroyAuthorizeUI');
         // if the window doesn't exist, exit
         if (window == null) return;
 
         // remove the UI
-        try
-        {
-                Ti.API.debug('destroyAuthorizeUI:webView.removeEventListener');
+        try {
+            Ti.API.debug('destroyAuthorizeUI:webView.removeEventListener');
             webView.removeEventListener('load', authorizeUICallback);
-                Ti.API.debug('destroyAuthorizeUI:window.close()');
+            Ti.API.debug('destroyAuthorizeUI:window.close()');
             window.hide();
-                        //              Ti.API.debug('destroyAuthorizeUI:window.remove(view)');
-                        // window.remove(view);
-                        //              Ti.API.debug('destroyAuthorizeUI:view.remove(webView)');
-                        //              view.remove(webView);
-                        //              Ti.API.debug('destroyAuthorizeUI:nullifying');
-                        //              webView = null;
-                        //             view = null;
-                        //             window = null;
+            //              Ti.API.debug('destroyAuthorizeUI:window.remove(view)');
+            // window.remove(view);
+            //              Ti.API.debug('destroyAuthorizeUI:view.remove(webView)');
+            //              view.remove(webView);
+            //              Ti.API.debug('destroyAuthorizeUI:nullifying');
+            //              webView = null;
+            //             view = null;
+            //             window = null;
         }
-        catch(ex)
-        {
+        catch(ex) {
             Ti.API.debug('Cannot destroy the authorize UI. Ignoring.');
         }
     };
 
     // looks for the PIN everytime the user clicks on the WebView to authorize the APP
     // currently works with TWITTER
-    var authorizeUICallback = function(e)
-    {
+    var authorizeUICallback = function(e) {
         Ti.API.debug('authorizeUILoaded');
 
         var xmlDocument = Ti.XML.parseString(e.source.html);
         var nodeList = xmlDocument.getElementsByTagName('div');
 
-        for (var i = 0; i < nodeList.length; i++)
-        {
+        for (var i = 0; i < nodeList.length; i++) {
             var node = nodeList.item(i);
             var id = node.attributes.getNamedItem('id');
-            if (id && id.nodeValue == 'oauth_pin')
-            {
+            if (id && id.nodeValue == 'oauth_pin') {
                 pin = node.text;
 
                 if (receivePinCallback) setTimeout(receivePinCallback, 100);
@@ -257,8 +242,7 @@ var OAuthAdapter = function(pConsumerSecret, pConsumerKey, pSignatureMethod)
     };
 
     // shows the authorization UI
-    this.showAuthorizeUI = function(pUrl, pReceivePinCallback)
-    {
+    this.showAuthorizeUI = function(pUrl, pReceivePinCallback) {
         receivePinCallback = pReceivePinCallback;
 
         window = Ti.UI.createWindow({
@@ -293,9 +277,9 @@ var OAuthAdapter = function(pConsumerSecret, pConsumerKey, pSignatureMethod)
 
         webView = Ti.UI.createWebView({
             url: pUrl,
-                        autoDetect:[Ti.UI.AUTODETECT_NONE]
+            autoDetect:[Ti.UI.AUTODETECT_NONE]
         });
-                Ti.API.debug('Setting:['+Ti.UI.AUTODETECT_NONE+']');
+        Ti.API.debug('Setting:[' + Ti.UI.AUTODETECT_NONE + ']');
         webView.addEventListener('load', authorizeUICallback);
         view.add(webView);
 
@@ -310,8 +294,7 @@ var OAuthAdapter = function(pConsumerSecret, pConsumerKey, pSignatureMethod)
         view.animate(animation);
     };
 
-    this.getAccessToken = function(pUrl)
-    {
+    this.getAccessToken = function(pUrl) {
         accessor.tokenSecret = requestTokenSecret;
 
         var message = createMessage(pUrl);
@@ -323,7 +306,7 @@ var OAuthAdapter = function(pConsumerSecret, pConsumerKey, pSignatureMethod)
 
         var parameterMap = OAuth.getParameterMap(message.parameters);
         for (var p in parameterMap)
-        Ti.API.debug(p + ': ' + parameterMap[p]);
+            Ti.API.debug(p + ': ' + parameterMap[p]);
 
         var client = Ti.Network.createHTTPClient();
         client.open('POST', pUrl, false);
@@ -341,18 +324,16 @@ var OAuthAdapter = function(pConsumerSecret, pConsumerKey, pSignatureMethod)
 
     };
 
-    var processQueue = function()
-    {
+    var processQueue = function() {
         Ti.API.debug('Processing queue.');
         while ((q = actionsQueue.shift()) != null)
-        send(q.url, q.parameters, q.title, q.successMessage, q.errorMessage);
+            send(q.url, q.parameters, q.title, q.successMessage, q.errorMessage);
 
         Ti.API.debug('Processing queue: done.');
     };
 
     // TODO: remove this on a separate Twitter library
-    var send = function(options)
-    {
+    var send = function(options) {
         var pUrl = options.url,
                 pParameters = options.parameters,
                 pTitle = options.title,
@@ -360,8 +341,7 @@ var OAuthAdapter = function(pConsumerSecret, pConsumerKey, pSignatureMethod)
                 pErrorMessage = options.onError;
         Ti.API.debug('Sending a message to the service at [' + pUrl + '] with the following params: ' + JSON.stringify(pParameters));
 
-        if (accessToken == null || accessTokenSecret == null)
-        {
+        if (accessToken == null || accessTokenSecret == null) {
 
             Ti.API.debug('The send status cannot be processed as the client doesn\'t have an access token. The status update will be sent as soon as the client has an access token.');
 
@@ -385,7 +365,7 @@ var OAuthAdapter = function(pConsumerSecret, pConsumerKey, pSignatureMethod)
 
         var parameterMap = OAuth.getParameterMap(message.parameters);
         for (var p in parameterMap)
-        Ti.API.debug(p + ': ' + parameterMap[p]);
+            Ti.API.debug(p + ': ' + parameterMap[p]);
 
         var client = Ti.Network.createHTTPClient();
         client.open('POST', pUrl, false);
