@@ -128,7 +128,7 @@ view = function(model) {
             message: value,
             callback: function(evt) {
                 if (evt.success) {
-                    text.value = '';
+                    text.value = (model && model.text) || '';
                     TiAir.close(view);
                 }
             }
