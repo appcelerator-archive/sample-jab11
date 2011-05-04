@@ -7,8 +7,8 @@ view = function(model) {
     table.updateRows = function(model) {
         if (model && model.rows) {
             var data = model.rows;
-            if (model.rows.length > 0) {
-                data[model.rows.length - 1].add(new ImageView({ className: 'TornEdge', bottom: -8 }));
+            if (data.length > 0) {
+                data[data.length - 1].add(new ImageView({ className: 'TornEdge', bottom: -8 }));
             }
             table.setData(data);
         }
