@@ -38,7 +38,7 @@ controller = {
                 });
             }
 
-            processQueue(to.pop());
+            processQueue(to.shift());
         },
         postToFacebook: function(message, callback) {
 
