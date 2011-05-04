@@ -12,6 +12,8 @@ view = function(model) {
         text = model.text;
         id = model.id;
     }
+    
+    info('TiAir :: Notification :: ' + text);
 
     if (id && byID[id]) {
         window = byID[id];
