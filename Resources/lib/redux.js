@@ -202,8 +202,8 @@ var redux = function (selector) {
             if (parsedrjss[file]) {
                 return parsedrjss[file];
             }
-            var rjss = (Ti.Filesystem.getFile(file).read() + '').replace(/[\r\t\n]/g, ' ');
-            var result = '', braceDepth = 0;
+            var rjss = (Ti.Filesystem.getFile(file).read() + '').replace(/[\r\t\n]/g, ' ').split('');
+            var result = [], braceDepth = 0;
             var inComment = false, inSelector = false, inAttributeBrace = false;
             var canStartSelector = true, canBeAttributeBrace = false;
 
@@ -216,29 +216,29 @@ var redux = function (selector) {
                 }
                 switch (rjss[i]) {
                     case ' ':
-                        result += ' ';
+                        result.push(rjss[i]);
                         break;
                     case '/':
                         inComment = rjss[i+1] == '*';
-                        result += inComment ? '' : '/';
+                        result.push(inComment ? '' : '/');
                         break;
                     case '[':
                         if (braceDepth > 0) {
-                            result += '[';
+                            result.push('[');
                         } else {
                             canStartSelector = false;
-                            result += 'if (';
+                            result.push('if (');
                         }
                         break;
                     case '=':
-                        result += (rjss[i - 1] != '!' && rjss[i - 1] != '<' && rjss[i - 1] != '>') ? '==' : '=';
+                        result.push((rjss[i - 1] != '!' && rjss[i - 1] != '<' && rjss[i - 1] != '>') ? '==' : '=');
                         break;
                     case ']':
                         if (braceDepth > 0) {
-                            result += ']';
+                            result.push(']');
                         } else {
                             canStartSelector = true;
-                            result += ')';
+                            result.push(')');
                             canBeAttributeBrace = true;
                         }
                         break;
@@ -249,18 +249,18 @@ var redux = function (selector) {
                         } else {
                             if (inSelector) {
                                 inSelector = false;
-                                result += '",';
+                                result.push('",');
                             }
                             braceDepth += 1;
                         }
-                        result += '{';
+                        result.push('{');
                         break;
                     case '}':
                         braceDepth -= 1;
-                        result += '}';
+                        result.push('}');
                         switch (braceDepth) {
                             case 0:
-                                result += ');';
+                                result.push(');');
                                 canStartSelector = true;
                                 break;
                             case -1:
@@ -274,15 +274,16 @@ var redux = function (selector) {
                         if (braceDepth == 0 && canStartSelector) {
                             canStartSelector = false;
                             inSelector = true;
-                            result += 'redux.fn.setDefault("';
+                            result.push('redux.fn.setDefault("');
                         }
-                        result += rjss[i];
+                        result.push(rjss[i]);
                         break;
                 }
             }
-            parsedrjss[file] = result;
+            var combinedResult = result.join('');
+            parsedrjss[file] = combinedResult;
             redux.data.global.setparsedrjss(parsedrjss);
-            return result;
+            return combinedResult;
         },
         /**
          * Includes and parses one or more RJSS files. Styles will be applied to any elements you create after calling this.

@@ -1,5 +1,5 @@
 #DefaultView {
-    backgroundImage: 'content/images/default/bg.png'
+    backgroundImage: '/content/images/default/bg.png'
 }
 
 /*
@@ -31,8 +31,7 @@
 */
 #DefaultGrid {
     top: 197,
-    left: 7,
-    right: 7
+    width: 306
 }
 .Icon {
     width: 102,
