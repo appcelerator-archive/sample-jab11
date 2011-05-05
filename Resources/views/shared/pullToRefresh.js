@@ -1,5 +1,10 @@
 view = function(model) {
 
+    // Android doesn't support pull to refresh at the moment
+    if (Ti.Android) {
+        return null;
+    }
+
     // based heavily on Jeff Haynie's blog post here:
     // http://developer.appcelerator.com/blog/2010/05/how-to-create-a-tweetie-like-pull-to-refresh-table.html
 
