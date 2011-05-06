@@ -10,18 +10,34 @@
 /*
     Style 'Days Until' at the top
 */
+[Ti.Android] {
+    .DaysUntilLabel {
+        font: { fontWeight: 'bold', fontSize: '16dp' },
+        left: '50dp',
+        bottom: 0
+    }
+    .DaysUntilNumber {
+        font: { fontWeight: 'bold', fontSize: '20dp' },
+        right: '115dp',
+        bottom: 0
+    }
+    .DaysUntil {
+        height: '25dp',
+        top: '30dp',
+        width: '160dp'
+    }
+}
 .DaysUntil {
     top: 9,
     height: 25,
-    width: 160,
-    left: 0,
-    right: 0
+    width: 160
 }
 .DaysUntilLabel {
     left: 50, height: 'auto', bottom: 3,
     font: { fontWeight: 'bold', fontSize: 16 },
     shadowColor: "#fdd49e",
 	shadowOffset: {x:0, y:1},
+    color: '#000'
 }
 .DaysUntilNumber {
     right: 115,
@@ -29,6 +45,7 @@
     font: { fontWeight: 'bold', fontSize: 20 },
     shadowColor: "#fdd49e",
 	shadowOffset: {x:0, y:1},
+    color: '#000'
 }
 
 /*
