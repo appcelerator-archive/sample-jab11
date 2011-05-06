@@ -143,7 +143,7 @@ controller = {
                         AirView('notification', { text: 'Interrupted while downloading details!', id: 'Program'});
                     }
                     else {
-                        if (response.data) {
+                        if (response && response.data) {
                             var data = response.data;
                             for (var j = 0, k = data.item.length; j < k; j++) {
                                 var item = data.item[j];
