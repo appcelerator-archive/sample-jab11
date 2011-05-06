@@ -32,9 +32,13 @@
 /*
     List
 */
-[Ti.Android]
-#SpeakerGrid {
-    layout: 'vertical'
+[Ti.Android] {
+    #SpeakerGrid {
+        layout: 'vertical'
+    }
+    .DaysSegmentedPicker {
+        width: 251
+    }
 }
 #SpeakerGrid {
      layout: 'horizontal',

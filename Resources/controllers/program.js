@@ -43,6 +43,9 @@ controller = {
         getMySchedule: function() {
             var retVal = [];
             for (var key in mySchedule) {
+                if (mySchedule[key] == null) {
+                    continue;
+                }
                 retVal.push(mySchedule[key])
             }
             retVal.sort(this.compareEventsChronologically);
@@ -61,12 +64,7 @@ controller = {
             return retVal;
         },
         setMySchedule: function(gripPos, val) {
-            if (val == null) {
-                delete mySchedule[gripPos];
-            }
-            else {
-                mySchedule[gripPos] = val;
-            }
+            mySchedule[gripPos] = val;
             Ti.App.Properties.setString('MySchedule', JSON.stringify(mySchedule));
             Ti.App.fireEvent('MySchedule-Updated', { GripPos: gripPos });
         },

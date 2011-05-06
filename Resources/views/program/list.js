@@ -76,6 +76,7 @@ view = function(model) {
     var secondBar = AirView('titleBar', {
         style: 'LighterGrey',
         right: AirView('segmentedPicker', {
+            className: 'Days',
             selectMultiple: false,
             allowNoneSelected: false,
             onSelect: function(evt) {
