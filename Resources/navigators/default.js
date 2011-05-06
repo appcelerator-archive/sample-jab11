@@ -25,6 +25,7 @@ navigator = {
             });
         }
 
+        Ti.UI.currentWindow = this.__mainWindow;
         this.__mainWindow.opacity = 0;
         this.__mainWindow.open(this.__animations.fade.visible);
         var self = this;

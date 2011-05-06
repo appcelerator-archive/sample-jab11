@@ -20,6 +20,7 @@ constants = {
 Ti.include('lib/oauth.js');
 Ti.include('lib/sha1.js');
 Ti.include('lib/oauth_adapter.js');
+Ti.include('lib/oauth_android.js');
 Ti.include('utility.js');
 Ti.include('lib/redux.js');
 Ti.include('lib/TiAir.js');
