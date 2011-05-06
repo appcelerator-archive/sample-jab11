@@ -18,13 +18,13 @@
 }
 .MyScheduleTimeRow {
     top: 14, right: 30,
-    height: 13, width: 'auto',
+    height: 'auto', width: 'auto',
     font: { fontWeight: 'bold', fontSize: 14 },
     color: '#4674b9'
 }
 .MyScheduleDateRow {
     top: 32, right: 30,
-    height: 13, width: 'auto',
+    height: 'auto', width: 'auto',
     font: { fontSize: 12 },
     color: '#000'
 }
@@ -32,6 +32,10 @@
 /*
     List
 */
+[Ti.Android]
+#SpeakerGrid {
+    layout: 'vertical'
+}
 #SpeakerGrid {
      layout: 'horizontal',
      top: 44,
