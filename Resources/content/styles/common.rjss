@@ -1,5 +1,10 @@
 Window {
-    backgroundImage: 'content/images/loading.withoutbar.png'
+    backgroundImage: 'content/images/loading.withoutbar.png',
+    orientationModes : [
+        Ti.UI.PORTRAIT,
+        Ti.UI.UPSIDE_PORTRAIT
+    ],
+    navBarHidden: true
 }
 
 /*
@@ -26,13 +31,7 @@ WebView {
     top: 60,
     borderRadius: 10,
     backgroundColor: 'transparent',
-    backgroundImage: null,
-    orientationModes : [
-        Titanium.UI.PORTRAIT,
-        Titanium.UI.UPSIDE_PORTRAIT,
-        Titanium.UI.LANDSCAPE_LEFT,
-        Titanium.UI.LANDSCAPE_RIGHT,
-    ]
+    backgroundImage: null
 }
 #NotificationOutAnimation {
     duration: 500,
@@ -107,7 +106,8 @@ WebView {
 }
 .TitleBarText {
     font: { fontWeight: 'bold', fontSize: 20 },
-    textAlign: 'center'
+    textAlign: 'center',
+    left: 0, right: 0
 }
 .BlackTitleBarText {
     color: '#fff',

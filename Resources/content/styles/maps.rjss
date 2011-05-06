@@ -7,5 +7,12 @@
 #VenueMapImageView {
     image: 'content/images/venueMap.gif',
     width: 2396,
-    height: 1409
+    height: 1409,
+    canScale: true,
+    enableZoomControls: true
+}
+[Ti.Android]
+#VenueMapImageView {
+    canScale: true,
+    enableZoomControls: true
 }
