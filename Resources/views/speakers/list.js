@@ -14,8 +14,20 @@ view = function(model) {
         var newGrid = new ScrollView({ id: 'SpeakerGrid' });
 
         // create our new grid
-        for (var i = 0, l = data.length; i < l; i++) {
-            newGrid.add(createTile(data[i]));
+        if (Ti.Android)
+        {
+            newGrid.layout = 'absolute';
+            for (var i = 0, l = data.length; i < l; i++) {
+                var tile = createTile(data[i]);
+                tile.left = (i % 2) * 160;
+                tile.top = parseInt(i / 2, 0) * 120;
+                newGrid.add(tile);
+            }
+        }
+        else {
+            for (var i = 0, l = data.length; i < l; i++) {
+                newGrid.add(createTile(data[i]));
+            }
         }
         if (l > 0) {
             newGrid.add(new ImageView({ className: 'TornEdge', bottom: -8 }));

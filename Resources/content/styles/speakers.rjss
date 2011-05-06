@@ -34,7 +34,8 @@
 */
 [Ti.Android] {
     #SpeakerGrid {
-        layout: 'vertical'
+        width: '320',
+        contentWidth: '320'
     }
     .DaysSegmentedPicker {
         width: 251
