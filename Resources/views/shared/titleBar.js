@@ -12,10 +12,11 @@ view = function(model) {
                 ? value
                 : new Label({
             text: value,
-            width: 'auto',
             className: (model.style || 'Black') + 'TitleBarText TitleBarText'
         });
-        obj[position] = 5;
+        if (position != 'center') {
+            obj[position] = 5;
+        }
 
         bar.add(obj);
     }
