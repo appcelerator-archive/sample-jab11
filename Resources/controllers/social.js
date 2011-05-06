@@ -125,7 +125,7 @@ controller = {
             var xhr = new HTTPClient({
                 onload: function() {
                     try {
-                        var response = JSON.parse(this.responseData);
+                        var response = JSON.parse(this.responseText);
                         if (response) {
                             var items = response.data;
                             for (var i = 0, l = items.length; i < l; i++) {
@@ -158,7 +158,7 @@ controller = {
                     callback({ error: e });
                 }
             });
-            xhr.open('GET', constants.FacebookUpdateURL + '?since=' + lastUpdate.value);
+            xhr.open('GET', constants.FacebookUpdateURL + '?since=' + ((lastUpdate && lastUpdate.value) || 0));
             xhr.send();
         },
         updateTwitter: function(callback, db, posts, settings) {
@@ -173,7 +173,7 @@ controller = {
             var xhr = new HTTPClient({
                 onload: function() {
                     try {
-                        var response = JSON.parse(this.responseData);
+                        var response = JSON.parse(this.responseText);
                         if (response) {
                             var items = response.results;
                             for (var i = 0, l = items.length; i < l; i++) {
@@ -206,7 +206,7 @@ controller = {
                     callback({ error: e });
                 }
             });
-            xhr.open('GET', constants.TwitterUpdateURL + '&page=1&since_id=' + maxID.value + '#' + new Date().getTime());
+            xhr.open('GET', constants.TwitterUpdateURL + '&page=1&since_id=' + ((maxID && maxID.value) || 0) + '#' + new Date().getTime());
             xhr.send();
         }
     }

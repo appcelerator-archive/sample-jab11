@@ -1,7 +1,7 @@
 view = function(model) {
     var view = new View({ id: 'SocialWindow', className: 'Window' });
 
-    var rightView = new View({ layout: 'horizontal', width: 'auto', height: 'auto' });
+    var rightView = new View({ layout: 'horizontal', width: 90, height: 'auto' });
     rightView.add(AirView('button', { type: 'AddComment', callback: function(evt) {
         TiAir.openURL({
             controller: 'social', action: 'addComment',
