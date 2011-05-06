@@ -18,7 +18,7 @@
     <statusbar-style>default</statusbar-style>
     <statusbar-hidden>false</statusbar-hidden>
     <fullscreen>false</fullscreen>
-    <navbar-hidden>false</navbar-hidden>
+    <navbar-hidden>true</navbar-hidden>
     <analytics>true</analytics>
     <guid>b164f3a8-ea64-43f4-aed0-7346b900356b</guid>
 	<property name="ti.facebook.appid">213079428719971</property>
