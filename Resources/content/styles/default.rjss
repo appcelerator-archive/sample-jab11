@@ -1,5 +1,10 @@
+[Ti.Android=undefined]
 #DefaultView {
-    backgroundImage: '/content/images/default/bg.png'
+    backgroundImage: 'content/images/default/bg.png'
+}
+[Ti.Android]
+#DefaultView {
+    backgroundImage: '/content/images/default/bg@android.png'
 }
 
 /*
