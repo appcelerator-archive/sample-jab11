@@ -1,5 +1,5 @@
 navigator = {
-    __mainWindow: new Window({ id: 'MainWindow' }),
+    __mainWindow: new Window({ id: 'MainWindow', exitOnClose: true }),
     __animations: {
         fade: {
             visible: new Animation({ className: 'FadeIn' }),
@@ -14,7 +14,7 @@ navigator = {
             hidden: new Animation({ className: 'SlideOut' })
         }
     },
-    __store: {},
+    __queue: [],
     init: function(TiAir) {
         for (var key in this.__animations) {
             $(this.__animations[key].visible).complete(function(evt) {
@@ -27,8 +27,15 @@ navigator = {
 
         this.__mainWindow.opacity = 0;
         this.__mainWindow.open(this.__animations.fade.visible);
+        var self = this;
+        if (Ti.Android) {
+            this.__mainWindow.addEventListener('android:back', function() {
+                self.close(self.__queue[self.__queue.length-1]);
+            });
+        }
     },
     open: function(url, target, evt) {
+        this.__queue.push(target);
         if (Ti.Android) {
             // if we're on Android, open the target straight away.
             this.__mainWindow.add(target);
@@ -66,6 +73,10 @@ navigator = {
         });
     },
     close: function(target) {
+        this.__queue.pop();
+        if (this.__queue.length == 0) {
+            this.__mainWindow.close();
+        }
         if (Ti.Android) {
             // if we're on Android, close the target straight away.
             this.__mainWindow.remove(target);
