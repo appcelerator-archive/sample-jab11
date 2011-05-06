@@ -141,7 +141,7 @@ controller = {
                 }
                 AirView('notification', { text: 'Downloading details: ' + parseInt(percent * 100, 0) + '%', id: 'Program'});
                 Ti.Yahoo.yql(query.split('{START}').join(start), function(response) {
-                    if (!response.success) {
+                    if (Ti.Android == undefined && !response.success) {
                         AirView('notification', { text: 'Interrupted while downloading details!', id: 'Program'});
                     }
                     else {

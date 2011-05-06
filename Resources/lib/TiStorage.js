@@ -1,4 +1,4 @@
-var turnOnTiStorageLogging = false;
+var turnOnTiStorageLogging = true;
 /**
  * TiStorage
  *
@@ -357,7 +357,7 @@ function TiStorage() {
 				var foundPropertiesCount = 0;
 				for(var prop in obj)
 				{
-					if( obj.hasOwnProperty(prop) && collection[i][prop] === obj[prop] ){ foundPropertiesCount++;  }
+					if( collection[i][prop] === obj[prop] ){ foundPropertiesCount++;  }
 				}
 				if( foundPropertiesCount == requiredPropertiesCount ){
 					if( records.indexOf(collection[i]) == -1 ){ records.push(collection[i]); }
@@ -402,37 +402,29 @@ function TiStorage() {
 				for(var i = 0; i < collection.length; i++)
 				{
 					// Need to make sure we're looping for the obj's stuff
-					for(var prop in obj)
-					{
-						// Just proper (keeps JSLint happy too)
-						if(obj.hasOwnProperty(prop))
-						{
-							// Go through each property in the array index
-							for(var row in collection[i])
-							{
-								if(collection[i].hasOwnProperty(row))
-								{
-									// If the collection's record matches the criteria obj, return it
-									if(prop === row && obj[prop] === collection[i][row])
-									{
-										// If qty is not specified, get all matching records
-										if(qty === undefined)
-										{
-											// @TODO - implement a way to return ANY, non-specific matching records
-											record.push(collection[i]);
-										} else {
-                                            if (turnOnTiStorageLogging) {
-											    Ti.API.info('TiStorage - Record Selected: ' + collection[i].id);
-                                            }
+					// Go through each property in the array index
+                    // If the collection's record matches the criteria obj, return it
+                    for (var prop in obj) {
+                        // Go through each property in the array index
+                        // If the collection's record matches the criteria obj, return it
+                        for (var row in collection[i]) {
+                            // If the collection's record matches the criteria obj, return it
+                            if (prop === row && obj[prop] === collection[i][row]) {
+                                // If qty is not specified, get all matching records
+                                if (qty === undefined) {
+                                    // @TODO - implement a way to return ANY, non-specific matching records
+                                    record.push(collection[i]);
+                                } else {
+                                    if (turnOnTiStorageLogging) {
+                                        Ti.API.info('TiStorage - Record Selected: ' + collection[i].id);
+                                    }
 
-											return collection[i];
-											//this.findSpecific(obj, collection[i])
-										}
-									}
-								}
-							}
-						}
-					}
+                                    return collection[i];
+                                    //this.findSpecific(obj, collection[i])
+                                }
+                            }
+                        }
+                    }
 				}
 
 				// Return of array of matching records

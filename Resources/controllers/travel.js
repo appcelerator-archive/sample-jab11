@@ -12,7 +12,7 @@ controller = {
             var query = 'SELECT * FROM feed WHERE url="http://jandbeyond.org/information.feed?export=json?t=' + timestamp + '" and guid="http://jandbeyond.org/information/Travelling.html"';
 
             Ti.Yahoo.yql(query, function(response) {
-                if (!response.success) {
+                if (Ti.Android == undefined && !response.success) {
                     callback({ error: response.message });
                 }
                 else {
