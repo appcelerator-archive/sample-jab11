@@ -5,14 +5,14 @@
         <target device="ipad">true</target>
         <target device="android">true</target>
     </deployment-targets>
-<id>com.appcelerator.jab11</id>
-<name>Jab11</name>
-<version>1.0</version>
-<publisher>Appcelerator</publisher>
-<url>http://www.appcelerator.com</url>
-<description>No description provided</description>
-<copyright>2011 by Appcelerator &amp; Joomla</copyright>
-<icon>appicon.png</icon>
+    <id>com.appcelerator.jab11</id>
+    <name>Jab11</name>
+    <version>1.0</version>
+    <publisher>Appcelerator</publisher>
+    <url>http://www.appcelerator.com</url>
+    <description>No description provided</description>
+    <copyright>2011 by Appcelerator &amp; Joomla</copyright>
+    <icon>appicon.png</icon>
     <persistent-wifi>false</persistent-wifi>
     <prerendered-icon>true</prerendered-icon>
     <statusbar-style>default</statusbar-style>
@@ -31,6 +31,13 @@
         </orientations>
     </iphone>
     <android xmlns:android="http://schemas.android.com/apk/res/android">
+        <manifest android:versionCode="1" android:versionName="1.0">
+            <supports-screens
+                    android:smallScreens="false"
+                    android:normalScreens="true"
+                    android:largeScreens="false"
+                    android:anyDensity="false"/>
+        </manifest>
     </android>
     <modules>
     </modules>

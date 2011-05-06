@@ -11,20 +11,8 @@
     Style 'Days Until' at the top
 */
 [Ti.Android] {
-    .DaysUntilLabel {
-        font: { fontWeight: 'bold', fontSize: '16dp' },
-        left: '50dp',
-        bottom: 0
-    }
-    .DaysUntilNumber {
-        font: { fontWeight: 'bold', fontSize: '20dp' },
-        right: '115dp',
-        bottom: 0
-    }
     .DaysUntil {
-        height: '25dp',
-        top: '30dp',
-        width: '160dp'
+        top: 30
     }
 }
 .DaysUntil {
@@ -51,6 +39,10 @@
 /*
     Style the icons grid
 */
+[Ti.Android]
+#DefaultGrid {
+    top: 60
+}
 #DefaultGrid {
     top: 197,
     width: 306

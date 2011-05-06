@@ -138,21 +138,3 @@ Ti.App.addEventListener('linkClicked', function(evt) {
     });
     alertDialog.show();
 });
-
-/*
- * Register for push notifications through Urban Airship.
- */
-/*
-Ti.UrbanAirship = require('ti.urbanairship');
-Ti.UrbanAirship.registerForPushNotifications({
-    urbanAirship: { appKey: 'MDjQggzdRpW8y9ptuVLJTQ' },
-    success: function(e) {
-        info('Ti :: Urban Airship :: register :: Successfully registered!');
-    },
-    error: function(e) {
-        error('Ti :: Urban Airship :: register :: Error! ' + e.error);
-    },
-    callback: function(e) {
-        info('Ti :: Urban Airship :: callback :: ' + (e.clicked ? 'User clicked notification: ' : 'Push message received: ') + e.message + ', ' + e.payload);
-    }
-});*/

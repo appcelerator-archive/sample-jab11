@@ -1,9 +1,5 @@
 Window {
-    backgroundImage: 'content/images/loading.withoutbar.png',
-    orientationModes : [
-        Ti.UI.PORTRAIT,
-        Ti.UI.UPSIDE_PORTRAIT
-    ]
+    backgroundImage: 'content/images/loading.withoutbar.png'
 }
 
 /*
@@ -30,7 +26,13 @@ WebView {
     top: 60,
     borderRadius: 10,
     backgroundColor: 'transparent',
-    backgroundImage: null
+    backgroundImage: null,
+    orientationModes : [
+        Titanium.UI.PORTRAIT,
+        Titanium.UI.UPSIDE_PORTRAIT,
+        Titanium.UI.LANDSCAPE_LEFT,
+        Titanium.UI.LANDSCAPE_RIGHT,
+    ]
 }
 #NotificationOutAnimation {
     duration: 500,
