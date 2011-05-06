@@ -144,7 +144,7 @@ WebView {
 }
 .DetailsTitle {
     top: 12, left: 10, right: 10,
-    height: 19,
+    height: 'auto', wordWrap: false, ellipsize: true,
     font: { fontWeight: 'bold', fontSize: 19 },
     color: '#b94646',
     textAlign: 'center'
