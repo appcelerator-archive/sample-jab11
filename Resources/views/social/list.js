@@ -1,8 +1,12 @@
 view = function(model) {
     var view = new View({ id: 'SocialWindow', className: 'Window' });
 
-    var rightView = new View({ layout: 'horizontal', width: 90, height: 'auto' });
+    var refreshButton = AirView('button', { type: 'Refresh', callback: function() {
+        table.update();
+    }});
+    var rightView;
     if (!Ti.Android) {
+        rightView = new View({ layout: 'horizontal', width: 90, height: 'auto' });
         // temporarily disable the "add comment" feature on Android
         // there are some OAuth issues preventing Facebook and Twitter from authorizing... :(
         rightView.add(AirView('button', { type: 'AddComment', callback: function(evt) {
@@ -11,10 +15,11 @@ view = function(model) {
                 navigatorOptions: { animate: 'pop' }
             }, evt);
         }}));
+        rightView.add(refreshButton);
     }
-    rightView.add(AirView('button', { type: 'Refresh', callback: function() {
-        table.update();
-    }}));
+    else {
+        rightView = refreshButton;
+    }
 
     view.add(AirView('titleBar', {
         left: AirView('button', { view: view, type: 'Home' }),
