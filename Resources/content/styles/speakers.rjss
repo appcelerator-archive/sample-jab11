@@ -39,6 +39,9 @@
     .DaysSegmentedPicker {
         width: 251
     }
+    .SpeakerSegmentedPicker {
+        width: 120
+    }
 }
 #SpeakerGrid {
      layout: 'horizontal',

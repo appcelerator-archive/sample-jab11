@@ -17,6 +17,7 @@ view = function(model) {
     var secondBar = AirView('titleBar', {
         style: 'LighterGrey',
         left: AirView('segmentedPicker', {
+            className: 'Speaker',
             selectMultiple: false,
             allowNoneSelected: false,
             onSelect: function(evt) {
