@@ -47,7 +47,7 @@ WebView {
 #NotificationLabel {
     color: '#fff',
     top: 5,
-    height: 13,
+    height: 'auto', wordWrap: false, ellipsize: true,
     font: {
         fontFamily: 'Helvetica Neue',
         fontSize: 13
@@ -178,13 +178,13 @@ WebView {
 }
 .RowTitle {
     top: 14, right: 30, left: 10,
-    height: 14,
+    height: 'auto', wordWrap: false, ellipsize: true,
     font: { fontWeight: 'bold', fontSize: 14 },
     color: '#4674b9'
 }
 .RowSubtitle {
     top: 32, right: 30, left: 10,
-    height: 13,
+    height: 'auto', wordWrap: false, ellipsize: true,
     font: { fontSize: 13 },
     color: '#b94646'
 }
