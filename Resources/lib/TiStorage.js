@@ -3,8 +3,9 @@ var turnOnTiStorageLogging = true;
  * TiStorage
  *
  * @author      Rick Blalock
+ * @slave       Dawson Toth
  * @company		Appcelerator
- * @version		0.1 - 'Zergling'
+ * @version		0.2 - 'Hydralisk'
  * @license		Apache License 2.0 (see license.txt)
  *
  * A lightweight document storage library.
@@ -79,6 +80,12 @@ var turnOnTiStorageLogging = true;
 	users.update({ 'last_name': 'Blalock' }, {
 		'location': 'Florida'
 	});
+
+
+	Sorts all records, ascending by the last_name (you can pass in multiple properties,
+    each set to 1 or -1 -- 1 is ascending, -1 is descending).
+	-------------------------------------------------------------------------------
+	users.sort({ 'last_name': 1 });
 
 
 	Removes record
@@ -180,10 +187,16 @@ function TiStorage() {
 	 * @param (string) collection - The name of the collection used for this instance
 	 */
 	TiStorage.core = function(globalStore, storage, database, collection) {
-		this.globalStore 	= globalStore;
-		this.storage 		= storage;
-		this.database 		= database;
-		this.collection 	= collection;
+
+        function loadArray() {
+            storage[database] = storage[database] || [];
+            return (storage[database][collection] = storage[database][collection] || []);
+        }
+
+        function saveArray(arr) {
+            storage[database][collection] = arr;
+            Ti.App.Properties.setString(globalStore, JSON.stringify(storage));
+        }
 
 		/**
 		 * Create a new record / data in the selected collection
@@ -191,20 +204,13 @@ function TiStorage() {
 		 * @param (object) obj An object of props/values for the new record
 		 */
 		this.create = function(obj) {
-			// Get the last index and the id prop.
-			var coll = this.storage[this.database][this.collection];
-			var last = coll[coll.length - 1];
-
-			// Create a new id (not perfect)
-			obj.id = last ? last.id + 1 : 0;
-
-			this.storage[this.database][this.collection].push(obj);
-			Ti.App.Properties.setString(this.globalStore, JSON.stringify(this.storage));
-
+			var coll = loadArray();
+			obj.id = (coll.length && coll[coll.length - 1] && (coll[coll.length - 1].id + 1)) || 0;
+			coll.push(obj);
+            saveArray(coll);
             if (turnOnTiStorageLogging) {
-			    Ti.API.info('TiStorage - Record Created: ' + obj.id);
+			    Ti.API.info('TiStorage - Record Created: ' + coll.length);
             }
-
 			return this;
 		};
 
@@ -215,10 +221,7 @@ function TiStorage() {
 		 * @param (object) obj An object of props/values to update
 		 */
 		this.update = function(target, obj) {
-			var record = this.storage[this.database][this.collection],
-				row,
-				rows,
-				prop;
+			var row, rows, prop;
 
 			// @TODO Create a method 'merge' or something similar so we don't have to keep
 			// repeating  for in loops for merging or creating props.  Propbably better
@@ -264,7 +267,7 @@ function TiStorage() {
                 }
 			}
 
-			Ti.App.Properties.setString(this.globalStore, JSON.stringify(this.storage));
+			Ti.App.Properties.setString(globalStore, JSON.stringify(storage));
 
             if (turnOnTiStorageLogging) {
 			    Ti.API.info('TiStorage - Updated Record');
@@ -281,7 +284,7 @@ function TiStorage() {
 		this.remove = function(itemId) {
 			// @TODO Determine whether to remove by ID or by associative object
 			// Make sure we're dealing with the right collection
-			var collection = this.storage[this.database][this.collection];
+			var collection = loadArray();
 
 			// Get the row to remove by ID reference
 			var row = this.findOne({ id: itemId });
@@ -293,7 +296,7 @@ function TiStorage() {
 			collection.splice(collection.indexOf(row), 1);
 
 			// Save the collection minus the removed row above
-			Ti.App.Properties.setString(this.globalStore, JSON.stringify(this.storage));
+			saveArray(collection);
 
             if (turnOnTiStorageLogging) {
 			    Ti.API.info('TiStorage - Removed record: ' + row.id);
@@ -383,7 +386,7 @@ function TiStorage() {
 		 * @param (bool) qty Whether to filter for one result or return all matching
 		 */
 		this.find = function(obj, qty) {
-			var collection = this.storage[this.database][this.collection];
+			var collection = loadArray();
 
 			if(obj === undefined) {
                 if (qty == 1)
@@ -458,17 +461,19 @@ function TiStorage() {
                 return 0;
             }
 
-            this.storage[this.database][this.collection].sort(compare);
+            var coll = loadArray();
+
+            coll.sort(compare);
 
             var id = 0;
-            for (var i in this.storage[this.database][this.collection]) {
-                this.storage[this.database][this.collection][i].id = id++;
+            for (var i in coll) {
+                coll[i].id = id++;
             }
 
-			Ti.App.Properties.setString(this.globalStore, JSON.stringify(this.storage));
+			saveArray(coll);
 
             if (turnOnTiStorageLogging) {
-			    Ti.API.info('TiStorage - Sorted collection: ' + this.collection);
+			    Ti.API.info('TiStorage - Sorted collection: ' + collection);
             }
 
 			return this;
