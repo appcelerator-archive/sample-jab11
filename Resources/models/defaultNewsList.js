@@ -1,11 +1,81 @@
 // http://query.yahooapis.com/v1/public/yql?q=SELECT+*+FROM+feed+WHERE+url%3D%22http://jandbeyond.org/blog.feed%3Fexport%3Djson%3Ft%3D2011030119%22&format=json&callback=
 model = {
    "query":{
-      "count":10,
+      "count":20,
       "created":"2011-03-01T19:56:19Z",
       "lang":"en-US",
       "results":{
-         "item":[
+            "item": [{
+                "title": "Details about the Shuttle Service",
+                "link": "http://jandbeyond.org/blog/item/415-Details-about-the-Shuttle-Service.html",
+                "guid": "http://jandbeyond.org/blog/item/415-Details-about-the-Shuttle-Service.html",
+                "description": "<div class=\"K2FeedIntroText\"><p>As promised a Shuttle service will be available on Thursday at Kerkrade and Herzogenrath train stations. For details check the time table below.</p>\n</div><div class=\"K2FeedFullText\">\n<p><strong>Kerkrade</strong></p>\n<ul>\n<li>13:00</li>\n<li>15:30</li>\n<li>17:30&nbsp;</li>\n</ul>\n<p><strong>Herzogenrath</strong></p>\n<ul>\n<li>14:00</li>\n<li>15:00</li>\n<li>16:00</li>\n<li>17:00</li>\n<li>18:30</li>\n<li>19:00</li>\n<li>19:30</li>\n</ul>\n<p>On Friday we will also operate a shuttle service</p>\n<p><strong>Kerkrade</strong>&nbsp;(we will wait for the people who have send an email)</p>\n<ul style=\"list-style-type: square;\">\n<li>9:30&nbsp;</li>\n</ul>\n<p><strong>Herzogenrath</strong>&nbsp;(we will wait for the people who have send an email)</p>\n<ul style=\"list-style-type: square;\">\n<li>9:30</li>\n<li>11:30</li>\n</ul>\n<p>If you arrive at the train station and have missed the shuttle service please send a tweet with #jab11 #shuttle and the station you are at.</p></div>",
+                "category": "Blog",
+                "pubDate": "Wed, 04 May 2011 17:29:08 +0000"
+            }, {
+                "title": "The J & Beyond Challenge ",
+                "link": "http://jandbeyond.org/blog/item/414-The-J-Beyond-Challenge.html",
+                "guid": "http://jandbeyond.org/blog/item/414-The-J-Beyond-Challenge.html",
+                "description": "<div class=\"K2FeedIntroText\"><ul>\n<li>J & Beyond is not about listening to speakers. </li>\n<li>J & Beyond is not about meeting online friends.</li>\n<li>J & Beyond is not about drinking beer.</li>\n</ul>\n<p>J & Beyond is all about participation, communication, learning and sharing. </p>\n</div><div class=\"K2FeedFullText\">\n<h2>So here is my J &amp; Beyond Challenge to you.</h2>\n<ul>\n<li>Introduce yourself to 10 people that you have never met.</li>\n<li>Buy a beer (or coffee) for someone that has helped you either directly or via their released work.</li>\n<li>Attend one session (or more) on a topic outside your obvious area of interest.</li>\n<li>Ask a question during a session.&nbsp;Don't be shy and leave it till afterwards.</li>\n<li>Have at least one meal with someone you do not know.</li>\n<li>Try to switch off your email and connection to the office.</li>\n<li>Speak to people from more than 20 countries.</li>\n</ul>\n<h3><strong>Above all - HAVE FUN!!!!</strong></h3></div>",
+                "category": "Blog",
+                "pubDate": "Wed, 04 May 2011 07:19:01 +0000"
+            }, {
+                "title": "Joomla Performance Run",
+                "link": "http://jandbeyond.org/blog/item/412-Joomla-Performance-Run.html",
+                "guid": "http://jandbeyond.org/blog/item/412-Joomla-Performance-Run.html",
+                "description": "<div class=\"K2FeedIntroText\"><p>After a successful start during JoomlaDays Netherlands last month, Ray Bogman and Michel van Agtmaal will lead the Joomla Performance Run on Saturday and Sunday Morning at 7.30am. This <strong>30 minute</strong> run will start from the Rolduc hotel lobby and Ray and Michel will lead you through the beautifull surroundings of Rolduc and Kerkrade.</p>\n<p>The Joomla Performance Run is not a race, the aim is to start and finish together. The weather will be perfect, so bring your running shoes and join us!</p>\nThere will be plenty of time to shower and eat breakfast before the program starts so <strong>no excuses</strong>!!</div>",
+                "category": "Blog",
+                "pubDate": "Tue, 03 May 2011 08:49:21 +0000"
+            }, {
+                "title": "J and Beyond Mobile App",
+                "link": "http://jandbeyond.org/blog/item/411-J-and-Beyond-Mobile-App.html",
+                "guid": "http://jandbeyond.org/blog/item/411-J-and-Beyond-Mobile-App.html",
+                "description": "<div class=\"K2FeedIntroText\"><p>We're excited to announce the immediate availability of a free mobile app to help you get the most out of your time at J & Beyond.</p>\n<p>Developed by the team at Appcelerator this is a truly native mobile app where you can see details of all the sessions and speakers and store them into your own personal planner. If you have a long journey ahead of you grab the app and select the sessions you wish to attend at your leisure.</p>\n<p>The source code for the app will be released so that other Joomla! event organisers can create a native mobile app.</p>\n<p>Download it now at the <a href=\"http://itunes.apple.com/us/app/j-and-beyond-2011/id434433930?mt=8\">itunes store</a> an android version will be released soon so that no one will miss out. </p></div>",
+                "category": "Blog",
+                "pubDate": "Tue, 03 May 2011 07:43:41 +0000"
+            }, {
+                "title": "Lightning Talks",
+                "link": "http://jandbeyond.org/blog/item/400-Lightning-Talks.html",
+                "guid": "http://jandbeyond.org/blog/item/400-Lightning-Talks.html",
+                "description": "<div class=\"K2FeedIntroText\"><p>After lunch on Day One of J and Beyond the observant amongst you will have noticed that we have a session called \"<strong>Lightning Talks</strong>\". No this isn't where the English attendees get to talk about the weather but an opportunity for <strong>anyone </strong>to make a short presentation on<strong> anything.</strong></p>\n<p>Unlike other presentations, <strong>lightning talks</strong> last only six minutes and any speaker who goes over that time will have their microphone switched off. If you are interested in giving a lightning talk please email contact@jandbeyond.org with your name and proposed topic. </p></div>",
+                "category": "Blog",
+                "pubDate": "Tue, 26 Apr 2011 07:28:42 +0000"
+            }, {
+                "title": "J.O.S.C.A.R. Nominees Announced",
+                "link": "http://jandbeyond.org/blog/item/399-J-O-S-C-A-R-Nominees-Announced.html",
+                "guid": "http://jandbeyond.org/blog/item/399-J-O-S-C-A-R-Nominees-Announced.html",
+                "description": "<div class=\"K2FeedIntroText\"><p>This year we have had a record number of nominations and the international panel has had a very hard task in creating a shortlist. The shortlist is of a very high calibre and the voting will take place at J & Beyond by all the attendees with the winners announce in a star studded celebrity awards ceremony on Saturday 7th May.</p>\n<p>The shortlisted nominees are presented in alphabetical order and all J and Beyond attendees are enouraged to check them out before voting at J and beyond.</p>\n<p><a href=\"http://jandbeyond.org/index.php?option=com_k2&view=item&layout=item&id=398&Itemid=661\">Full list of nominees.</a></p></div>",
+                "category": "Blog",
+                "pubDate": "Mon, 25 Apr 2011 22:56:55 +0000"
+            }, {
+                "title": "The Mobile Cloud Opportunity - Tony Guntharp - Keynote Speaker",
+                "link": "http://jandbeyond.org/blog/item/397-keynote.html",
+                "guid": "http://jandbeyond.org/blog/item/397-keynote.html",
+                "description": "<div class=\"K2FeedIntroText\"><p>This year for J and Beyond we've really tried hard to bring you a Keynote Speaker who is Beyond Joomla!</p>\n<p>We're delighted to announce that <strong>Tony Guntharp</strong> the Director of Developer Relations at Appcelerator will be delivering the keynote this year.</p>\n\n<p />\n</div><div class=\"K2FeedFullText\">\nTony worked at VA Linux Systems where, together with Tim Perdue, Drew Streib and Uriah Welcome, he was one of the four co-founders of SourceForge.net, the leading resource for open source software development and distribution and served as the Engineering Manager of the Web Technologies Group focusing on the development of Internet applications and the acceleration of the Apache and Tux web servers.</p>\n<p>He has also helped build developer communities for Fonality, Real Networks, Phillips Consumer Electronics and Sharp Electronics and somehow found time to co-author \"Practical Linux\" published by Que, June 2000.</p>\n<p>Appcelerator is the leading enterprise-grade, cross-platform development solution on the market today, with over 1.5 million developers using its software to power more than 20,000 cloud-connected mobile, desktop, and web applications used by tens of millions of users every day.</p>\n<p>The company’s flagship offering, Appcelerator Titanium, is the only open source platform to enable fully native, cross-platform development, from a single codebase, at web development speed. For more information, please visit <a href=\"http://www.appcelerator.com\">www.appcelerator.com</a>.</p></div>",
+                "category": "Blog",
+                "pubDate": "Thu, 21 Apr 2011 20:51:47 +0000"
+            }, {
+                "title": "Shuttle Bus Service",
+                "link": "http://jandbeyond.org/blog/item/396-Shuttle-Bus-Service.html",
+                "guid": "http://jandbeyond.org/blog/item/396-Shuttle-Bus-Service.html",
+                "description": "<div class=\"K2FeedImage\"><img src=\"http://jandbeyond.org///media/k2/items/cache/18bdd04e288fc232234be2fb5ea8bf38_M.jpg\" alt=\"Shuttle Bus Service\" /></div><div class=\"K2FeedIntroText\"><p>If you are travelling to J and Beyond by <a href=\"http://jandbeyond.org/index.php?option=com_k2&view=item&layout=item&id=25&Itemid=472\">train</a> do not worry about taking a taxi the final few miles from the railway stations of either Kerkrade Centrum (Netherlands) or Herzogenrath (Germany) the <strong>JAB-Wagons</strong> will be there to meet you.</p>\n</div><div class=\"K2FeedFullText\">\n<p>To make sure that we are there please send us a <a href=\"mailto:travel2@jandbeyond.org?subject=Train Collection J &amp; Beyond\">quick email</a> with your expected time of arrival at either Kerkrade or&nbsp;Herzogenrath&nbsp;stations. We can't guarantee to be there on the platform waiting for you in full&nbsp;chauffeur&nbsp;livery to carry your bags but we won't make you wait too long and it will be much easier than grabbing a taxi.</p>\n<p>This is a <strong>free service </strong>kindly brought to you by your ever thoughtful organisation team.</p>\n<p><em>An emergency only telephone number&nbsp;+49 241 94315711 is available just in case of major incident.</em></p></div>",
+                "category": "Blog",
+                "pubDate": "Wed, 20 Apr 2011 05:18:03 +0000"
+            }, {
+                "title": "Pre-Event Ski Party",
+                "link": "http://jandbeyond.org/blog/item/395-Pre-Event-Ski-Party.html",
+                "guid": "http://jandbeyond.org/blog/item/395-Pre-Event-Ski-Party.html",
+                "description": "<div class=\"K2FeedIntroText\"><p />Thanks to the Nooku team this year J and Beyond starts a little early with a pre-event party on the evening of Thursday 5th May. They could have just arranged a meetup in the bar or go to a restaurant but they wouldn't be Nooku if they didn’t try to organise something a little bit different. So … we are <strong>going skiing</strong>!\n</div><div class=\"K2FeedFullText\">\n</p>\n<h3>Party programme</h3>\n<p>You read that right! Not even a 10 minutes drive from the J and Beyond venue lies&nbsp;<a href=\"http://www.snowworld.com/\">SnowWorld</a>, the largest indoor ski-slope in Europe, total length of 520m.</p>\n<p>We will be gathering at Snowworld around&nbsp;<strong>17:00</strong>. You can enjoy a&nbsp;<strong>drink in the bar</strong>. At&nbsp;<strong>18:00</strong> we will have&nbsp;<strong>dinner</strong> in one of the restaurants of SnowWorld which has been specially reserved for us. On the menu is a&nbsp;<strong>3 course buffet with Swiss specialities</strong> (food, fish and vegetarian choices) and some nice desserts afterwards.</p>\n<p>At<strong> 20:00</strong> we will hit the slopes for those who want to do a little bit of&nbsp;<strong>skiing</strong>, or you can go straight to the&nbsp;<strong>Apres-ski bar</strong>. Thursdays is party night at SnowWorld, with music in the ski hal and a DJ.</p>\n<h3>What does it cost ?</h3>\n<p>Dinner will cost the little fee of&nbsp;<strong>32,50 Euro</strong>. Drinks during dinner are offered for by&nbsp;<a href=\"http://www.timble.net/\">Timble</a>. Skiing, which is optional, costs&nbsp;25 Euro for&nbsp;entrance to the hall and you can&nbsp;rent ski, boots and clothes for&nbsp;12,50 Euro.</p>\n<h3>Register now !</h3>\n<p>We kindly ask you to&nbsp;<strong>register</strong> as soon as possible using our&nbsp;<a href=\"http://nooku-party.eventbrite.com/\"><strong>Eventbrite page</strong></a>. Registrations will be closed on the&nbsp;<strong>25th of April</strong> and cannot be extended.</p>\n<p>We hope to see many of you there for this historic event !&nbsp;<strong>Nooku, Joomla, Molajo, … Alltogether on a ski slope</strong> ! Imagine that !</p></div>",
+                "category": "Blog",
+                "pubDate": "Wed, 20 Apr 2011 05:09:45 +0000"
+            }, {
+                "title": "Volunteers needed - sign up now!",
+                "link": "http://jandbeyond.org/blog/item/390-Volunteers-needed-sign-up-now.html",
+                "guid": "http://jandbeyond.org/blog/item/390-Volunteers-needed-sign-up-now.html",
+                "description": "<div class=\"K2FeedImage\"><img src=\"http://jandbeyond.org///media/k2/items/cache/e9f3064a37460e22935d3df9e26e53bb_M.jpg\" alt=\"Volunteers needed - sign up now!\" /></div><div class=\"K2FeedIntroText\"><p>J! and Beyond was founded on the principle of ‘by users, for users’. In this spirit, we are recruiting from among the conference attendees a team 12 volunteers to help capture all the sessions on video.</p>\n<p>No videography experience is required and we have a lot of flexibility for scheduling. This allows all team members to record a session they are already attending making volunteering a quick and easy way to contribute to the conference.</p>\n</div><div class=\"K2FeedFullText\">\n<h2>Swag!</h2>\n<p>But thats not all! In true J!OSCAR fashion we have swag for all the team members including:</p>\n<ul>\n<li>A unique JAB11 Video Team T-shirt</li>\n<li>25 EUR bar tab (That’s a lot of drinks!)</li>\n<li>Your name in the video credits of the sessions you record</li>\n</ul>\n<p>Each team member will have the following responsibilities:</p>\n<ul>\n<li>Attend a short training session (9 AM, May 6th)</li>\n<li>Arrive at your designated session (5 in total) 10 minutes early to check the equipment</li>\n<li>Help the speaker use the microphones</li>\n<li>Setup and watch the camera during the session</li>\n<li>Deliver the footage to the video director after the session</li>\n</ul>\n<h2>Join the team</h2>\n<p>To join the video team, please submit the following information to <a href=\"mailto:videoteam@jandbeyond.org\">videoteam@jandbeyond.org</a> by April 22:</p>\n<ul>\n<li>Name</li>\n<li>Email</li>\n<li>Any part of the event that you are NOT attending</li>\n<li>6-7 sessions you would like to/will be attending from the <a href=\"http://jandbeyond.org/index.php?option=com_k2&amp;view=item&amp;id=388&amp;Itemid=6\" title=\"Accepted talks, J! and Beyond 2011\">published list</a></li>\n</ul>\n<h3>We look forward to hearing from you!</h3></div>",
+                "category": "Blog",
+                "pubDate": "Mon, 11 Apr 2011 17:16:17 +0000"
+            },
             {
                "title":"J and Beyond sponsorship opportunities close March 15 ",
                "link":"http://jandbeyond.org/blog/item/320-J-and-Beyond-sponsorship-opportunities-close-March-15.html",
