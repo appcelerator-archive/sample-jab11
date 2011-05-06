@@ -31,7 +31,7 @@ var used = [
     Ti.UI.createWebView, Ti.UI.createAnimation, Ti.Map.createView, Ti.UI.create2DMatrix, Ti.UI.createScrollView,
     Ti.UI.createTableView, Ti.UI.createTableViewRow, Ti.Network.createHTTPClient, Ti.UI.createTextField,
     Ti.UI.createActivityIndicator, Ti.UI.createAlertDialog, Ti.UI.createTextArea, Ti.UI.createProgressBar,
-    Ti.UI.createEmailDialog
+    Ti.UI.createEmailDialog, Ti.UI.PORTRAIT, Ti.UI.UPSIDE_PORTRAIT
 ];
 
 /*

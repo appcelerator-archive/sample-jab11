@@ -1,5 +1,5 @@
 navigator = {
-    __mainWindow: new Window({ id: 'MainWindow', exitOnClose: true }),
+    __mainWindow: new Window({ id: 'MainWindow', exitOnClose: true, navBarHidden: true }),
     __animations: {
         fade: {
             visible: new Animation({ className: 'FadeIn' }),
