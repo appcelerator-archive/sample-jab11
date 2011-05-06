@@ -1,15 +1,9 @@
 controller = {
     actions: {
         list: function() {
-            var collection = TiStorage().use('jab').collection('Travel');
-            // if we don't have anything in our database, load in the default data.
-            collection.clear();
-            if (collection.find().length == 0) {
-                var item = AirModel('defaultTravel').query.results.item;
-                item.description = item.description.replace(/K2Feed/gi, 'item');
-                collection.create(item);
-            }
-            return AirView(collection.findOne());
+            var item = AirModel('defaultTravel').query.results.item;
+            item.description = item.description.replace(/K2Feed/gi, 'item');
+            return AirView(item);
         },
         update: function(callback) {
 
