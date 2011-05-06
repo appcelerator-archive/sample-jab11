@@ -2,12 +2,16 @@ view = function(model) {
     var view = new View({ id: 'SocialWindow', className: 'Window' });
 
     var rightView = new View({ layout: 'horizontal', width: 90, height: 'auto' });
-    rightView.add(AirView('button', { type: 'AddComment', callback: function(evt) {
-        TiAir.openURL({
-            controller: 'social', action: 'addComment',
-            navigatorOptions: { animate: 'pop' }
-        }, evt);
-    }}));
+    if (!Ti.Android) {
+        // temporarily disable the "add comment" feature on Android
+        // there are some OAuth issues preventing Facebook and Twitter from authorizing... :(
+        rightView.add(AirView('button', { type: 'AddComment', callback: function(evt) {
+            TiAir.openURL({
+                controller: 'social', action: 'addComment',
+                navigatorOptions: { animate: 'pop' }
+            }, evt);
+        }}));
+    }
     rightView.add(AirView('button', { type: 'Refresh', callback: function() {
         table.update();
     }}));

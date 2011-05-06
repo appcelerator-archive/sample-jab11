@@ -44,16 +44,15 @@ controller = {
 
             AirView('notification', { text: 'Posting to Facebook...', id: 'PostToFacebook' });
 
-            var facebook = require('facebook');
-            facebook.appid = String(constants.FacebookAppID);
-            facebook.permissions = ['publish_stream'];
-            facebook.authorize();
+            Ti.Facebook.appid = String(constants.FacebookAppID);
+            Ti.Facebook.permissions = ['publish_stream'];
+            Ti.Facebook.authorize();
 
             var data = {
                 message: message,
                 link: constants.Website
             };
-            facebook.requestWithGraphPath('me/feed', data, 'POST', function (evt) {
+            Ti.Facebook.requestWithGraphPath('me/feed', data, 'POST', function (evt) {
                 if (evt.success) {
                     AirView('notification', { text: 'Posted to Facebook!', id: 'PostToFacebook' });
                     callback(evt);

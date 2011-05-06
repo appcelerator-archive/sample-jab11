@@ -35,7 +35,10 @@ view = function(model) {
             TiAir.close(view);
         }}),
         center: 'Add Comment',
-        right: !Ti.Media.isCameraSupported ? null : AirView('button', { type: 'Camera', callback: showCamera }),
+        // 'Ti.Media.isCameraSupported' is not impl on Android; http://appc.me/TIMOB-993
+        right: (Ti.Android || Ti.Media.isCameraSupported)
+                ? AirView('button', { type: 'Camera', callback: showCamera })
+                : null,
         style: 'Grey'
     }));
 
