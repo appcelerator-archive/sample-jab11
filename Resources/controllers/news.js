@@ -1,3 +1,4 @@
+var news = TiStorage().use('jab').collection('News');
 controller = {
     actions: {
         list: function() {
@@ -7,7 +8,7 @@ controller = {
             return AirView(this.get(id)[0]);
         },
         get: function(id) {
-            var news = TiStorage().use('jab').collection('News');
+
             // if we don't have anything in our database, load in the default data.
             if (news.find().length == 0) {
                 var defaultNews = AirModel('defaultNewsList').query.results.item;
@@ -30,10 +31,9 @@ controller = {
                 }
                 else {
                     var data = response.data;
-                    var news = TiStorage().use('jab').collection('News');
                     news.clear();
                     var items = data.item;
-                    for (var i = 0, l = 0 + items.length; i < l; i++) {
+                    for (var i = 0, l = items.length; i < l; i++) {
                         items[i].description = items[i].description.replace(/K2Feed/gi, 'item');
                         news.create(items[i]);
                     }
