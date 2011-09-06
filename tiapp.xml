@@ -1,6 +1,8 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <ti:app xmlns:ti="http://ti.appcelerator.org">
     <deployment-targets>
+        <target device="mobileweb">true</target>
+        <target device="blackberry">false</target>
         <target device="iphone">true</target>
         <target device="ipad">true</target>
         <target device="android">true</target>
@@ -21,7 +23,7 @@
     <navbar-hidden>true</navbar-hidden>
     <analytics>true</analytics>
     <guid>b164f3a8-ea64-43f4-aed0-7346b900356b</guid>
-	<property name="ti.facebook.appid">213079428719971</property>
+    <property name="ti.facebook.appid">213079428719971</property>
     <iphone>
         <orientations device="iphone">
             <orientation>Ti.UI.PORTRAIT</orientation>
@@ -32,13 +34,10 @@
     </iphone>
     <android xmlns:android="http://schemas.android.com/apk/res/android">
         <manifest android:versionCode="1" android:versionName="1.0">
-            <supports-screens
-                    android:smallScreens="false"
-                    android:normalScreens="true"
-                    android:largeScreens="false"
-                    android:anyDensity="false"/>
+            <supports-screens android:anyDensity="false"
+                android:largeScreens="false"
+                android:normalScreens="true" android:smallScreens="false"/>
         </manifest>
     </android>
-    <modules>
-    </modules>
+    <modules/>
 </ti:app>
